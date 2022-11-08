@@ -1,4 +1,4 @@
-# Личный проект «{{projectTitle}}»
+# Личный проект «{what to watch}»
 
 * Студент: [{Fess986}]({{https://github.com/fess986/}}).
 

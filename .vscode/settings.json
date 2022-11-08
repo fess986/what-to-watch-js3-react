@@ -1,0 +1,4 @@
+{
+    "open-in-browser.default": "google-chrome",
+    "liveServer.settings.CustomBrowser": "chrome"
+}
