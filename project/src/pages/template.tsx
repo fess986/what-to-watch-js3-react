@@ -1,8 +1,7 @@
 // шаблон для реакт-страниц
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
+import React from 'react';
 
-function Main(): JSX.Element {
+function Template(): JSX.Element {
   return (
     <>
       <div>
@@ -15,4 +14,4 @@ function Main(): JSX.Element {
   );
 }
 
-export default Main;
+export default Template;
