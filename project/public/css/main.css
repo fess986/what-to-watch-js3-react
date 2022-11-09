@@ -828,6 +828,20 @@ main {
 .film-card__header {
   position: relative; }
 
+.film-card__count {
+  display: inline-block;
+  min-width: 40px;
+  height: 25px;
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+  color: #fff;
+  background: #fd612ead;
+  border-radius: 15px; }
+
 .film-nav__list {
   padding: 0;
   margin: 0;
@@ -1409,3 +1423,20 @@ main {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%); }
+
+.user-page__film-count {
+  position: absolute;
+  top: 6px;
+  z-index: 1;
+  display: inline-block;
+  min-width: 40px;
+  height: 25px;
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+  color: #fff;
+  background: #fd612ead;
+  border-radius: 15px; }
