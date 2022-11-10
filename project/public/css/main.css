@@ -1440,3 +1440,63 @@ main {
   color: #fff;
   background: #fd612ead;
   border-radius: 15px; }
+
+  /* стилизация ошибки 404 */
+
+  .wrapper404 {
+    background-color: #95c2de;
+  }
+
+  .mainbox {
+    background-color: #95c2de;
+    margin: auto;
+    height: 600px;
+    width: 600px;
+    position: relative;
+  }
+
+    .err404 {
+      color: #ffffff;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 11rem;
+      position:absolute;
+      left: 20%;
+      top: 15%;
+    }
+
+    .err404-2 {
+      color: #ffffff;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 11rem;
+      position:absolute;
+      left: 45%;
+      top: 15%;
+    }
+
+    .err404-3 {
+      color: #ffffff;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 11rem;
+      position:absolute;
+      left: 68%;
+      top: 15%;
+    }
+
+  .msg404 {
+      text-align: center;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 1.6rem;
+      position:absolute;
+      left: 16%;
+      top: 45%;
+      width: 75%;
+    }
+
+  .link404 {
+    text-decoration: none;
+    color: white;
+  }
+
+  .link404:hover {
+    text-decoration: underline;
+  }

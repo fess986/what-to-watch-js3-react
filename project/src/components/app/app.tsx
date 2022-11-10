@@ -9,11 +9,12 @@
 // import Player from '../../pages/player/player-play/player';
 // import SignInError from '../../pages/sign-in/sign-in-error/sign-in-error';
 // import SignInMessage from '../../pages/sign-in/sign-in-message/sign-in-message';
-import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
+// import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
+import Page404 from '../../pages/page404/page404';
 
 function App(): JSX.Element {
   return (
-    <SignIn />
+    <Page404 />
   );
 }
 
