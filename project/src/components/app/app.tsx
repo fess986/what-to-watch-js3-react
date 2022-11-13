@@ -4,7 +4,7 @@ import React from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 
 // импорт констант
-import { AppRoute } from '../../const/const';
+import { AppRoute, AuthStatus } from '../../const/const';
 
 // импорт страниц
 // стартовые
@@ -15,6 +15,8 @@ import MyList from '../../pages/my-list/my-list';
 import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
 import Player from '../../pages/player/player-play/player';
 import Page404 from '../../pages/page404/page404';
+
+import { PrivateRouteElement } from '../private-route/private-route';
 
 // дополнительные
 /* import HeadGuest from '../../pages/head-guest/head-guest';
@@ -40,7 +42,11 @@ function App(): JSX.Element {
 
         <Route
           path={AppRoute.MyList}
-          element={<MyList />}
+          element={
+            <PrivateRouteElement authStatus={AuthStatus.Auth}>
+              <MyList />
+            </PrivateRouteElement>
+          }
         />
 
         <Route
@@ -50,7 +56,11 @@ function App(): JSX.Element {
 
         <Route
           path={AppRoute.AddReview}
-          element={<AddReview />}
+          element={
+            <PrivateRouteElement authStatus={AuthStatus.Auth}>
+              <AddReview />
+            </PrivateRouteElement>
+          }
         />
 
         <Route
