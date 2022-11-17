@@ -9,7 +9,6 @@ export const Films : Film[] = [
     backgroundImage: 'img/the-grand-budapest-hotel-bg.jpg',
     backgroundColor: '#ffffff',
     videoLink: 'https://some-link',
-    previewVideoLink: 'https://some-link',
     previewVideoLink: 'https://download.blender.org/peach/trailer/trailer_400p.ogg',
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski
     resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby
