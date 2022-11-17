@@ -16,6 +16,8 @@ import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
 import Player from '../../pages/player/player-play/player';
 import Page404 from '../../pages/page404/page404';
 
+import FilmCard from '../film-card/film-card';
+
 import { Film, Review } from '../../types/mocks-types';
 
 import { PrivateRouteElement } from '../private-route/private-route';
@@ -34,6 +36,7 @@ type AppProps = {
 }
 
 function App({films, reviews} : AppProps): JSX.Element {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -41,6 +44,11 @@ function App({films, reviews} : AppProps): JSX.Element {
           path={AppRoute.Main}
           element={<Main />}
         />
+
+       {/*  <Route
+          path={'/123'}
+          element={<FilmCard films = {films[0]} />}
+        /> */}
 
         <Route
           path={AppRoute.Login}
