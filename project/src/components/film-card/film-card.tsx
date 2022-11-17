@@ -2,6 +2,7 @@
 import { Film } from '../../types/mocks-types';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const/const';
+import { useState, MouseEvent } from 'react';
 
 type FilmCardProps = {
   films: Film;
@@ -9,10 +10,25 @@ type FilmCardProps = {
 
 function FilmCard(props : FilmCardProps): JSX.Element {
   const {films} = props;
-  const {name, previewImage} = films;
+  const {id, name, previewImage} = films;
+
+  const [activeFilm, setActiveFilm] = useState(NaN);
 
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card"
+
+      // подсветка красным цветом активного фильма
+      style={ id === activeFilm ? {outline: '3px solid red'} : {outline: '3px solid yellow'}}
+
+      onMouseOver = {(e : MouseEvent) => {
+        setActiveFilm(id);
+      }}
+
+      onMouseOut = {() => {
+        setActiveFilm(NaN);
+      }}
+
+    >
       <div className="small-film-card__image">
         <img src={previewImage} alt={name} width="280" height="175" />
       </div>
