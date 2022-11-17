@@ -5,7 +5,7 @@ export const Films : Film[] = [
     id: 0,
     name: 'The Grand Budapest Hotel',
     posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
-    previewImage: 'img/the-grand-budapest-hotel.jpg',
+    previewImage: 'img/the-grand-budapest-hotel-poster.jpg',
     backgroundImage: 'img/the-grand-budapest-hotel-bg.jpg',
     backgroundColor: '#ffffff',
     videoLink: 'https://some-link',

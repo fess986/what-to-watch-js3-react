@@ -17,6 +17,7 @@ import Player from '../../pages/player/player-play/player';
 import Page404 from '../../pages/page404/page404';
 
 import FilmCard from '../film-card/film-card';
+import FilmList from '../film-list/film-list';
 
 import { Film, Review } from '../../types/mocks-types';
 
@@ -45,10 +46,18 @@ function App({films, reviews} : AppProps): JSX.Element {
           element={<Main />}
         />
 
-       {/*  <Route
+        {/*
+          мини-карточка фильма
+        <Route
           path={'/123'}
           element={<FilmCard films = {films[0]} />}
         /> */}
+
+        {/* список фильмов */}
+        <Route
+          path={'/list'}
+          element={<FilmList films = {films}/>}
+        />
 
         <Route
           path={AppRoute.Login}
