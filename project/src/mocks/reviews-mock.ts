@@ -1,6 +1,6 @@
 import { Review } from '../types/mocks-types';
 
-export const reviews: Review[] = [
+export const Reviews: Review[] = [
   {
     id: 1,
     user: {
