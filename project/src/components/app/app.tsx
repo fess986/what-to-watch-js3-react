@@ -16,6 +16,8 @@ import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
 import Player from '../../pages/player/player-play/player';
 import Page404 from '../../pages/page404/page404';
 
+import { Film, Review } from '../../types/mocks-types';
+
 import { PrivateRouteElement } from '../private-route/private-route';
 
 // дополнительные
@@ -26,7 +28,12 @@ import PlayerPause from '../../pages/player/player-pause/player-pause';
 import SignInError from '../../pages/sign-in/sign-in-error/sign-in-error';
 import SignInMessage from '../../pages/sign-in/sign-in-message/sign-in-message'; */
 
-function App(): JSX.Element {
+type AppProps = {
+  films: Film[],
+  reviews: Review[],
+}
+
+function App({films, reviews} : AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
