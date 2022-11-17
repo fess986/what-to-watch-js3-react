@@ -13,7 +13,8 @@ function FilmList(props: FilmListProps): JSX.Element {
   const {films} = props;
 
   return (
-    <div className="catalog__films-list">
+
+    <div className="catalog__films-list" >
 
       {
         films.map((film : Film) : JSX.Element => (
