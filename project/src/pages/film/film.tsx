@@ -1,6 +1,6 @@
 // страница деталей фильма
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 
 import { FILM_MENU } from '../../const/const';
 
@@ -10,7 +10,29 @@ import FilmOverview from '../../components/film-card/film-card-overview';
 import FilmReviews from '../../components/film-card/film-card-reviews';
 import FilmNavigation from '../../components/film-card/film-navigation';
 
-function FilmCard(): JSX.Element {
+import { Film } from '../../types/mocks-types';
+
+type FilmProps = {
+  films: Film[];
+}
+
+function FilmCard(props : FilmProps): JSX.Element {
+  const idParam = useParams().id;
+
+  let filmId : number;
+
+  if (idParam === undefined) {
+    filmId = 0;
+  } else if (isNaN(Number(idParam))) {
+    filmId = 0;
+  } else {
+    filmId = Math.floor(Number(idParam));
+  }
+
+  const film : Film = props.films[filmId] ? props.films[filmId] : props.films[0];
+
+  // const {id} = film;
+
   return (
     <>
       <section className="film-card film-card--full">

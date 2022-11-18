@@ -59,7 +59,7 @@ function App({films, reviews} : AppProps): JSX.Element {
 
         <Route
           path={AppRoute.Film}
-          element={<FilmCard />}
+          element={<FilmCard films = {films}/>}
         />
 
         <Route
