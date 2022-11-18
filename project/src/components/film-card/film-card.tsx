@@ -5,12 +5,12 @@ import {AppRoute} from '../../const/const';
 import { useState, MouseEvent } from 'react';
 
 type FilmCardProps = {
-  films: Film;
+  film: Film;
 }
 
 function FilmCard(props : FilmCardProps): JSX.Element {
-  const {films} = props;
-  const {id, name, previewImage} = films;
+  const {film} = props;
+  const {id, name, previewImage} = film;
 
   const [activeFilm, setActiveFilm] = useState(NaN);
 
