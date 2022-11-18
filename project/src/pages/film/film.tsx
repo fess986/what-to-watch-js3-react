@@ -5,6 +5,8 @@ import FilmDetails from '../../components/film-card/film-card-details';
 import FilmOverview from '../../components/film-card/film-card-overview';
 import FilmReviews from '../../components/film-card/film-card-reviews';
 
+import { Route, Routes, Outlet, Link } from 'react-router-dom';
+
 function FilmCard(): JSX.Element {
   return (
     <>
@@ -73,20 +75,23 @@ function FilmCard(): JSX.Element {
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
                   <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Overview</a>
+                    <Link to="overview" className="film-nav__link">Overview</Link>
                   </li>
                   <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">Details</a>
+                    <Link to="details" className="film-nav__link">Details</Link>
                   </li>
                   <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Reviews</a>
+                    <Link to="reviews" className="film-nav__link">Reviews</Link>
                   </li>
                 </ul>
               </nav>
 
-              <FilmDetails />
-              {/* <FilmOverview />
-              <FilmReviews /> */}
+              <Routes>
+                <Route path="/" element={<FilmDetails />} />
+                <Route path="details" element={<FilmDetails />} />
+                <Route path="overview" element={<FilmOverview />} />
+                <Route path="reviews" element={<FilmReviews />} />
+              </Routes>
 
             </div>
           </div>
