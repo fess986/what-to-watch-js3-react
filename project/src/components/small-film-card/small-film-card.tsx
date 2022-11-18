@@ -4,11 +4,11 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const/const';
 import { useState, MouseEvent } from 'react';
 
-type FilmCardProps = {
+type SmallFilmCardProps = {
   film: Film;
 }
 
-function FilmCard(props : FilmCardProps): JSX.Element {
+function SmallFilmCard(props : SmallFilmCardProps): JSX.Element {
   const {film} = props;
   const {id, name, previewImage} = film;
 
@@ -39,4 +39,4 @@ function FilmCard(props : FilmCardProps): JSX.Element {
   );
 }
 
-export default FilmCard;
+export default SmallFilmCard;
