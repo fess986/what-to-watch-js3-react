@@ -1,8 +1,8 @@
 // страница деталей фильма
 import React from 'react';
-import Logo from '../../../components/logo/Logo';
+import Logo from '../../components/logo/Logo';
 
-function MovieDetails(): JSX.Element {
+function FilmCard(): JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">
@@ -189,4 +189,4 @@ function MovieDetails(): JSX.Element {
   );
 }
 
-export default MovieDetails;
+export default FilmCard;
