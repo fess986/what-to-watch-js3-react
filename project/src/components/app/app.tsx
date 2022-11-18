@@ -45,12 +45,6 @@ function App({films, reviews} : AppProps): JSX.Element {
           element={<Main films = {films}/>}
         />
 
-        {/* список фильмов */}
-        <Route
-          path={'/list'}
-          element={<FilmList films = {films}/>}
-        />
-
         <Route
           path={AppRoute.Login}
           element={<SignIn />}

@@ -1,6 +1,6 @@
 // компонент списка карточек фильмов
 import React from 'react';
-import FilmCard from '../film-card/film-card';
+import SmallFilmCard from '../small-film-card/small-film-card';
 import { Film } from '../../types/mocks-types';
 
 type FilmListProps = {
@@ -18,7 +18,7 @@ function FilmList(props: FilmListProps): JSX.Element {
 
       {
         films.map((film : Film) : JSX.Element => (
-          <FilmCard film = {film} key = {film.id}/>
+          <SmallFilmCard film = {film} key = {film.id}/>
         ))
       }
 
