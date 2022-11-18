@@ -10,13 +10,11 @@ import { AppRoute, AuthStatus } from '../../const/const';
 // стартовые
 import Main from '../../pages/main/main';
 import AddReview from '../../pages/add-review/add-review';
-import MovieDetails from '../../pages/movie/movie-page-details/movie-page-details';
+import FilmCard from '../../pages/film/film';
 import MyList from '../../pages/my-list/my-list';
 import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
 import Player from '../../pages/player/player-play/player';
 import Page404 from '../../pages/page404/page404';
-
-import FilmList from '../film-list/film-list';
 
 import { Film, Review } from '../../types/mocks-types';
 
@@ -61,7 +59,7 @@ function App({films, reviews} : AppProps): JSX.Element {
 
         <Route
           path={AppRoute.Film}
-          element={<MovieDetails />}
+          element={<FilmCard />}
         />
 
         <Route
