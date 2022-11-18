@@ -1,12 +1,28 @@
 // компонент навигации на странице FilmCard
 import React from 'react';
 import { useState, MouseEvent } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 import {FILM_MENU} from '../../const/const';
 
 function FilmNavigation(): JSX.Element {
-  const [activeItem, setActiveItem] = useState(FILM_MENU.details);
+  const params = useParams();
+
+  let initialState : string = FILM_MENU.details;
+
+  switch (params['*']) {
+    case FILM_MENU.details.toLowerCase() :
+      initialState = FILM_MENU.details;
+      break;
+    case FILM_MENU.overview.toLowerCase() :
+      initialState = FILM_MENU.overview;
+      break;
+    case FILM_MENU.reviews.toLowerCase() :
+      initialState = FILM_MENU.reviews;
+      break;
+  }
+
+  const [activeItem, setActiveItem] = useState(initialState);
 
   return (
     <ul className="film-nav__list">
