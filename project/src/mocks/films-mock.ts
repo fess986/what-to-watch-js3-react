@@ -13,7 +13,7 @@ export const Films : Film[] = [
     description: `In the 1930s, the Grand Budapest Hotel is a popular European ski
     resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby
     boy, becomes Gustave's friend and protege.`,
-    rating: 8.9,
+    rating: 9,
     scoresCount: 240,
     director: 'Wes Anderson',
     starring: ['Bill Murray', 'Edward Norton', 'Jude Law', 'Willem Dafoe', 'Saoirse Ronan'],
@@ -26,14 +26,14 @@ export const Films : Film[] = [
   {
     id: 1,
     name: 'Moonrise Kingdom',
-    posterImage: 'img/moonrise-kingdom-poster.jpg',
+    posterImage: 'img/moonrise-kingdom.jpg',
     previewImage: 'img/moonrise-kingdom.jpg',
     backgroundImage: 'img/moonrise-kingdom.jpg',
     backgroundColor: '#E1DD8F',
     videoLink: 'https://some-link',
     previewVideoLink: 'https://download.blender.org/peach/trailer/trailer_400p.ogg',
     description: 'A pair of young lovers flee their New England town, which causes a local search party to fan out to find them',
-    rating: 7.8,
+    rating: 3,
     scoresCount: 800,
     director: 'Wes Anderson',
     starring: ['Jared Gilman', 'Kara Hayward', 'Bruce Willis'],
@@ -46,7 +46,7 @@ export const Films : Film[] = [
   {
     id: 2,
     name: 'Pulp Fiction',
-    posterImage: 'img/pulp-fiction-poster.jpg',
+    posterImage: 'img/pulp-fiction.jpg',
     previewImage: 'img/pulp-fiction.jpg',
     backgroundImage: 'img/pulp-fiction.jpg',
     backgroundColor: '#4C86A8',
@@ -66,7 +66,7 @@ export const Films : Film[] = [
   {
     id: 3,
     name: 'The Darjeeling Limited',
-    posterImage: 'img/dardjeeling-limited-poster.jpg',
+    posterImage: 'img/dardjeeling-limited.jpg',
     previewImage: 'img/dardjeeling-limited.jpg',
     backgroundImage: 'img/pulp-fiction.jpg',
     backgroundColor: '#8E3B46',
@@ -86,7 +86,7 @@ export const Films : Film[] = [
   {
     id: 4,
     name: 'The Aviator',
-    posterImage: 'img/aviator-poster.jpg',
+    posterImage: 'img/aviator.jpg',
     previewImage: 'img/aviator.jpg',
     backgroundImage: 'img/aviator.jpg',
     backgroundColor: '#477890',
@@ -106,7 +106,7 @@ export const Films : Film[] = [
   {
     id: 5,
     name: 'The Revenant',
-    posterImage: 'img/revenant-poster.jpg',
+    posterImage: 'img/revenant.jpg',
     previewImage: 'img/revenant.jpg',
     backgroundImage: 'img/revenant.jpg',
     backgroundColor: '#FF784F',
@@ -126,7 +126,7 @@ export const Films : Film[] = [
   {
     id: 6,
     name: 'Johnny English',
-    posterImage: 'img/johnny-english-poster.jpg',
+    posterImage: 'img/johnny-english.jpg',
     previewImage: 'img/johnny-english.jpg',
     backgroundImage: 'img/johnny-english.jpg',
     backgroundColor: '#DB9D47',
@@ -146,7 +146,7 @@ export const Films : Film[] = [
   {
     id: 7,
     name: 'Bohemian Rhapsody',
-    posterImage: 'img/bohemian-rhapsody-poster.jpg',
+    posterImage: 'img/bohemian-rhapsody.jpg',
     previewImage: 'img/bohemian-rhapsody.jpg',
     backgroundImage: 'img/bohemian-rhapsody.jpg',
     backgroundColor: '#3A3042',
