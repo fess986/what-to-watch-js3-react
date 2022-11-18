@@ -1,11 +1,14 @@
 // страница деталей фильма
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+
+import { FILM_MENU } from '../../const/const';
+
 import Logo from '../../components/logo/Logo';
 import FilmDetails from '../../components/film-card/film-card-details';
 import FilmOverview from '../../components/film-card/film-card-overview';
 import FilmReviews from '../../components/film-card/film-card-reviews';
-
-import { Route, Routes, Outlet, Link } from 'react-router-dom';
+import FilmNavigation from '../../components/film-card/film-navigation';
 
 function FilmCard(): JSX.Element {
   return (
@@ -73,24 +76,14 @@ function FilmCard(): JSX.Element {
 
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item">
-                    <Link to="overview" className="film-nav__link">Overview</Link>
-                  </li>
-                  <li className="film-nav__item film-nav__item--active">
-                    <Link to="details" className="film-nav__link">Details</Link>
-                  </li>
-                  <li className="film-nav__item">
-                    <Link to="reviews" className="film-nav__link">Reviews</Link>
-                  </li>
-                </ul>
+                <FilmNavigation />
               </nav>
 
               <Routes>
                 <Route path="/" element={<FilmDetails />} />
-                <Route path="details" element={<FilmDetails />} />
-                <Route path="overview" element={<FilmOverview />} />
-                <Route path="reviews" element={<FilmReviews />} />
+                <Route path={FILM_MENU.details.toLowerCase()} element={<FilmDetails />} />
+                <Route path={FILM_MENU.overview.toLowerCase()} element={<FilmOverview />} />
+                <Route path={FILM_MENU.reviews.toLowerCase()} element={<FilmReviews />} />
               </Routes>
 
             </div>
