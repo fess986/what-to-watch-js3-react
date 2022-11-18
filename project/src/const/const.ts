@@ -12,3 +12,9 @@ export enum AuthStatus {
   NoAuth = 'NOAUTH',
   UnKnown = 'UNKNOWN',
 }
+
+export const FILM_MENU = {
+  details : 'Details',
+  overview : 'Overview',
+  reviews: 'Reviews',
+}
