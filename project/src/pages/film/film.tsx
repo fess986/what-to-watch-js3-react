@@ -31,7 +31,7 @@ function FilmCard(props : FilmProps): JSX.Element {
 
   const film : Film = props.films[filmId] ? props.films[filmId] : props.films[0];
 
-  const {id, backgroundImage, name, genre, posterImage} = film;
+  const {backgroundImage, name, genre, posterImage} = film;
 
   return (
     <>
@@ -104,7 +104,7 @@ function FilmCard(props : FilmProps): JSX.Element {
               <Routes>
                 <Route path="/" element={<FilmDetails />} />
                 <Route path={FILM_MENU.details.toLowerCase()} element={<FilmDetails />} />
-                <Route path={FILM_MENU.overview.toLowerCase()} element={<FilmOverview />} />
+                <Route path={FILM_MENU.overview.toLowerCase()} element={<FilmOverview film={film} />} />
                 <Route path={FILM_MENU.reviews.toLowerCase()} element={<FilmReviews />} />
               </Routes>
 
