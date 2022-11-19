@@ -102,8 +102,8 @@ function FilmCard(props : FilmProps): JSX.Element {
               </nav>
 
               <Routes>
-                <Route path="/" element={<FilmDetails />} />
-                <Route path={FILM_MENU.details.toLowerCase()} element={<FilmDetails />} />
+                <Route path="/" element={<FilmDetails film={film} />} />
+                <Route path={FILM_MENU.details.toLowerCase()} element={<FilmDetails film={film} />} />
                 <Route path={FILM_MENU.overview.toLowerCase()} element={<FilmOverview film={film} />} />
                 <Route path={FILM_MENU.reviews.toLowerCase()} element={<FilmReviews />} />
               </Routes>
