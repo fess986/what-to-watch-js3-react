@@ -10,10 +10,11 @@ import FilmOverview from '../../components/film-card/film-card-overview';
 import FilmReviews from '../../components/film-card/film-card-reviews';
 import FilmNavigation from '../../components/film-card/film-navigation';
 
-import { Film } from '../../types/mocks-types';
+import { Film, Review } from '../../types/mocks-types';
 
 type FilmProps = {
   films: Film[];
+  reviews: Review[];
 }
 
 function FilmCard(props : FilmProps): JSX.Element {
@@ -30,6 +31,8 @@ function FilmCard(props : FilmProps): JSX.Element {
   }
 
   const film : Film = props.films[filmId] ? props.films[filmId] : props.films[0];
+
+  const {reviews} = props;
 
   const {backgroundImage, name, genre, posterImage} = film;
 
@@ -105,7 +108,7 @@ function FilmCard(props : FilmProps): JSX.Element {
                 <Route path="/" element={<FilmDetails film={film} />} />
                 <Route path={FILM_MENU.details.toLowerCase()} element={<FilmDetails film={film} />} />
                 <Route path={FILM_MENU.overview.toLowerCase()} element={<FilmOverview film={film} />} />
-                <Route path={FILM_MENU.reviews.toLowerCase()} element={<FilmReviews />} />
+                <Route path={FILM_MENU.reviews.toLowerCase()} element={<FilmReviews reviews={reviews}/>} />
               </Routes>
 
             </div>
