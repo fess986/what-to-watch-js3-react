@@ -14,8 +14,6 @@ function FilmReview(props : FilmReviewProps): JSX.Element {
 
   const calculatedDate = parseCommentDate(date);
 
-  console.log(review);
-
   return (
     <div className="review">
       <blockquote className="review__quote">

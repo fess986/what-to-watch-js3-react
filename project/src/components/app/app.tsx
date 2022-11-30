@@ -12,7 +12,7 @@ import Main from '../../pages/main/main';
 import AddReview from '../../pages/add-review/add-review';
 import FilmCard from '../../pages/film/film';
 import MyList from '../../pages/my-list/my-list';
-import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
+// import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
 import Player from '../../pages/player/player-play/player';
 import Page404 from '../../pages/page404/page404';
 
@@ -20,12 +20,15 @@ import { Film, Review } from '../../types/mocks-types';
 
 import { PrivateRouteElement } from '../private-route/private-route';
 
+import SignIn from '../../pages/sign-in/sign-in';
+
+
 // дополнительные
 /* import HeadGuest from '../../pages/head-guest/head-guest';
 import MovieOverview from '../../pages/movie/movie-overview/movie-overview';
 import MovieReviews from '../../pages/movie/movie-reviews/movie-reviews';
 import PlayerPause from '../../pages/player/player-pause/player-pause';
-import SignInError from '../../pages/sign-in/sign-in-error/sign-in-error';
+
 import SignInMessage from '../../pages/sign-in/sign-in-message/sign-in-message'; */
 
 type AppProps = {
