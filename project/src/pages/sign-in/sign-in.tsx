@@ -47,14 +47,17 @@ function SignIn(): JSX.Element {
   }
 
   const emailChangeHandler = (event : ChangeEvent<HTMLInputElement>) : void => {
-    event.preventDefault()
-    // console.log(event)
-  }
+    event.preventDefault();
+  };
 
   const loginSubmit = (event : FormEvent) : void => {
     event.preventDefault();
-    // console.log(event);
-  }
+    setloginStatus(LOGIN_STATUS.userNotFound);
+  };
+
+  const emailFocusHandler = () => {
+    setloginStatus(LOGIN_STATUS.normal);
+  };
 
   return (
     <div className="user-page">
@@ -73,7 +76,7 @@ function SignIn(): JSX.Element {
           </div>
           <div className="sign-in__fields">
             <div className={inputClassListAdress}>
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={emailChangeHandler}/>
+              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={emailChangeHandler} onFocus={emailFocusHandler}/>
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className={inputClassListPass}>
