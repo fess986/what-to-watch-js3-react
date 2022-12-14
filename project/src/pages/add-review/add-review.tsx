@@ -7,7 +7,7 @@ import Logo from '../../components/logo/Logo';
 import ReviewStars from '../../components/review-stars/review-stars';
 
 function AddReview(): JSX.Element {
-  const INITIAL_COUNT = 3;
+  const INITIAL_COUNT = 5;
   const [starCount, setStarCount] = useState(INITIAL_COUNT);
   const [reviewMessage, setReviewMessage] = useState('');
 
@@ -70,7 +70,7 @@ function AddReview(): JSX.Element {
             >
             </textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" type="submit" disabled = {reviewMessage === ''}>Post</button>
             </div>
 
           </div>
