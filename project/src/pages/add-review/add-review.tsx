@@ -2,16 +2,16 @@
 import React from 'react';
 
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import Logo from '../../components/logo/Logo';
 import ReviewStars from '../../components/review-stars/review-stars';
 
 function AddReview(): JSX.Element {
   const INITIAL_COUNT = 3;
-
   const [starCount, setStarCount] = useState(INITIAL_COUNT);
+  const [reviewMessage, setReviewMessage] = useState('');
 
-  const reviewID = useParams();
+  // const reviewID = useParams();
 
   return (
     <section className="film-card film-card--full">
@@ -63,7 +63,12 @@ function AddReview(): JSX.Element {
           />
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
+              onChange={(evt) => {
+                setReviewMessage(evt.target.value);
+              }}
+            >
+            </textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
             </div>
