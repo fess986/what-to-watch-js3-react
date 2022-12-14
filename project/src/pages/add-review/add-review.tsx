@@ -56,6 +56,7 @@ function AddReview(): JSX.Element {
       <div className="add-review">
         <form className="add-review__form">
 
+          {/* передаем состояние на уровень вверх через вызов коллбек-функции */}
           <ReviewStars starCount={starCount} onStarClick={(count : number) : void => {
             setStarCount(count);
           }}

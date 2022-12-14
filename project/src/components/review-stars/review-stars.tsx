@@ -3,8 +3,8 @@ import React from 'react';
 import {ChangeEvent} from 'react';
 
 type ReviewStarsProps = {
-  starCount : number;
-  onStarClick : (count: number) => void;
+  starCount : number; // это стейт вызывающего компонента
+  onStarClick : (count: number) => void; // коллбек-функция вызывающего компонента
 }
 
 const ReviewStars = function(props : ReviewStarsProps) {

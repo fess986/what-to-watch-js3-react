@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "project",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build - project",
+			"detail": "react-scripts build"
+		},
+		{
+			"type": "npm",
+			"script": "test",
+			"path": "project",
+			"group": "test",
+			"problemMatcher": [],
+			"label": "npm: test - project",
+			"detail": "react-scripts test --passWithNoTests"
+		}
+	]
+}
