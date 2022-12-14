@@ -1,17 +1,18 @@
 // страница добавления объявления
 import React from 'react';
 
-import { useState } from 'react';
-// import { useParams } from 'react-router-dom';
+import { useState, FormEvent } from 'react';
+import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 import Logo from '../../components/logo/Logo';
 import ReviewStars from '../../components/review-stars/review-stars';
 
 function AddReview(): JSX.Element {
-  const INITIAL_COUNT = 3;
+  const INITIAL_COUNT = 5;
   const [starCount, setStarCount] = useState(INITIAL_COUNT);
   const [reviewMessage, setReviewMessage] = useState('');
 
-  // const reviewID = useParams();
+  const reviewID = useParams();
+  const navigate : NavigateFunction = useNavigate();
 
   return (
     <section className="film-card film-card--full">
@@ -54,7 +55,11 @@ function AddReview(): JSX.Element {
       </div>
 
       <div className="add-review">
-        <form className="add-review__form">
+        <form className="add-review__form" onSubmit={(evt : FormEvent) : void => {
+          evt.preventDefault();
+          navigate(`/films/${reviewID.id}`);
+        }}
+        >
 
           {/* передаем состояние на уровень вверх через вызов коллбек-функции */}
           <ReviewStars starCount={starCount} onStarClick={(count : number) : void => {
@@ -70,7 +75,7 @@ function AddReview(): JSX.Element {
             >
             </textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" type="submit" disabled = {reviewMessage === ''}>Post</button>
             </div>
 
           </div>
