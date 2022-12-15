@@ -11,6 +11,7 @@ import FilmReviews from '../../components/film-card/film-card-reviews';
 import FilmNavigation from '../../components/film-card/film-navigation';
 import AddReviewButton from '../../components/buttons/add-review-button/add-review-button';
 import MyListButton from '../../components/buttons/my-list-button/my-list-button';
+import PlayButton from '../../components/buttons/play-button/play-button';
 import MoreLikeThisList from '../../components/more-like-this-list/more-like-this-list';
 
 import { Film, Review } from '../../types/mocks-types';
@@ -75,13 +76,8 @@ function FilmCard(props : FilmProps): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
 
+                <PlayButton id={idParam}/>
                 <MyListButton />
                 <AddReviewButton/>
 
