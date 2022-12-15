@@ -9,6 +9,7 @@ import FilmDetails from '../../components/film-card/film-card-details';
 import FilmOverview from '../../components/film-card/film-card-overview';
 import FilmReviews from '../../components/film-card/film-card-reviews';
 import FilmNavigation from '../../components/film-card/film-navigation';
+import AddReviewButton from '../../components/buttons/add-review-button/add-review-button';
 
 import { Film, Review } from '../../types/mocks-types';
 
@@ -85,7 +86,7 @@ function FilmCard(props : FilmProps): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <AddReviewButton/>
               </div>
             </div>
           </div>
