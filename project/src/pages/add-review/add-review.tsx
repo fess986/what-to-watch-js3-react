@@ -6,6 +6,8 @@ import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 import Logo from '../../components/logo/Logo';
 import ReviewStars from '../../components/review-stars/review-stars';
 
+import { appRouteWithId } from '../../const/const';
+
 function AddReview(): JSX.Element {
   const INITIAL_COUNT = 5;
   const [starCount, setStarCount] = useState(INITIAL_COUNT);
@@ -57,7 +59,7 @@ function AddReview(): JSX.Element {
       <div className="add-review">
         <form className="add-review__form" onSubmit={(evt : FormEvent) : void => {
           evt.preventDefault();
-          navigate(`/films/${reviewID.id}`);
+          navigate(appRouteWithId('Film', reviewID.id));
         }}
         >
 
