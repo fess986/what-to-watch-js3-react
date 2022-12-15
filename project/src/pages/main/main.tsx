@@ -2,6 +2,7 @@
 import Logo from '../../components/logo/Logo';
 import { Film } from '../../types/mocks-types';
 import FilmList from '../../components/film-list/film-list';
+import MyListButton from '../../components/buttons/my-list-button/my-list-button';
 
 
 type MainProps = {
@@ -56,12 +57,9 @@ function Main(props: MainProps): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+
+                <MyListButton />
+
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ import FilmOverview from '../../components/film-card/film-card-overview';
 import FilmReviews from '../../components/film-card/film-card-reviews';
 import FilmNavigation from '../../components/film-card/film-navigation';
 import AddReviewButton from '../../components/buttons/add-review-button/add-review-button';
+import MyListButton from '../../components/buttons/my-list-button/my-list-button';
 import MoreLikeThisList from '../../components/more-like-this-list/more-like-this-list';
 
 import { Film, Review } from '../../types/mocks-types';
@@ -41,7 +42,6 @@ function FilmCard(props : FilmProps): JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">
-
 
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -81,13 +81,10 @@ function FilmCard(props : FilmProps): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+
+                <MyListButton />
                 <AddReviewButton/>
+
               </div>
             </div>
           </div>
