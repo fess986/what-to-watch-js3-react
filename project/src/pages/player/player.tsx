@@ -12,7 +12,7 @@ type PlayerProps = {
 
 function Player(props : PlayerProps): JSX.Element {
   const [isLoading, setIsloading] = useState(true);
-  // const [isPlaying, setIsPlaing] = useState(false);
+  const [isPlaying, setIsPlaing] = useState(false);
   const [currentTimePlaying, setcurrentTimePlaying] = useState(0);
 
 
@@ -51,8 +51,10 @@ function Player(props : PlayerProps): JSX.Element {
 
     if (videoRef.current.paused) {
       videoRef.current.play();
+      setIsPlaing((value) => !value);
     } else {
       videoRef.current.pause();
+      setIsPlaing((value) => !value);
     }
   };
 
@@ -78,12 +80,27 @@ function Player(props : PlayerProps): JSX.Element {
         </div>
 
         <div className="player__controls-row">
-          <button onClick={playButtonClick} type="button" className="player__play">
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
-            </svg>
-            <span>Play</span>
-          </button>
+
+          {
+            isPlaying ?
+
+              <button onClick={playButtonClick} type="button" className="player__play">
+                <svg viewBox="0 0 14 21" width="14" height="21">
+                  <use xlinkHref="#pause"></use>
+                </svg>
+                <span>Pause</span>
+              </button>
+              :
+              <button onClick={playButtonClick} type="button" className="player__play">
+                <svg viewBox="0 0 19 19" width="19" height="19">
+                  <use xlinkHref="#play-s"></use>
+                </svg>
+                <span>Play</span>
+              </button>
+
+          }
+
+
           <div className="player__name">{isLoading ? 'loading' : 'played'}</div>
 
           <button type="button" className="player__full-screen">
