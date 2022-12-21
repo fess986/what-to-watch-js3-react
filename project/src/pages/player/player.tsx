@@ -12,7 +12,7 @@ type PlayerProps = {
 
 function Player(props : PlayerProps): JSX.Element {
   const [isLoading, setIsloading] = useState(true);
-  const [isPlaying, setIsPlaing] = useState(true);
+  // const [isPlaying, setIsPlaing] = useState(false);
   const [currentTimePlaying, setcurrentTimePlaying] = useState(0);
 
 
@@ -28,8 +28,8 @@ function Player(props : PlayerProps): JSX.Element {
     videoRef.current.addEventListener('loadeddata', () => {
       setIsloading(false) ;
       console.log('loaded1');
-
     });
+
   }, []);
 
   // useEffect(() => {
@@ -45,6 +45,15 @@ function Player(props : PlayerProps): JSX.Element {
 
   const playButtonClick = () => {
     console.log(videoRef.current);
+    if (videoRef.current === null) {
+      return;
+    }
+
+    if (videoRef.current.paused) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
+    }
   };
 
 
@@ -52,8 +61,8 @@ function Player(props : PlayerProps): JSX.Element {
     <div className="player">
       <video
         ref={videoRef}
-
-        src={videoLink} className="player__video" poster="img/player-poster.jpg"
+        src={videoLink} className="player__video"
+        poster={film.backgroundImage}
       >
       </video>
 
@@ -75,7 +84,7 @@ function Player(props : PlayerProps): JSX.Element {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{isLoading ? 'loading' : 'played'}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
