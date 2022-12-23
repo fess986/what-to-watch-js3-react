@@ -76,6 +76,7 @@ function Player(props : PlayerProps): JSX.Element {
         src={videoLink} className="player__video"
         poster={film.backgroundImage}
         onTimeUpdate={handleCurrentTimePlaying}
+        onClick={playButtonClick}
       >
       </video>
 
