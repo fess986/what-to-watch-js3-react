@@ -1,11 +1,12 @@
 // плеер
 import React from 'react';
 
-import { useState, useEffect, useRef, SyntheticEvent } from 'react';
+import { useState, useEffect, useRef, SyntheticEvent, MouseEvent } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 
 import { Film } from '../../types/mocks-types';
 import {parseMinutes} from '../../utils/utils';
+import { appRouteWithId } from '../../const/const';
 
 type PlayerProps = {
   films : Film[];
@@ -48,6 +49,11 @@ function Player(props : PlayerProps): JSX.Element {
     setCurrentTimePlaying((evt.target as HTMLVideoElement).currentTime);
   };
 
+  const exitButtonClickHandler = (evt : MouseEvent) => {
+    evt.preventDefault();
+    navigate(appRouteWithId('Film', params.id));
+  };
+
   const playButtonClick = () => {
     if (videoRef.current === null) {
       return;
@@ -73,7 +79,7 @@ function Player(props : PlayerProps): JSX.Element {
       >
       </video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" onClick={exitButtonClickHandler} className="player__exit">Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
