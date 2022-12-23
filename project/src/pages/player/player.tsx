@@ -1,10 +1,11 @@
 // плеер
 import React from 'react';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, SyntheticEvent } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 
 import { Film } from '../../types/mocks-types';
+import {parseMinutes} from '../../utils/utils';
 
 type PlayerProps = {
   films : Film[];
@@ -13,7 +14,7 @@ type PlayerProps = {
 function Player(props : PlayerProps): JSX.Element {
   const [isLoading, setIsloading] = useState(true);
   const [isPlaying, setIsPlaing] = useState(false);
-  const [currentTimePlaying, setcurrentTimePlaying] = useState(0);
+  const [currentTimePlaying, setCurrentTimePlaying] = useState(0);
 
 
   const params = useParams();
@@ -27,34 +28,37 @@ function Player(props : PlayerProps): JSX.Element {
 
     videoRef.current.addEventListener('loadeddata', () => {
       setIsloading(false) ;
-      console.log('loaded1');
     });
 
   }, []);
 
-  // useEffect(() => {
-  //   console.log('loaded2')
-  // }, [isLoading]);
 
   let film;
   if (params.id) {
     film = props.films[Number(params.id)];
   } else { film = props.films[0]; }
 
+
+  const fullFilmTime = film.runTime * 60;
+
+
   const {videoLink} = film;
 
+  const handleCurrentTimePlaying = (evt : SyntheticEvent<HTMLVideoElement>) => {
+    setCurrentTimePlaying((evt.target as HTMLVideoElement).currentTime);
+  };
+
   const playButtonClick = () => {
-    console.log(videoRef.current);
     if (videoRef.current === null) {
       return;
     }
 
     if (videoRef.current.paused) {
       videoRef.current.play();
-      setIsPlaing((value) => !value);
+      setIsPlaing((value : boolean) : boolean => !value);
     } else {
       videoRef.current.pause();
-      setIsPlaing((value) => !value);
+      setIsPlaing((value : boolean) : boolean => !value);
     }
   };
 
@@ -65,6 +69,7 @@ function Player(props : PlayerProps): JSX.Element {
         ref={videoRef}
         src={videoLink} className="player__video"
         poster={film.backgroundImage}
+        onTimeUpdate={handleCurrentTimePlaying}
       >
       </video>
 
@@ -76,7 +81,8 @@ function Player(props : PlayerProps): JSX.Element {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%' }}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{parseMinutes(fullFilmTime - currentTimePlaying)}</div>
+
         </div>
 
         <div className="player__controls-row">
