@@ -16,7 +16,8 @@ function Player(props : PlayerProps): JSX.Element {
   const [isLoading, setIsloading] = useState(true);
   const [isPlaying, setIsPlaing] = useState(false);
   const [currentTimePlaying, setCurrentTimePlaying] = useState(0);
-
+  const [filmDuration, setfilmDuration] = useState(0);
+  const [playRowPosition, setPlayRowPosition] = useState(0);
 
   const params = useParams();
   const navigate : NavigateFunction = useNavigate();
@@ -29,9 +30,20 @@ function Player(props : PlayerProps): JSX.Element {
 
     videoRef.current.addEventListener('loadeddata', () => {
       setIsloading(false) ;
+      setfilmDuration((current) => {
+        if (videoRef.current) {
+          current = videoRef.current.duration;
+        }
+        return current;
+      });
     });
 
   }, []);
+
+  useEffect(() => {
+    setPlayRowPosition(Math.floor(currentTimePlaying / filmDuration * 100));
+
+  }, [currentTimePlaying, filmDuration]);
 
 
   let film;
@@ -39,9 +51,7 @@ function Player(props : PlayerProps): JSX.Element {
     film = props.films[Number(params.id)];
   } else { film = props.films[0]; }
 
-
-  const fullFilmTime = film.runTime * 60;
-
+  // const fullFilmTime = film.runTime * 60;  - пока что используем моки, поэтому длинну видео рассчитываем по факту. Возможно потом будем брать из данных карточки фильма.
 
   const {videoLink} = film;
 
@@ -69,7 +79,9 @@ function Player(props : PlayerProps): JSX.Element {
   };
 
   const toggleFullScreen = () => {
+    /* eslint-disable */
     const document:any = window.document;
+    /* eslint-enable */
     const elem = document.documentElement;
 
     if (!document.fullscreenElement && !document.mozFullScreenElement &&
@@ -81,7 +93,9 @@ function Player(props : PlayerProps): JSX.Element {
       } else if (elem.mozRequestFullScreen) {
         elem.mozRequestFullScreen();
       } else if (elem.webkitRequestFullscreen) {
+        /* eslint-disable */
         elem.webkitRequestFullscreen((Element as any).ALLOW_KEYBOARD_INPUT);
+        /* eslint-enable */
       }
     } else {
       if (document.exitFullscreen) {
@@ -95,7 +109,6 @@ function Player(props : PlayerProps): JSX.Element {
       }
     }
   };
-
 
   return (
     <div className="player">
@@ -113,10 +126,10 @@ function Player(props : PlayerProps): JSX.Element {
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{left: '30%' }}>Toggler</div>
+            <progress className="player__progress" value={String(playRowPosition)} max="100"></progress>
+            <div className="player__toggler" style={{left: `${playRowPosition}%` }}>Toggler</div>
           </div>
-          <div className="player__time-value">{parseMinutes(fullFilmTime - currentTimePlaying)}</div>
+          <div className="player__time-value">{parseMinutes(filmDuration - currentTimePlaying)}</div>
 
         </div>
 
@@ -140,7 +153,6 @@ function Player(props : PlayerProps): JSX.Element {
               </button>
 
           }
-
 
           <div className="player__name">{isLoading ? 'loading' : 'played'}</div>
 
