@@ -1,11 +1,12 @@
 // плеер
 import React from 'react';
 
-import { useState, useEffect, useRef, SyntheticEvent } from 'react';
+import { useState, useEffect, useRef, SyntheticEvent, MouseEvent } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 
 import { Film } from '../../types/mocks-types';
 import {parseMinutes} from '../../utils/utils';
+import { appRouteWithId } from '../../const/const';
 
 type PlayerProps = {
   films : Film[];
@@ -15,7 +16,8 @@ function Player(props : PlayerProps): JSX.Element {
   const [isLoading, setIsloading] = useState(true);
   const [isPlaying, setIsPlaing] = useState(false);
   const [currentTimePlaying, setCurrentTimePlaying] = useState(0);
-
+  const [filmDuration, setfilmDuration] = useState(0);
+  const [playRowPosition, setPlayRowPosition] = useState(0);
 
   const params = useParams();
   const navigate : NavigateFunction = useNavigate();
@@ -28,9 +30,20 @@ function Player(props : PlayerProps): JSX.Element {
 
     videoRef.current.addEventListener('loadeddata', () => {
       setIsloading(false) ;
+      setfilmDuration((current) => {
+        if (videoRef.current) {
+          current = videoRef.current.duration;
+        }
+        return current;
+      });
     });
 
   }, []);
+
+  useEffect(() => {
+    setPlayRowPosition(Math.floor(currentTimePlaying / filmDuration * 100));
+
+  }, [currentTimePlaying, filmDuration]);
 
 
   let film;
@@ -38,14 +51,17 @@ function Player(props : PlayerProps): JSX.Element {
     film = props.films[Number(params.id)];
   } else { film = props.films[0]; }
 
-
-  const fullFilmTime = film.runTime * 60;
-
+  // const fullFilmTime = film.runTime * 60;  - пока что используем моки, поэтому длинну видео рассчитываем по факту. Возможно потом будем брать из данных карточки фильма.
 
   const {videoLink} = film;
 
   const handleCurrentTimePlaying = (evt : SyntheticEvent<HTMLVideoElement>) => {
     setCurrentTimePlaying((evt.target as HTMLVideoElement).currentTime);
+  };
+
+  const exitButtonClickHandler = (evt : MouseEvent) => {
+    evt.preventDefault();
+    navigate(appRouteWithId('Film', params.id));
   };
 
   const playButtonClick = () => {
@@ -62,6 +78,37 @@ function Player(props : PlayerProps): JSX.Element {
     }
   };
 
+  const toggleFullScreen = () => {
+    /* eslint-disable */
+    const document:any = window.document;
+    /* eslint-enable */
+    const elem = document.documentElement;
+
+    if (!document.fullscreenElement && !document.mozFullScreenElement &&
+      !document.webkitFullscreenElement && !document.msFullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        /* eslint-disable */
+        elem.webkitRequestFullscreen((Element as any).ALLOW_KEYBOARD_INPUT);
+        /* eslint-enable */
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  };
 
   return (
     <div className="player">
@@ -70,18 +117,19 @@ function Player(props : PlayerProps): JSX.Element {
         src={videoLink} className="player__video"
         poster={film.backgroundImage}
         onTimeUpdate={handleCurrentTimePlaying}
+        onClick={playButtonClick}
       >
       </video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" onClick={exitButtonClickHandler} className="player__exit">Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{left: '30%' }}>Toggler</div>
+            <progress className="player__progress" value={String(playRowPosition)} max="100"></progress>
+            <div className="player__toggler" style={{left: `${playRowPosition}%` }}>Toggler</div>
           </div>
-          <div className="player__time-value">{parseMinutes(fullFilmTime - currentTimePlaying)}</div>
+          <div className="player__time-value">{parseMinutes(filmDuration - currentTimePlaying)}</div>
 
         </div>
 
@@ -106,10 +154,9 @@ function Player(props : PlayerProps): JSX.Element {
 
           }
 
-
           <div className="player__name">{isLoading ? 'loading' : 'played'}</div>
 
-          <button type="button" className="player__full-screen">
+          <button type="button" className="player__full-screen" onClick={toggleFullScreen}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>
