@@ -25,8 +25,6 @@ export function appRouteWithId(line : appRouteWithIdProps, id: number|string|und
   return finalString;
 }
 
-// console.log(appRouteWithId('Player', 7));
-
 export enum AuthStatus {
   Auth = 'AUTH',
   NoAuth = 'NOAUTH',
@@ -39,3 +37,4 @@ export const FILM_MENU = {
   reviews: 'Reviews',
 };
 
+export const ALL_GENRES = 'All genres';
