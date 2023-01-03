@@ -1,19 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {changeGenre, getFilmsByGenre} from './action';
+import {changeGenre, getFilmsByGenre, loadFilms} from './action';
+import {State} from '../types/state';
 
-import {ALL_GENRES} from '../const/const';
+import {ALL_GENRES, FILMS_COUNT_ON_START} from '../const/const';
 
 const initialStateFilms = {
   genre: ALL_GENRES,
   filmList: [],
+  filmsCount: FILMS_COUNT_ON_START,
 };
 
-type State = {
-  genre: string,
-  filmList: string[],
-}
-
-const reduser = createReducer(initialStateFilms, (builder) => {
+const reducer = createReducer(initialStateFilms, (builder) => {
   builder
     .addCase(changeGenre, (state : State, action) => {
       if (action.payload) {
@@ -24,7 +21,10 @@ const reduser = createReducer(initialStateFilms, (builder) => {
       if (action.payload) {
         state.filmList = action.payload;
       }
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.filmList = action.payload;
     });
 });
 
-export {reduser};
+export {reducer};
