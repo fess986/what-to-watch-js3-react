@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {changeGenre, getFilmsByGenre, loadFilms, resetFilms} from './action';
+import {changeGenre, getFilmsByGenre, loadFilms, resetFilms, addFilms} from './action';
 import {State} from '../types/state';
 
-import {ALL_GENRES, FILMS_COUNT_ON_START} from '../const/const';
+import {ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../const/const';
 
 const initialStateFilms = {
   genre: ALL_GENRES,
@@ -27,6 +27,9 @@ const reducer = createReducer(initialStateFilms, (builder) => {
     })
     .addCase(resetFilms, (state) => {
       state.filmsShownCount = FILMS_COUNT_ON_START;
+    })
+    .addCase(addFilms, (state) => {
+      state.filmsShownCount = state.filmsShownCount + SHOW_MORE_FILMS_COUNT;
     });
 });
 

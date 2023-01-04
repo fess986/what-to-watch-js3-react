@@ -9,10 +9,9 @@ import PlayButton from '../../components/buttons/play-button/play-button';
 import ShowMoreButton from '../../components/buttons/show-more-button/show-more-button';
 import Genres from '../../components/genres/genres';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-// import { store } from '../../store';
 import {getGenre, getFilmList, getfilmsShownCount} from '../../store/selectors';
 
-import { loadFilms, resetFilms } from '../../store/action';
+import { loadFilms, resetFilms, addFilms } from '../../store/action';
 
 type MainProps = {
   films: Film[];
@@ -29,6 +28,10 @@ function Main(props: MainProps): JSX.Element {
   const genre = useAppSelector(getGenre);
   const filmsShownCount = useAppSelector(getfilmsShownCount);
   const filmList = useAppSelector(getFilmList);
+
+  const showMoreButtonHandler = () => {
+    dispatch(addFilms());
+  };
 
   useEffect(() => {
     dispatch(loadFilms(films));
@@ -95,7 +98,10 @@ function Main(props: MainProps): JSX.Element {
 
           <FilmList films={filmList} filmsShownCount={filmsShownCount}/>
 
-          <ShowMoreButton />
+          {
+            filmList.length > filmsShownCount ? <ShowMoreButton showMoreButtonHandler={showMoreButtonHandler}/> : ''
+          }
+
 
         </section>
 
