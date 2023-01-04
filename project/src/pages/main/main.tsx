@@ -5,6 +5,7 @@ import FilmList from '../../components/film-list/film-list';
 import MyListButton from '../../components/buttons/my-list-button/my-list-button';
 import PlayButton from '../../components/buttons/play-button/play-button';
 import ShowMoreButton from '../../components/buttons/show-more-button/show-more-button';
+import Genres from '../../components/genres/genres';
 
 type MainProps = {
   films: Film[];
@@ -66,38 +67,7 @@ function Main(props: MainProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a className="catalog__genres-link" href='/some/valid/url'>All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href='/some/valid/url2'>Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href='/some/valid/url3'>Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href='/some/valid/url' className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href='/some/valid/url' className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href='/some/valid/url' className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href='/some/valid/url' className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href='/some/valid/url' className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href='/some/valid/url' className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href='/some/valid/url' className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <Genres />
 
           <FilmList films={films}/>
 
