@@ -1,4 +1,6 @@
 // главная страница
+import { useEffect } from 'react';
+
 import Logo from '../../components/logo/Logo';
 import { Film } from '../../types/mocks-types';
 import FilmList from '../../components/film-list/film-list';
@@ -6,6 +8,11 @@ import MyListButton from '../../components/buttons/my-list-button/my-list-button
 import PlayButton from '../../components/buttons/play-button/play-button';
 import ShowMoreButton from '../../components/buttons/show-more-button/show-more-button';
 import Genres from '../../components/genres/genres';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+// import { store } from '../../store';
+import {getGenre, getFilmList, getfilmsShownCount} from '../../store/selectors';
+
+import { loadFilms, resetFilms } from '../../store/action';
 
 type MainProps = {
   films: Film[];
@@ -14,6 +21,23 @@ type MainProps = {
 function Main(props: MainProps): JSX.Element {
 
   const {films} = props;
+
+  const dispatch = useAppDispatch();
+  // const genre = useAppSelector((state) => state.genre); // так мы напрямую используем useSelector через типизированную версию useAppSelector
+
+  // а так мы обращаемся через вспомогательную наглядную функцию
+  const genre = useAppSelector(getGenre);
+  const filmsShownCount = useAppSelector(getfilmsShownCount);
+  const filmList = useAppSelector(getFilmList);
+
+  useEffect(() => {
+    dispatch(loadFilms(films));
+
+    return () => {
+      dispatch(resetFilms());
+    };
+  }, [dispatch, films]);
+
 
   return (
     <>
