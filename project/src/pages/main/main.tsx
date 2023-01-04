@@ -4,6 +4,7 @@ import { Film } from '../../types/mocks-types';
 import FilmList from '../../components/film-list/film-list';
 import MyListButton from '../../components/buttons/my-list-button/my-list-button';
 import PlayButton from '../../components/buttons/play-button/play-button';
+import ShowMoreButton from '../../components/buttons/show-more-button/show-more-button';
 
 type MainProps = {
   films: Film[];
@@ -100,9 +101,8 @@ function Main(props: MainProps): JSX.Element {
 
           <FilmList films={films}/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton />
+
         </section>
 
         <footer className="page-footer">
