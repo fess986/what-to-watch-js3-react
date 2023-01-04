@@ -93,7 +93,7 @@ function Main(props: MainProps): JSX.Element {
 
           <Genres />
 
-          <FilmList films={films}/>
+          <FilmList films={filmList} filmsShownCount={filmsShownCount}/>
 
           <ShowMoreButton />
 

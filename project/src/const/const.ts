@@ -39,7 +39,7 @@ export const FILM_MENU = {
 
 export const ALL_GENRES = 'All genres';
 
-export const FILMS_COUNT_ON_START = 8;
+export const FILMS_COUNT_ON_START = 7;
 
 export const SHOW_MORE_FILMS_COUNT = 8;
 
