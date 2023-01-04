@@ -1,6 +1,6 @@
 import {store} from '../store/index';
 
-// тут мы прописываем тип State вручную
+// тут мы прописываем тип State вручную. Точнее начинаем, далее на автомате
 // export type State = {
 //   genre: string,
 //   filmList: string[],

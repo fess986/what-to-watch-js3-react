@@ -5,19 +5,24 @@ import { Film } from '../../types/mocks-types';
 
 type FilmListProps = {
   films: Film[];
+  filmsShownCount?: number;
 }
 
 // компонент получает массив фильмов и рендерит их
-function FilmList(props: FilmListProps): JSX.Element {
+function FilmList({films, filmsShownCount = films.length}: FilmListProps): JSX.Element {
 
-  const {films} = props;
+console.log(films)
+console.log(filmsShownCount)
+
+const shownList = films.slice(0, filmsShownCount);
+
 
   return (
 
     <div className="catalog__films-list" >
 
       {
-        films.map((film : Film) : JSX.Element => (
+        shownList.map((film : Film) : JSX.Element => (
           <SmallFilmCard film = {film} key = {film.id}/>
         ))
       }
