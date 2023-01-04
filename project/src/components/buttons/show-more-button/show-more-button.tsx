@@ -1,16 +1,14 @@
 import React from 'react';
 
-const ShowMoreButton = () : JSX.Element => {
+type ShowMoreButtonProp = {
+  showMoreButtonHandler : () => void;
+}
 
-  const something = 42;
-  console.log(something);
+const ShowMoreButton = ({showMoreButtonHandler} : ShowMoreButtonProp) : JSX.Element =>
 
-  return (
+  (
     <div className="catalog__more">
-      <button className="catalog__button" type="button">Show more</button>
+      <button className="catalog__button" type="button" onClick={showMoreButtonHandler}>Show more</button>
     </div>
   );
-
-};
-
 export default ShowMoreButton;
