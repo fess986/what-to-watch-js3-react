@@ -11,7 +11,7 @@ import Genres from '../../components/genres/genres';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import {getGenre, getFilmList, getfilmsShownCount} from '../../store/selectors';
 
-import { loadFilms, resetFilms, addFilms } from '../../store/action';
+import { loadFilms, resetFilms, addFilms, changeGenre } from '../../store/action';
 
 type MainProps = {
   films: Film[];
@@ -31,6 +31,10 @@ function Main(props: MainProps): JSX.Element {
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
+  };
+
+  const genreClickHandler = (filmGenre : string) => {
+    dispatch(changeGenre(filmGenre));
   };
 
   useEffect(() => {
@@ -94,7 +98,7 @@ function Main(props: MainProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <Genres />
+          <Genres films={filmList} genre={genre} genreClickHandler={genreClickHandler}/>
 
           <FilmList films={filmList} filmsShownCount={filmsShownCount}/>
 
