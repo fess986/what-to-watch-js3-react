@@ -1,41 +1,31 @@
 import React from 'react';
+import { Film } from '../../types/mocks-types';
+import {ALL_GENRES, GENRES_SHOWN_NUMBER} from '../../const/const';
 
-const Genres = () => {
-  const something = 42;
-  console.log(something);
+type GenresProps = {
+  films: Film[],
+  genre: string,
+  genreClickHandler: (filmgenre: string) => void
+}
+
+const Genres = ({films, genre, genreClickHandler} : GenresProps) => {
+
+  const fullGenreList = films.map((film) => film.genre);
+  let genreList = Array.from(new Set(fullGenreList));
+  genreList = genreList.slice(0, GENRES_SHOWN_NUMBER);
+  genreList.unshift(ALL_GENRES);
 
   return (
     <ul className="catalog__genres-list">
-      <li className="catalog__genres-item catalog__genres-item--active">
-        <a className="catalog__genres-link" href='/some/valid/url'>All genres</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a className="catalog__genres-link" href='/some/valid/url2'>Comedies</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a className="catalog__genres-link" href='/some/valid/url3'>Crime</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href='/some/valid/url' className="catalog__genres-link">Documentary</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href='/some/valid/url' className="catalog__genres-link">Dramas</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href='/some/valid/url' className="catalog__genres-link">Horror</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href='/some/valid/url' className="catalog__genres-link">Kids & Family</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href='/some/valid/url' className="catalog__genres-link">Romance</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href='/some/valid/url' className="catalog__genres-link">Sci-Fi</a>
-      </li>
-      <li className="catalog__genres-item">
-        <a href='/some/valid/url' className="catalog__genres-link">Thrillers</a>
-      </li>
+
+      {
+        genreList.map((genres) => (
+          <li key={Math.random()} className={`catalog__genres-item ${genres === genre ? 'catalog__genres-item--active' : ''}`} onClick={() => genreClickHandler(genres)}>
+            <span className="catalog__genres-link">{genres}</span>
+          </li>
+        ))
+      }
+
     </ul>
   );
 

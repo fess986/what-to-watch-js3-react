@@ -11,16 +11,11 @@ type FilmListProps = {
 // компонент получает массив фильмов и рендерит их
 function FilmList({films, filmsShownCount = films.length}: FilmListProps): JSX.Element {
 
-console.log(films)
-console.log(filmsShownCount)
-
-const shownList = films.slice(0, filmsShownCount);
-
+  const shownList = films.slice(0, filmsShownCount);
 
   return (
 
     <div className="catalog__films-list" >
-
       {
         shownList.map((film : Film) : JSX.Element => (
           <SmallFilmCard film = {film} key = {film.id}/>
