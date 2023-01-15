@@ -1,12 +1,12 @@
 import React from 'react';
+import { PropsWithChildren } from 'react';
 import { AuthStatus, AppRoute } from '../../const/const';
 import {Navigate} from 'react-router-dom';
 
-type PrivateRoute = {
+type PrivateRoute = PropsWithChildren <{
   authStatus: AuthStatus,
   children: JSX.Element,
-
-}
+}>
 
 export const PrivateRouteElement = (props : PrivateRoute) : JSX.Element => {
   const {authStatus, children} = props;

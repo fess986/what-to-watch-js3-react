@@ -108,7 +108,7 @@ function Main(props: MainProps): JSX.Element {
 
           <Genres films={filmList} genre={genre} genreClickHandler={genreClickHandler}/>
 
-          <FilmList films={filteredFilmList} genre={genre} filmsShownCount={filmsShownCount}/>
+          <FilmList films={filteredFilmList} filmsShownCount={filmsShownCount}/>
 
           {
             filteredFilmList.length > filmsShownCount ? <ShowMoreButton showMoreButtonHandler={showMoreButtonHandler}/> : ''

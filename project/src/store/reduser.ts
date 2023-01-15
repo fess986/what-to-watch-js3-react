@@ -1,10 +1,17 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {changeGenre, getFilmsByGenre, loadFilms, resetFilms, addFilms} from './action';
 import {State} from '../types/state';
+import { Film } from '../types/mocks-types';
 
 import {ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../const/const';
 
-const initialStateFilms = {
+type initialStateFilmsProps = {
+  genre: string,
+  filmList: Film[],
+  filmsShownCount: number,
+}
+
+const initialStateFilms : initialStateFilmsProps = {
   genre: ALL_GENRES,
   filmList: [],
   filmsShownCount: FILMS_COUNT_ON_START,
@@ -22,13 +29,13 @@ const reducer = createReducer(initialStateFilms, (builder) => {
         state.filmList = action.payload;
       }
     })
-    .addCase(loadFilms, (state, action) => {
-      state.filmList = action.payload;
+    .addCase(loadFilms, (state : State, action1) => {
+      state.filmList = action1.payload;
     })
-    .addCase(resetFilms, (state) => {
+    .addCase(resetFilms, (state : State) => {
       state.filmsShownCount = FILMS_COUNT_ON_START;
     })
-    .addCase(addFilms, (state) => {
+    .addCase(addFilms, (state : State) => {
       state.filmsShownCount = state.filmsShownCount + SHOW_MORE_FILMS_COUNT;
     });
 });

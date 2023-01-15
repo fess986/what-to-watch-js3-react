@@ -1,4 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
+import { Film } from '../types/mocks-types';
 
 export enum ActionTypes {
   CHANGE_GENRE = 'filmList/changeGenre',
@@ -8,13 +9,13 @@ export enum ActionTypes {
   ADD_FILMS = 'filmList/addFilms'
 }
 
-export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre : string) => ({
-  payload : genre
+export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({
+  payload : genre1
 }));
 
 export const getFilmsByGenre = createAction(ActionTypes.GET_FILMS_BY_GENRE);
 
-export const loadFilms = createAction(ActionTypes.LOAD_FILMS, (films) => ({
+export const loadFilms = createAction(ActionTypes.LOAD_FILMS, (films : Film[]) => ({
   payload: films,
 }));
 
