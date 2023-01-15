@@ -4,8 +4,8 @@ import SmallFilmCard from '../small-film-card/small-film-card';
 import { Film } from '../../types/mocks-types';
 
 type FilmListProps = {
-  films: Film[];
-  filmsShownCount?: number;
+  films: Film[],
+  filmsShownCount?: number,
 }
 
 // компонент получает массив фильмов и рендерит их

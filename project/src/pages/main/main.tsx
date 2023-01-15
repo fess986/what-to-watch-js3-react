@@ -10,8 +10,8 @@ import ShowMoreButton from '../../components/buttons/show-more-button/show-more-
 import Genres from '../../components/genres/genres';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import {getGenre, getFilmList, getfilmsShownCount} from '../../store/selectors';
-
 import { loadFilms, resetFilms, addFilms, changeGenre } from '../../store/action';
+import { ALL_GENRES } from '../../const/const';
 
 type MainProps = {
   films: Film[];
@@ -27,7 +27,16 @@ function Main(props: MainProps): JSX.Element {
   // а так мы обращаемся через вспомогательную наглядную функцию
   const genre = useAppSelector(getGenre);
   const filmsShownCount = useAppSelector(getfilmsShownCount);
-  const filmList = useAppSelector(getFilmList);
+  const filmList : Film[] = useAppSelector(getFilmList);
+
+  const filterFilms = (filmList1 : Film[]) => {
+    if (genre === ALL_GENRES) {
+      return filmList;
+    }
+    return filmList1.filter((film : Film) => film.genre === genre);
+  };
+
+  const filteredFilmList = filterFilms(films);
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
@@ -44,7 +53,6 @@ function Main(props: MainProps): JSX.Element {
       dispatch(resetFilms());
     };
   }, [dispatch, films]);
-
 
   return (
     <>
@@ -100,23 +108,17 @@ function Main(props: MainProps): JSX.Element {
 
           <Genres films={filmList} genre={genre} genreClickHandler={genreClickHandler}/>
 
-          <FilmList films={filmList} filmsShownCount={filmsShownCount}/>
+          <FilmList films={filteredFilmList} genre={genre} filmsShownCount={filmsShownCount}/>
 
           {
-            filmList.length > filmsShownCount ? <ShowMoreButton showMoreButtonHandler={showMoreButtonHandler}/> : ''
+            filteredFilmList.length > filmsShownCount ? <ShowMoreButton showMoreButtonHandler={showMoreButtonHandler}/> : ''
           }
-
 
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a href='/some/valid/url' className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+
+          <Logo lightness='light'/>
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
