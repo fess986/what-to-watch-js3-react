@@ -5,8 +5,9 @@ export enum ActionTypes {
   CHANGE_GENRE = 'filmList/changeGenre',
   GET_FILMS_BY_GENRE = 'filmList/getFilmsByGenre',
   LOAD_FILMS = 'load/loadFilms',
+  LOAD_FILMS_API = 'load/loadFilmsAPI',
   RESET_FILMS = 'filmList/resetFilms',
-  ADD_FILMS = 'filmList/addFilms'
+  ADD_FILMS = 'filmList/addFilms',
 }
 
 export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({
