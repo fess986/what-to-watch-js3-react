@@ -7,6 +7,20 @@ export enum AppRoute {
   Player = '/player/:id',
 }
 
+export enum AppRouteAPI {
+  Films = '/films', // get - получение списка фильмов
+  Film = '/films/', // get /films/:id - Получение фильма с идентификатором id .
+  Similar = '/films/', // get /films/: id/similar - Получение списка похожих фильмов.
+  Promo = '/promo', // get /promo - Получение промо-фильма.
+  Favorite = '/favorite', // get - Получение списка фильмов «к просмотру».
+  FavoritePost = '/favorite/', // post /favorite/: film_id/: status
+  Comments = '/comments/', // get - /comments/: film_id
+  CommentsPost = '/comments/', // post - /comments/: film_id - Отправить новый комментарий к фильму по его id .
+  LoginPost = '/login', // post - /login, Авторизация пользователя на сервере
+  LoginCheck = '/login', // get - /login - Проверка статуса авторизации пользователя.
+  Logout = '/logout' // delete - /logout - Завершение сеанса работы — выход из закрытой части приложения.
+}
+
 type appRouteWithIdProps = keyof (typeof AppRoute);
 
 export function appRouteWithId(line : appRouteWithIdProps, id: number|string|undefined) {

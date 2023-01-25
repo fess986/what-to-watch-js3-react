@@ -9,25 +9,22 @@ import PlayButton from '../../components/buttons/play-button/play-button';
 import ShowMoreButton from '../../components/buttons/show-more-button/show-more-button';
 import Genres from '../../components/genres/genres';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import {getGenre, getFilmList, getfilmsShownCount} from '../../store/selectors';
+import { getGenre, getFilmList, getfilmsShownCount } from '../../store/selectors';
 import { loadFilms, resetFilms, addFilms, changeGenre } from '../../store/action';
-import { ALL_GENRES } from '../../const/const';
+import { ALL_GENRES, AppRouteAPI } from '../../const/const';
+import { api } from '../../store';
+import { adaptAllFilmAPItoProject } from '../../services/adapterAPI';
 
-type MainProps = {
-  films: Film[];
-}
-
-function Main(props: MainProps): JSX.Element {
-
-  const {films} = props;
+function Main(): JSX.Element {
 
   const dispatch = useAppDispatch();
   // const genre = useAppSelector((state) => state.genre); // так мы напрямую используем useSelector через типизированную версию useAppSelector
-
   // а так мы обращаемся через вспомогательную наглядную функцию
   const genre = useAppSelector(getGenre);
   const filmsShownCount = useAppSelector(getfilmsShownCount);
-  const filmList : Film[] = useAppSelector(getFilmList);
+  let filmList = useAppSelector(getFilmList);
+
+  filmList = adaptAllFilmAPItoProject(filmList) ?? []; // проверка - если не существует выражение adaptAllFilmAPItoProject(filmList), то передаем пустой массив
 
   const filterFilms = (filmList1 : Film[]) => {
     if (genre === ALL_GENRES) {
@@ -36,7 +33,7 @@ function Main(props: MainProps): JSX.Element {
     return filmList1.filter((film : Film) => film.genre === genre);
   };
 
-  const filteredFilmList = filterFilms(films);
+  const filteredFilmList = filterFilms(filmList);
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
@@ -47,12 +44,12 @@ function Main(props: MainProps): JSX.Element {
   };
 
   useEffect(() => {
-    dispatch(loadFilms(films));
+    api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data))); // грузим первоначальный список фильмов
 
     return () => {
       dispatch(resetFilms());
     };
-  }, [dispatch, films]);
+  }, [dispatch]);
 
   return (
     <>
