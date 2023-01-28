@@ -2,6 +2,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import createAPI from '../services/api';
 import {reducer} from './reduser';
 
+
 export const api = createAPI();
 
 // при создании через configureStore - не нужно указывать ссылку на redux-devtools, он будет активирован автоматически
@@ -15,5 +16,6 @@ export const store = configureStore({ // configureStore - из пакета @red
       thunk: {
         extraArgument: api, // добавляем в thunk наш экземпляр api, теперь к нему всегда можно будет обращаться из экшена
       },
-    }),
+    }
+    )
 });

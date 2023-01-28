@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {changeGenre, getFilmsByGenre, loadFilms, resetFilms, addFilms} from './action';
+import {changeGenre, getFilmsByGenre, loadFilms, resetFilms, addFilms, requireAutorization} from './action';
 import {State} from '../types/state';
 import { Film } from '../types/mocks-types';
+import { AuthStatus } from '../const/const';
 
 import {ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../const/const';
 
@@ -9,12 +10,14 @@ type initialStateFilmsProps = {
   genre: string,
   filmList: Film[],
   filmsShownCount: number,
+  requireAutorization: AuthStatus,
 }
 
 const initialStateFilms : initialStateFilmsProps = {
   genre: ALL_GENRES,
   filmList: [],
   filmsShownCount: FILMS_COUNT_ON_START,
+  requireAutorization: AuthStatus.UnKnown,
 };
 
 const reducer = createReducer(initialStateFilms, (builder) => {
@@ -37,6 +40,9 @@ const reducer = createReducer(initialStateFilms, (builder) => {
     })
     .addCase(addFilms, (state : State) => {
       state.filmsShownCount = state.filmsShownCount + SHOW_MORE_FILMS_COUNT;
+    })
+    .addCase(requireAutorization, (state : State, action) => {
+      state.requireAutorization = action.payload;
     });
 });
 
