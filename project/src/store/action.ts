@@ -1,24 +1,29 @@
 import {createAction} from '@reduxjs/toolkit';
 import { Film } from '../types/mocks-types';
+import { AuthStatus } from '../const/const';
 
 export enum ActionTypes {
-  CHANGE_GENRE = 'filmList/changeGenre',
-  GET_FILMS_BY_GENRE = 'filmList/getFilmsByGenre',
+  CHANGE_GENRE = 'films/changeGenre',
+  GET_FILMS_BY_GENRE = 'films/getFilmsByGenre',
   LOAD_FILMS = 'load/loadFilms',
-  LOAD_FILMS_API = 'load/loadFilmsAPI',
-  RESET_FILMS = 'filmList/resetFilms',
-  ADD_FILMS = 'filmList/addFilms',
+  RESET_FILMS = 'films/resetFilms',
+  ADD_FILMS = 'films/addFilms',
+  REQUIRE_AUTORIZATION = 'user/requireAutorization',
 }
 
 export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({
   payload : genre1
 }));
 
+// export const requireAutorization = createAction(ActionTypes.REQUIRE_AUTORIZATION, (auth : AuthStatusType) => ({
+//   payload : auth
+// }));  // так задаем через коллбек-функцию используется например тогда, если нужно создать объект в поле payload (payload: {...})
+
+export const requireAutorization = createAction<AuthStatus>(ActionTypes.REQUIRE_AUTORIZATION); // создадим через дженерик <AuthStatus> - указывает какого типа будет payload
+
 export const getFilmsByGenre = createAction(ActionTypes.GET_FILMS_BY_GENRE);
 
-export const loadFilms = createAction(ActionTypes.LOAD_FILMS, (films : Film[]) => ({
-  payload: films,
-}));
+export const loadFilms = createAction<Film[]>(ActionTypes.LOAD_FILMS);
 
 export const resetFilms = createAction(ActionTypes.RESET_FILMS);
 
