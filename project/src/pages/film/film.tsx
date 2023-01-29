@@ -2,8 +2,6 @@
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
-import { FILM_MENU } from '../../const/const';
-
 import Logo from '../../components/logo/Logo';
 import FilmDetails from '../../components/film-card/film-card-details';
 import FilmOverview from '../../components/film-card/film-card-overview';
@@ -13,7 +11,9 @@ import AddReviewButton from '../../components/buttons/add-review-button/add-revi
 import MyListButton from '../../components/buttons/my-list-button/my-list-button';
 import PlayButton from '../../components/buttons/play-button/play-button';
 import MoreLikeThisList from '../../components/more-like-this-list/more-like-this-list';
+import UserBlock from '../../components/user-block/user-block';
 
+import { FILM_MENU } from '../../const/const';
 import { Film, Review } from '../../types/mocks-types';
 
 type FilmProps = {
@@ -55,16 +55,8 @@ function FilmCard(props : FilmProps): JSX.Element {
 
             <Logo />
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a href='/' className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <UserBlock />
+
           </header>
 
           <div className="film-card__wrap">

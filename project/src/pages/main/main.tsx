@@ -8,6 +8,7 @@ import MyListButton from '../../components/buttons/my-list-button/my-list-button
 import PlayButton from '../../components/buttons/play-button/play-button';
 import ShowMoreButton from '../../components/buttons/show-more-button/show-more-button';
 import Genres from '../../components/genres/genres';
+import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { getGenre, getFilmList, getfilmsShownCount } from '../../store/selectors';
 import { resetFilms, addFilms, changeGenre } from '../../store/action';
@@ -66,17 +67,8 @@ function Main(): JSX.Element {
         <header className="page-header film-card__head">
 
           <Logo />
+          <UserBlock />
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href='/some/valid/url'>Sign out</a>
-            </li>
-          </ul>
         </header>
 
         <div className="film-card__wrap">
