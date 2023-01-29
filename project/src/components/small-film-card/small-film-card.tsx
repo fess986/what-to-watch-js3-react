@@ -10,6 +10,7 @@ type SmallFilmCardProps = {
 function SmallFilmCard(props : SmallFilmCardProps): JSX.Element {
   const {film} = props;
   const {id, name, previewImage} = film;
+  console.log(id)
 
   const navigate = useNavigate();
   const [activeFilm, setActiveFilm] = useState(NaN);
@@ -30,6 +31,7 @@ function SmallFilmCard(props : SmallFilmCardProps): JSX.Element {
 
       onClick = {() => {
         // параметры (фильмы) передаются из мэйна
+        console.log(id)
         navigate(`/Films/${id}`);
       }}
 

@@ -10,33 +10,30 @@ import ShowMoreButton from '../../components/buttons/show-more-button/show-more-
 import Genres from '../../components/genres/genres';
 import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getGenre, getFilmList, getfilmsShownCount } from '../../store/selectors';
+import { getGenre, getfilmsShownCount } from '../../store/selectors';
 import { resetFilms, addFilms, changeGenre } from '../../store/action';
 import { ALL_GENRES } from '../../const/const';
-// import { api } from '../../store';
-import { adaptAllFilmAPItoProject } from '../../services/adapterAPI';
-import {fetchFilmsAction} from '../../store/api-actions';
-// import { store } from '../../store';
 
-function Main(): JSX.Element {
+type MainProps = {
+  films: Film[]
+}
+
+function Main({films} : MainProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   // const genre = useAppSelector((state) => state.genre); // так мы напрямую используем useSelector через типизированную версию useAppSelector
   // а так мы обращаемся через вспомогательную наглядную функцию
   const genre = useAppSelector(getGenre);
   const filmsShownCount = useAppSelector(getfilmsShownCount);
-  let filmList = useAppSelector(getFilmList);
-
-  filmList = adaptAllFilmAPItoProject(filmList) ?? []; // проверка - если не существует выражение adaptAllFilmAPItoProject(filmList), то передаем пустой массив
 
   const filterFilms = (filmList1 : Film[]) => {
     if (genre === ALL_GENRES) {
-      return filmList;
+      return films;
     }
     return filmList1.filter((film : Film) => film.genre === genre);
   };
 
-  const filteredFilmList = filterFilms(filmList);
+  const filteredFilmList = filterFilms(films);
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
@@ -46,14 +43,8 @@ function Main(): JSX.Element {
     dispatch(changeGenre(filmGenre));
   };
 
-  useEffect(() => {
-    // dispatch(fetchFilms());
-    // api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data))); // грузим первоначальный список фильмов
-    dispatch(fetchFilmsAction());
-
-    return () => {
-      dispatch(resetFilms());
-    };
+  useEffect(() => () => {
+    dispatch(resetFilms());
   }, [dispatch]);
 
   return (
@@ -99,7 +90,7 @@ function Main(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <Genres films={filmList} genre={genre} genreClickHandler={genreClickHandler}/>
+          <Genres films={films} genre={genre} genreClickHandler={genreClickHandler}/>
 
           <FilmList films={filteredFilmList} filmsShownCount={filmsShownCount}/>
 
