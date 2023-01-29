@@ -1,7 +1,13 @@
 // импорт рабочих инструментов
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmsAction } from '../../store/api-actions';
+import { resetFilms } from '../../store/action';
+import { getFilmList } from '../../store/selectors';
+import { adaptAllFilmAPItoProject } from '../../services/adapterAPI';
 
 // импорт констант
 import { AppRoute, AuthStatus } from '../../const/const';
@@ -31,18 +37,35 @@ import PlayerPause from '../../pages/player/player-pause/player-pause';
 import SignInMessage from '../../pages/sign-in/sign-in-message/sign-in-message'; */
 
 type AppProps = {
-  films: Film[],
   reviews: Review[],
 }
 
-function App({films, reviews} : AppProps): JSX.Element {
+function App({reviews} : AppProps): JSX.Element {
+
+  const dispatch = useAppDispatch();
+
+  const filmListAPI = useAppSelector(getFilmList);
+
+  const films: Film[] = adaptAllFilmAPItoProject(filmListAPI) ?? []; // проверка - если не существует выражение adaptAllFilmAPItoProject(filmList), то передаем пустой массив
+
+  console.log(films);
+
+  useEffect(() => {
+    // dispatch(fetchFilms());
+    // api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data))); // грузим первоначальный список фильмов
+    dispatch(fetchFilmsAction());
+
+    return () => {
+      dispatch(resetFilms());
+    };
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Main />}
+          element={<Main films={films}/>}
         />
 
         <Route
