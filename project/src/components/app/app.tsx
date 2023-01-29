@@ -12,7 +12,6 @@ import Main from '../../pages/main/main';
 import AddReview from '../../pages/add-review/add-review';
 import FilmCard from '../../pages/film/film';
 import MyList from '../../pages/my-list/my-list';
-// import SignIn from '../../pages/sign-in/sign-in-default/sign-in-default';
 import Player from '../../pages/player/player';
 import Page404 from '../../pages/page404/page404';
 

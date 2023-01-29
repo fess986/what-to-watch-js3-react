@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { useState, FormEvent } from 'react';
-import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
+import { useParams, useNavigate, NavigateFunction, Link } from 'react-router-dom';
 import Logo from '../../components/logo/Logo';
 import ReviewStars from '../../components/review-stars/review-stars';
 import UserBlock from '../../components/user-block/user-block';
@@ -32,10 +32,10 @@ function AddReview(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <Link to={appRouteWithId('Film', reviewID.id)} className="breadcrumbs__link">The Grand Budapest Hotel</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a href='/' className="breadcrumbs__link">Add review</a>
+                <Link to={appRouteWithId('AddReview', reviewID.id)} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
