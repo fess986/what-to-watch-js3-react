@@ -9,7 +9,11 @@ export enum ActionTypes {
   RESET_FILMS = 'films/resetFilms',
   ADD_FILMS = 'films/addFilms',
   REQUIRE_AUTORIZATION = 'user/requireAutorization',
-  SET_DATA_LOADED = 'films/isFilmsLoaded'
+  SET_DATA_LOADED = 'films/isFilmsLoaded',
+  CHECK_AUTH_STATUS = 'user/checkAuthStatus',
+  LOGIN = 'user/login',
+  LOGOUT = 'user/logout',
+  ERROR = 'app/error',
 }
 
 export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({
@@ -31,4 +35,6 @@ export const loadFilms = createAction<Film[]>(ActionTypes.LOAD_FILMS);
 export const resetFilms = createAction(ActionTypes.RESET_FILMS);
 
 export const addFilms = createAction(ActionTypes.ADD_FILMS);
+
+export const error = createAction<string | null>(ActionTypes.ERROR); // если не указать <string | null>, то createAction будет создавать экшен без пэйлоада, те он будет в статусе undefined и поэтому если мы попробуем его где то применить, то TS нас уведомит об этом
 
