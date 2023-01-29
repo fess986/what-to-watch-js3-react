@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {changeGenre, getFilmsByGenre, loadFilms, resetFilms, addFilms, requireAutorization} from './action';
+import {changeGenre, getFilmsByGenre, loadFilms, resetFilms, addFilms, requireAutorization, setIsDataLoaded, error} from './action';
 import {State} from '../types/state';
 import { Film } from '../types/mocks-types';
 import { AuthStatus } from '../const/const';
@@ -11,6 +11,8 @@ type initialStateFilmsProps = {
   filmList: Film[],
   filmsShownCount: number,
   requireAutorization: AuthStatus,
+  isDataLoaded: boolean,
+  error: string | null,
 }
 
 const initialStateFilms : initialStateFilmsProps = {
@@ -18,6 +20,8 @@ const initialStateFilms : initialStateFilmsProps = {
   filmList: [],
   filmsShownCount: FILMS_COUNT_ON_START,
   requireAutorization: AuthStatus.UnKnown,
+  isDataLoaded: false,
+  error: null,
 };
 
 const reducer = createReducer(initialStateFilms, (builder) => {
@@ -43,6 +47,12 @@ const reducer = createReducer(initialStateFilms, (builder) => {
     })
     .addCase(requireAutorization, (state : State, action) => {
       state.requireAutorization = action.payload;
+    })
+    .addCase(setIsDataLoaded, (state : State, action) => {
+      state.isDataLoaded = action.payload;
+    })
+    .addCase(error, (state : State, action) => {
+      state.error = action.payload;
     });
 });
 

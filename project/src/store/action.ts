@@ -5,10 +5,15 @@ import { AuthStatus } from '../const/const';
 export enum ActionTypes {
   CHANGE_GENRE = 'films/changeGenre',
   GET_FILMS_BY_GENRE = 'films/getFilmsByGenre',
-  LOAD_FILMS = 'load/loadFilms',
+  LOAD_FILMS = 'films/loadFilms',
   RESET_FILMS = 'films/resetFilms',
   ADD_FILMS = 'films/addFilms',
   REQUIRE_AUTORIZATION = 'user/requireAutorization',
+  SET_DATA_LOADED = 'films/isFilmsLoaded',
+  CHECK_AUTH_STATUS = 'user/checkAuthStatus',
+  LOGIN = 'user/login',
+  LOGOUT = 'user/logout',
+  ERROR = 'app/error',
 }
 
 export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({
@@ -21,6 +26,8 @@ export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : stri
 
 export const requireAutorization = createAction<AuthStatus>(ActionTypes.REQUIRE_AUTORIZATION); // создадим через дженерик <AuthStatus> - указывает какого типа будет payload
 
+export const setIsDataLoaded = createAction<boolean>(ActionTypes.SET_DATA_LOADED);
+
 export const getFilmsByGenre = createAction(ActionTypes.GET_FILMS_BY_GENRE);
 
 export const loadFilms = createAction<Film[]>(ActionTypes.LOAD_FILMS);
@@ -28,4 +35,6 @@ export const loadFilms = createAction<Film[]>(ActionTypes.LOAD_FILMS);
 export const resetFilms = createAction(ActionTypes.RESET_FILMS);
 
 export const addFilms = createAction(ActionTypes.ADD_FILMS);
+
+export const error = createAction<string | null>(ActionTypes.ERROR); // если не указать <string | null>, то createAction будет создавать экшен без пэйлоада, те он будет в статусе undefined и поэтому если мы попробуем его где то применить, то TS нас уведомит об этом
 

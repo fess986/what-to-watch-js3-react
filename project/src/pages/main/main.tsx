@@ -10,10 +10,12 @@ import ShowMoreButton from '../../components/buttons/show-more-button/show-more-
 import Genres from '../../components/genres/genres';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { getGenre, getFilmList, getfilmsShownCount } from '../../store/selectors';
-import { loadFilms, resetFilms, addFilms, changeGenre } from '../../store/action';
-import { ALL_GENRES, AppRouteAPI } from '../../const/const';
-import { api } from '../../store';
+import { resetFilms, addFilms, changeGenre } from '../../store/action';
+import { ALL_GENRES } from '../../const/const';
+// import { api } from '../../store';
 import { adaptAllFilmAPItoProject } from '../../services/adapterAPI';
+import {fetchFilmsAction} from '../../store/api-actions';
+// import { store } from '../../store';
 
 function Main(): JSX.Element {
 
@@ -44,7 +46,9 @@ function Main(): JSX.Element {
   };
 
   useEffect(() => {
-    api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data))); // грузим первоначальный список фильмов
+    // dispatch(fetchFilms());
+    // api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data))); // грузим первоначальный список фильмов
+    dispatch(fetchFilmsAction());
 
     return () => {
       dispatch(resetFilms());
