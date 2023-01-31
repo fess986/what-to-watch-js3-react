@@ -4,7 +4,7 @@ import React from 'react';
 import { useState, useEffect, useRef, SyntheticEvent, MouseEvent } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 
-import { Film } from '../../types/mocks-types';
+import { Film } from '../../types/films';
 import {parseMinutes} from '../../utils/utils';
 import { appRouteWithId } from '../../const/const';
 

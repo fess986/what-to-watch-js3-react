@@ -14,7 +14,7 @@ import MoreLikeThisList from '../../components/more-like-this-list/more-like-thi
 import UserBlock from '../../components/user-block/user-block';
 
 import { FILM_MENU } from '../../const/const';
-import { Film, Review } from '../../types/mocks-types';
+import { Film, Review } from '../../types/films';
 
 type FilmProps = {
   films: Film[];

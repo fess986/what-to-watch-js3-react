@@ -1,7 +1,7 @@
 // компонент списка карточек фильмов
 import React from 'react';
 import SmallFilmCard from '../small-film-card/small-film-card';
-import { Film } from '../../types/mocks-types';
+import { Film } from '../../types/films';
 
 type FilmListProps = {
   films: Film[],

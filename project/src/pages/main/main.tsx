@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 
 import Logo from '../../components/logo/Logo';
-import { Film } from '../../types/mocks-types';
+import { Film } from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import MyListButton from '../../components/buttons/my-list-button/my-list-button';
 import PlayButton from '../../components/buttons/play-button/play-button';

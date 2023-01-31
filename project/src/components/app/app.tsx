@@ -21,7 +21,7 @@ import MyList from '../../pages/my-list/my-list';
 import Player from '../../pages/player/player';
 import Page404 from '../../pages/page404/page404';
 
-import { Film, Review } from '../../types/mocks-types';
+import { Film, Review } from '../../types/films';
 
 import { PrivateRouteElement } from '../private-route/private-route';
 

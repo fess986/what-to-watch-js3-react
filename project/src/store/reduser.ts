@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {changeGenre, getFilmsByGenre, loadFilms, resetFilms, addFilms, requireAutorization, setIsDataLoaded, error} from './action';
 import {State} from '../types/state';
-import { Film } from '../types/mocks-types';
+import { Film } from '../types/films';
 import { AuthStatus } from '../const/const';
 
 import {ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../const/const';

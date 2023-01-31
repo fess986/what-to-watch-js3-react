@@ -1,4 +1,4 @@
-import { Film } from '../types/mocks-types';
+import { Film } from '../types/films';
 
 // описывать тип для входящих по api данных - так себе развлечение
 // eslint-disable-next-line
