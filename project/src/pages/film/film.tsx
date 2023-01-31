@@ -24,8 +24,6 @@ type FilmProps = {
 function FilmCard(props : FilmProps): JSX.Element {
   const idParam = useParams().id;
 
-  console.log(props.films)
-
   let filmId : number;
 
   if (idParam === undefined) {
