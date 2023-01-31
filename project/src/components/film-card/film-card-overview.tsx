@@ -1,6 +1,6 @@
 // компонент для краткого описания фильма на странице FilmCard
 import React from 'react';
-import { Film } from '../../types/mocks-types';
+import { Film } from '../../types/films';
 
 type FilmOverviewProps = {
   film: Film;

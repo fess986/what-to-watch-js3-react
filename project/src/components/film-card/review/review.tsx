@@ -1,5 +1,5 @@
 import React from 'react';
-import { Review } from '../../../types/mocks-types';
+import { Review } from '../../../types/films';
 import { parseCommentDate } from '../../../utils/utils';
 
 type FilmReviewProps = {

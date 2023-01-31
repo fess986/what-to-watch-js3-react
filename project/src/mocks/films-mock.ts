@@ -1,4 +1,4 @@
-import { Film } from '../types/mocks-types';
+import { Film } from '../types/films';
 
 export const Films : Film[] = [
   {

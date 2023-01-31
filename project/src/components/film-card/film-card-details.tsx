@@ -1,6 +1,6 @@
 // компонент для детального описания фильма на странице FilmCard
 import React from 'react';
-import { Film } from '../../types/mocks-types';
+import { Film } from '../../types/films';
 import {getDuration} from '../../utils/utils';
 
 type FilmDetailsProps = {

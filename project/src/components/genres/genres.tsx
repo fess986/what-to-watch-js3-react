@@ -1,5 +1,5 @@
 import React from 'react';
-import { Film } from '../../types/mocks-types';
+import { Film } from '../../types/films';
 import {ALL_GENRES, GENRES_SHOWN_NUMBER} from '../../const/const';
 
 type GenresProps = {

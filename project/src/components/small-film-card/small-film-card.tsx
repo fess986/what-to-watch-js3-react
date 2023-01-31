@@ -1,5 +1,5 @@
 // компонент одной карточки фильма
-import { Film } from '../../types/mocks-types';
+import { Film } from '../../types/films';
 import {Link, useNavigate} from 'react-router-dom';
 import { useState, MouseEvent } from 'react';
 

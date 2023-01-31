@@ -6,7 +6,7 @@ import Logo from '../../components/logo/Logo';
 import FilmList from '../../components/film-list/film-list';
 import UserBlock from '../../components/user-block/user-block';
 
-import { Film } from '../../types/mocks-types';
+import { Film } from '../../types/films';
 
 type MyListProps = {
   films: Film[];

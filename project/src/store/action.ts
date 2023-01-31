@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import { Film } from '../types/mocks-types';
+import { Film } from '../types/films';
 import { AuthStatus } from '../const/const';
 
 export enum ActionTypes {

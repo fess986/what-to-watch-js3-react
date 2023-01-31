@@ -1,6 +1,6 @@
 // компонент для добавления комментария на странице FilmCard
 import React from 'react';
-import { Review } from '../../types/mocks-types';
+import { Review } from '../../types/films';
 import FilmReview from './review/review';
 
 type FilmReviewsProps = {
