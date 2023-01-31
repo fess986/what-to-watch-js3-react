@@ -1,6 +1,8 @@
 // шапка логина пользователя
 import React from 'react';
 import Logo from '../../components/logo/Logo';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const/const';
 
 function HeadGuest(): JSX.Element {
   return (
@@ -15,7 +17,7 @@ function HeadGuest(): JSX.Element {
         <Logo />
 
         <div className="user-block">
-          <a href="sign-in.html" className="user-block__link">Sign in</a>
+          <Link to={AppRoute.Login} className="user-block__link">Sign in</Link>
         </div>
       </header>
 
