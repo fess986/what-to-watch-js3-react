@@ -21,6 +21,8 @@ type FilmProps = {
   reviews: Review[];
 }
 
+console.log('тест использования гита через vs-code');
+
 function FilmCard(props : FilmProps): JSX.Element {
   const idParam = useParams().id;
 
