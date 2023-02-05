@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {changeGenre, getFilmsByGenre, loadFilms, resetFilms, addFilms, requireAutorization, setIsDataLoaded, error} from './action';
+import {changeGenre, getFilmsByGenre, loadFilms, loadActiveFilm,resetFilms, addFilms, requireAutorization, setIsFilmsLoaded, setIsActiveFilmLoaded, error} from './action';
 import {State} from '../types/state';
 import { Film } from '../types/films';
 import { AuthStatus } from '../const/const';
@@ -9,18 +9,22 @@ import {ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../const/
 type initialStateFilmsProps = {
   genre: string,
   filmList: Film[],
+  activeFIlm: Film | null,
+  isActiveFilmLoaded: boolean,
   filmsShownCount: number,
   requireAutorization: AuthStatus,
-  isDataLoaded: boolean,
+  isFilmsLoaded: boolean,
   error: string | null,
 }
 
 const initialStateFilms : initialStateFilmsProps = {
   genre: ALL_GENRES,
   filmList: [],
+  activeFIlm: null,
+  isActiveFilmLoaded: false,
   filmsShownCount: FILMS_COUNT_ON_START,
   requireAutorization: AuthStatus.UnKnown,
-  isDataLoaded: false,
+  isFilmsLoaded: false,
   error: null,
 };
 
@@ -39,6 +43,9 @@ const reducer = createReducer(initialStateFilms, (builder) => {
     .addCase(loadFilms, (state : State, action1) => {
       state.filmList = action1.payload;
     })
+    .addCase(loadActiveFilm, (state : State, action1) => {
+      state.activeFIlm = action1.payload;
+    })
     .addCase(resetFilms, (state : State) => {
       state.filmsShownCount = FILMS_COUNT_ON_START;
     })
@@ -48,8 +55,11 @@ const reducer = createReducer(initialStateFilms, (builder) => {
     .addCase(requireAutorization, (state : State, action) => {
       state.requireAutorization = action.payload;
     })
-    .addCase(setIsDataLoaded, (state : State, action) => {
-      state.isDataLoaded = action.payload;
+    .addCase(setIsFilmsLoaded, (state : State, action) => {
+      state.isFilmsLoaded = action.payload;
+    })
+    .addCase(setIsActiveFilmLoaded, (state : State, action) => {
+      state.isActiveFilmLoaded = action.payload;
     })
     .addCase(error, (state : State, action) => {
       state.error = action.payload;

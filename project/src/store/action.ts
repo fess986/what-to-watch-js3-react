@@ -6,10 +6,12 @@ export enum ActionTypes {
   CHANGE_GENRE = 'films/changeGenre',
   GET_FILMS_BY_GENRE = 'films/getFilmsByGenre',
   LOAD_FILMS = 'films/loadFilms',
+  LOAD_ACTIVE_FILM = 'films/loadActiveFilm',
   RESET_FILMS = 'films/resetFilms',
   ADD_FILMS = 'films/addFilms',
   REQUIRE_AUTORIZATION = 'user/requireAutorization',
-  SET_DATA_LOADED = 'films/isFilmsLoaded',
+  SET_FILMS_LOADED = 'films/isFilmsLoaded',
+  SET_ACTIVE_FILM_LOADED = 'films/isActiveFilmLoaded',
   CHECK_AUTH_STATUS = 'user/checkAuthStatus',
   LOGIN = 'user/login',
   LOGOUT = 'user/logout',
@@ -26,11 +28,15 @@ export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : stri
 
 export const requireAutorization = createAction<AuthStatus>(ActionTypes.REQUIRE_AUTORIZATION); // создадим через дженерик <AuthStatus> - указывает какого типа будет payload
 
-export const setIsDataLoaded = createAction<boolean>(ActionTypes.SET_DATA_LOADED);
+export const setIsFilmsLoaded = createAction<boolean>(ActionTypes.SET_FILMS_LOADED);
+
+export const setIsActiveFilmLoaded = createAction<boolean>(ActionTypes.SET_ACTIVE_FILM_LOADED);
 
 export const getFilmsByGenre = createAction(ActionTypes.GET_FILMS_BY_GENRE);
 
 export const loadFilms = createAction<Film[]>(ActionTypes.LOAD_FILMS);
+
+export const loadActiveFilm = createAction<Film>(ActionTypes.LOAD_ACTIVE_FILM);
 
 export const resetFilms = createAction(ActionTypes.RESET_FILMS);
 

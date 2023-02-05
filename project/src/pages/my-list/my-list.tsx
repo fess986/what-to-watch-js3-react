@@ -7,13 +7,12 @@ import FilmList from '../../components/film-list/film-list';
 import UserBlock from '../../components/user-block/user-block';
 
 import { Film } from '../../types/films';
+import { useAppSelector } from '../../hooks';
+import { getFilmList } from '../../store/selectors';
 
-type MyListProps = {
-  films: Film[];
-}
+function MyList(): JSX.Element {
 
-function MyList(props: MyListProps): JSX.Element {
-  const {films} = props;
+  const films : Film[] = useAppSelector(getFilmList);
 
   return (
     <div className="user-page">

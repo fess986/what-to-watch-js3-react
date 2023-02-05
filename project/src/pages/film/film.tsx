@@ -1,6 +1,7 @@
 // страница деталей фильма
-import React from 'react';
+import {useEffect} from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks';
 
 import Logo from '../../components/logo/Logo';
 import FilmDetails from '../../components/film-card/film-card-details';
@@ -12,31 +13,39 @@ import MyListButton from '../../components/buttons/my-list-button/my-list-button
 import PlayButton from '../../components/buttons/play-button/play-button';
 import MoreLikeThisList from '../../components/more-like-this-list/more-like-this-list';
 import UserBlock from '../../components/user-block/user-block';
+import Loading from '../../components/Loading/loading';
+
+import { getFilmList, getActiveFilm, getIsActiveFilmLoaded } from '../../store/selectors';
+import { useAppSelector } from '../../hooks';
+import { fetchActiveFilmAction } from '../../store/api-actions';
 
 import { FILM_MENU } from '../../const/const';
 import { Film, Review } from '../../types/films';
 
 type FilmProps = {
-  films: Film[];
   reviews: Review[];
 }
 
-console.log('тест использования гита через vs-code');
-
 function FilmCard(props : FilmProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const idParam = useParams().id;
+  const id = Number(useParams().id) ?? 1;
+  const isFilmLoaded = useAppSelector(getIsActiveFilmLoaded);
+  const films = useAppSelector(getFilmList);
+  const film = useAppSelector(getActiveFilm) as Film; // воспользуемся приведением типа, для того чтобы TS не ругался на нас, когда мы пробуем деструкторизировать film, который может оказаться null. На самом деле, если там будет null,  мы рендерим заглушку и до самой деструкторизации дело не дойдет
 
-  let filmId : number;
+  useEffect(() => {
+    dispatch(fetchActiveFilmAction(id));
+  }, [id, dispatch]);
 
-  if (idParam === undefined) {
-    filmId = 0;
-  } else if (isNaN(Number(idParam))) {
-    filmId = 0;
-  } else {
-    filmId = Math.floor(Number(idParam));
+  if (!isFilmLoaded) {
+    return (
+      <Loading />
+    );
   }
 
-  const film : Film = props.films[filmId] ? props.films[filmId] : props.films[0];
+
+  //const film : any = useAppSelector(getActiveFilm) || Films[0];
 
   const {reviews} = props;
 
@@ -112,7 +121,7 @@ function FilmCard(props : FilmProps): JSX.Element {
 
           <div className="catalog__films-list">
 
-            <MoreLikeThisList film={props.films}/>
+            <MoreLikeThisList film={films}/>
 
           </div>
         </section>

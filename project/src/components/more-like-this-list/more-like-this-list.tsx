@@ -1,5 +1,3 @@
-import React from 'react';
-
 import SmallFilmCard from '../../components/small-film-card/small-film-card';
 import { Film } from '../../types/films';
 
