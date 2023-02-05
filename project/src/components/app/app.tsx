@@ -48,8 +48,6 @@ function App({reviews} : AppProps): JSX.Element {
 
   const films: Film[] = adaptAllFilmAPItoProject(filmListAPI) ?? []; // проверка - если не существует выражение adaptAllFilmAPItoProject(filmList), то передаем пустой массив
 
-  console.log(films);
-
   useEffect(() => {
     // dispatch(fetchFilms());
     // api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data))); // грузим первоначальный список фильмов
