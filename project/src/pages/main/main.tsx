@@ -10,27 +10,24 @@ import ShowMoreButton from '../../components/buttons/show-more-button/show-more-
 import Genres from '../../components/genres/genres';
 import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getGenre, getfilmsShownCount } from '../../store/selectors';
+import { getGenre, getfilmsShownCount, getFilmList } from '../../store/selectors';
 import { resetFilms, addFilms, changeGenre } from '../../store/action';
 import { ALL_GENRES } from '../../const/const';
 
-type MainProps = {
-  films: Film[]
-}
-
-function Main({films} : MainProps): JSX.Element {
+function Main(): JSX.Element {
 
   const dispatch = useAppDispatch();
   // const genre = useAppSelector((state) => state.genre); // так мы напрямую используем useSelector через типизированную версию useAppSelector
   // а так мы обращаемся через вспомогательную наглядную функцию
   const genre = useAppSelector(getGenre);
   const filmsShownCount = useAppSelector(getfilmsShownCount);
+  const films = useAppSelector(getFilmList);
 
-  const filterFilms = (filmList1 : Film[]) => {
+  const filterFilms = (filmList : Film[]) => {
     if (genre === ALL_GENRES) {
-      return films;
+      return filmList;
     }
-    return filmList1.filter((film : Film) => film.genre === genre);
+    return filmList.filter((film : Film) => film.genre === genre);
   };
 
   const filteredFilmList = filterFilms(films);

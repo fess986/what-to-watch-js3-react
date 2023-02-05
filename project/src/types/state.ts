@@ -8,6 +8,13 @@ import { AxiosInstance } from 'axios';
 //   filmList: string[],
 // }
 
+// этот тип мы создаем и используем сразу в api-actions.ts
+// type createAsyncThunkProps = {
+//   dispatch: AppDispatch;
+//   state: State;
+//   extra: AxiosInstance;
+// }
+
 // тут тип State берется непосредственно из хранилища. ReturnType получает тип возвращаемой функцией store.getState объекта. Без этого получился бы корявый тип
 export type State = ReturnType<typeof store.getState>;
 

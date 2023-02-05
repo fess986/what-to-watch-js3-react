@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmsAction } from '../../store/api-actions';
 import { resetFilms } from '../../store/action';
 import { getFilmList } from '../../store/selectors';
-import { adaptAllFilmAPItoProject } from '../../services/adapterAPI';
 
 // импорт констант
 import { AppRoute, AuthStatus } from '../../const/const';
@@ -27,7 +26,6 @@ import { PrivateRouteElement } from '../private-route/private-route';
 
 import SignIn from '../../pages/sign-in/sign-in';
 
-
 // дополнительные
 /* import HeadGuest from '../../pages/head-guest/head-guest';
 import MovieOverview from '../../pages/movie/movie-overview/movie-overview';
@@ -44,9 +42,11 @@ function App({reviews} : AppProps): JSX.Element {
 
   const dispatch = useAppDispatch();
 
-  const filmListAPI = useAppSelector(getFilmList);
+  const films : Film[] = useAppSelector(getFilmList);
+  console.log(films);
 
-  const films: Film[] = adaptAllFilmAPItoProject(filmListAPI) ?? []; // проверка - если не существует выражение adaptAllFilmAPItoProject(filmList), то передаем пустой массив
+  // const filmListAPI = useAppSelector(getFilmList);
+  // const films: Film[] = adaptAllFilmAPItoProject(filmListAPI) ?? []; // проверка - если не существует выражение adaptAllFilmAPItoProject(filmList), то передаем пустой массив
 
   useEffect(() => {
     // dispatch(fetchFilms());
@@ -63,7 +63,7 @@ function App({reviews} : AppProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Main films={films}/>}
+          element={<Main />}
         />
 
         <Route
@@ -75,14 +75,14 @@ function App({reviews} : AppProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRouteElement authStatus={AuthStatus.Auth}>
-              <MyList films = {films}/>
+              <MyList />
             </PrivateRouteElement>
           }
         />
 
         <Route
           path={AppRoute.Film}
-          element={<FilmCard films = {films} reviews={reviews}/>}
+          element={<FilmCard reviews={reviews}/>}
         />
 
         <Route
