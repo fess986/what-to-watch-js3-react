@@ -12,7 +12,7 @@ type initialStateFilmsProps = {
   activeFIlm: Film | null,
   isActiveFilmLoaded: boolean,
   filmsShownCount: number,
-  requireAutorization: AuthStatus,
+  autorizationStatus: AuthStatus,
   isFilmsLoaded: boolean,
   error: string | null,
 }
@@ -23,7 +23,7 @@ const initialStateFilms : initialStateFilmsProps = {
   activeFIlm: null,
   isActiveFilmLoaded: false,
   filmsShownCount: FILMS_COUNT_ON_START,
-  requireAutorization: AuthStatus.UnKnown,
+  autorizationStatus: AuthStatus.Auth,
   isFilmsLoaded: false,
   error: null,
 };
@@ -53,7 +53,7 @@ const reducer = createReducer(initialStateFilms, (builder) => {
       state.filmsShownCount = state.filmsShownCount + SHOW_MORE_FILMS_COUNT;
     })
     .addCase(requireAutorization, (state : State, action) => {
-      state.requireAutorization = action.payload;
+      state.autorizationStatus = action.payload;
     })
     .addCase(setIsFilmsLoaded, (state : State, action) => {
       state.isFilmsLoaded = action.payload;

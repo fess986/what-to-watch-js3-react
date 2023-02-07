@@ -5,6 +5,7 @@ import { AppRoute } from '../../const/const';
 import { Link } from 'react-router-dom';
 
 function SignIn(): JSX.Element {
+  console.log('ass')
 
   const LOGIN_STATUS = {
     normal: 'normal',
