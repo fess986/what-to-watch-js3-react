@@ -6,4 +6,6 @@ export const getActiveFilm = (state : State) => state.activeFIlm;
 export const getfilmsShownCount = (state : State) => state.filmsShownCount;
 export const getIsActiveFilmLoaded = (state : State) => state.isActiveFilmLoaded;
 export const getIsFilmsLoaded = (state : State) => state.isFilmsLoaded;
+export const getAuthStatus = (state : State) => state.autorizationStatus;
+
 

@@ -6,10 +6,12 @@ import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmsAction } from '../../store/api-actions';
 import { resetFilms } from '../../store/action';
-import { getFilmList } from '../../store/selectors';
+import { getFilmList, getAuthStatus } from '../../store/selectors';
+import { PrivateRouteElement } from '../private-route/private-route';
 
-// импорт констант
-import { AppRoute, AuthStatus } from '../../const/const';
+// импорт констант и типов
+import { AppRoute } from '../../const/const';
+import { Film, Review } from '../../types/films';
 
 // импорт страниц
 // стартовые
@@ -19,20 +21,10 @@ import FilmCard from '../../pages/film/film';
 import MyList from '../../pages/my-list/my-list';
 import Player from '../../pages/player/player';
 import Page404 from '../../pages/page404/page404';
-
-import { Film, Review } from '../../types/films';
-
-import { PrivateRouteElement } from '../private-route/private-route';
-
 import SignIn from '../../pages/sign-in/sign-in';
 
 // дополнительные
-/* import HeadGuest from '../../pages/head-guest/head-guest';
-import MovieOverview from '../../pages/movie/movie-overview/movie-overview';
-import MovieReviews from '../../pages/movie/movie-reviews/movie-reviews';
-import PlayerPause from '../../pages/player/player-pause/player-pause';
-
-import SignInMessage from '../../pages/sign-in/sign-in-message/sign-in-message'; */
+// import HeadGuest from '../../pages/head-guest/head-guest';  // кнопка sign-in
 
 type AppProps = {
   reviews: Review[],
@@ -43,7 +35,7 @@ function App({reviews} : AppProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const films : Film[] = useAppSelector(getFilmList);
-  console.log(films);
+  const authStatus = useAppSelector(getAuthStatus);
 
   // const filmListAPI = useAppSelector(getFilmList);
   // const films: Film[] = adaptAllFilmAPItoProject(filmListAPI) ?? []; // проверка - если не существует выражение adaptAllFilmAPItoProject(filmList), то передаем пустой массив
@@ -74,7 +66,7 @@ function App({reviews} : AppProps): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRouteElement authStatus={AuthStatus.Auth}>
+            <PrivateRouteElement authStatus={authStatus}>
               <MyList />
             </PrivateRouteElement>
           }
@@ -88,7 +80,7 @@ function App({reviews} : AppProps): JSX.Element {
         <Route
           path={AppRoute.AddReview}
           element={
-            <PrivateRouteElement authStatus={AuthStatus.Auth}>
+            <PrivateRouteElement authStatus={authStatus}>
               <AddReview />
             </PrivateRouteElement>
           }
