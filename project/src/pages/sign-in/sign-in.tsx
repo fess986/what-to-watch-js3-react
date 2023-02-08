@@ -1,11 +1,11 @@
 // страница регистрации
 import React, {useState, ChangeEvent, FormEvent} from 'react';
+
 import Logo from '../../components/logo/Logo';
 import { AppRoute } from '../../const/const';
 import { Link } from 'react-router-dom';
 
 function SignIn(): JSX.Element {
-  console.log('ass')
 
   const LOGIN_STATUS = {
     normal: 'normal',
