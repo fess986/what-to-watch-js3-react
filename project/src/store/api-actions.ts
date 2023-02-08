@@ -1,14 +1,15 @@
 import { AxiosInstance } from 'axios';
-import { AppDispatch, State } from '../types/state';
-import { ThunkActionResult } from '../types/state';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import {AuthData, UserData} from '../types/user';
+
 import {saveToken, removeToken} from '../services/token';
 import { adaptAllFilmAPItoProject, adaptFilmAPItoProject } from '../services/adapterAPI';
-// import {api} from '../store/index';
+import { store } from '.';
+import {loadFilms, setIsFilmsLoaded, requireAutorization, loadActiveFilm, setIsActiveFilmLoaded, setError} from './action';
 
-import {loadFilms, setIsFilmsLoaded, requireAutorization, loadActiveFilm, setIsActiveFilmLoaded} from './action';
-import { AppRouteAPI, AuthStatus} from '../const/const';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AppDispatch, State } from '../types/state';
+import { ThunkActionResult } from '../types/state';
+import {AuthData, UserData} from '../types/user';
+import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT} from '../const/const';
 
 // вариант без создания createAsyncThunk
 export const fetchFilms = () : ThunkActionResult<void> =>
@@ -73,6 +74,16 @@ export const logoutAction = createAsyncThunk<void, undefined, createAsyncThunkPr
     await api.delete(AppRouteAPI.Logout);
     removeToken();
     dispatch(requireAutorization(AuthStatus.NoAuth));
+  },
+);
+
+// так ка мы не используем никакие параметры в коллбеке, нам не нужно описывать типы
+export const clearErrorActionAPI = createAsyncThunk(
+  'app/clearError',
+  () => {
+    setTimeout(() => {
+      store.dispatch(setError(null));
+    }, ERROR_TIMEOUT);
   },
 );
 

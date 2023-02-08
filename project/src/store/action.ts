@@ -42,5 +42,5 @@ export const resetFilms = createAction(ActionTypes.RESET_FILMS);
 
 export const addFilms = createAction(ActionTypes.ADD_FILMS);
 
-export const error = createAction<string | null>(ActionTypes.ERROR); // если не указать <string | null>, то createAction будет создавать экшен без пэйлоада, те он будет в статусе undefined и поэтому если мы попробуем его где то применить, то TS нас уведомит об этом
+export const setError = createAction<string | null>(ActionTypes.ERROR); // если не указать <string | null>, то createAction будет создавать экшен без пэйлоада, те он будет в статусе undefined и поэтому если мы попробуем его где то применить, то TS нас уведомит об этом
 

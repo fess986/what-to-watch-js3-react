@@ -15,7 +15,7 @@ import { appRouteWithId } from '../../const/const';
 import { fetchActiveFilmAction } from '../../store/api-actions';
 import { Film } from '../../types/films';
 
-function AddReview(props : any): JSX.Element {
+function AddReview(): JSX.Element {
   const INITIAL_COUNT = 5;
   const [starCount, setStarCount] = useState(INITIAL_COUNT);
   const [reviewMessage, setReviewMessage] = useState('');

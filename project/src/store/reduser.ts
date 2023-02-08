@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {changeGenre, getFilmsByGenre, loadFilms, loadActiveFilm,resetFilms, addFilms, requireAutorization, setIsFilmsLoaded, setIsActiveFilmLoaded, error} from './action';
+import {changeGenre, getFilmsByGenre, loadFilms, loadActiveFilm,resetFilms, addFilms, requireAutorization, setIsFilmsLoaded, setIsActiveFilmLoaded, setError} from './action';
 import {State} from '../types/state';
 import { Film } from '../types/films';
 import { AuthStatus } from '../const/const';
@@ -61,7 +61,7 @@ const reducer = createReducer(initialStateFilms, (builder) => {
     .addCase(setIsActiveFilmLoaded, (state : State, action) => {
       state.isActiveFilmLoaded = action.payload;
     })
-    .addCase(error, (state : State, action) => {
+    .addCase(setError, (state : State, action) => {
       state.error = action.payload;
     });
 });

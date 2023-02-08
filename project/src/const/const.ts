@@ -59,3 +59,5 @@ export const FILMS_COUNT_ON_START = 6;
 
 export const SHOW_MORE_FILMS_COUNT = 1;
 
+export const ERROR_TIMEOUT = 2000;
+
