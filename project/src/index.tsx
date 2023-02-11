@@ -4,6 +4,7 @@ import App from './components/app/app';
 import { Reviews } from './mocks/reviews-mock';
 import { store } from './store';
 import { Provider } from 'react-redux';
+import ErrorMessage from './components/error-message/error-message';
 
 
 const root = ReactDOM.createRoot(
@@ -13,6 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <App
         reviews = {Reviews}
       />
