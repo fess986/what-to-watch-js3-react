@@ -61,3 +61,5 @@ export const SHOW_MORE_FILMS_COUNT = 1;
 
 export const ERROR_TIMEOUT = 2000;
 
+export const TIMEOUT_API = 5000;
+

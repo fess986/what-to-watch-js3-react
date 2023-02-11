@@ -23,7 +23,7 @@ const initialStateFilms : initialStateFilmsProps = {
   activeFIlm: null,
   isActiveFilmLoaded: false,
   filmsShownCount: FILMS_COUNT_ON_START,
-  autorizationStatus: AuthStatus.Auth,
+  autorizationStatus: AuthStatus.UnKnown,
   isFilmsLoaded: false,
   error: null,
 };
