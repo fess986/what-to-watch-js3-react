@@ -12,10 +12,11 @@ export const PrivateRouteElement = (props : PrivateRoute) : JSX.Element => {
   const {authStatus, children} = props;
 
   return (
-    authStatus === AuthStatus.Auth
+    authStatus === AuthStatus.Auth || authStatus === AuthStatus.UnKnown
       ? children
       : <Navigate to={AppRoute.Login} />
   );
+
 
 };
 

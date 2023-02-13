@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
-import {StatusCodes} from 'http-status-codes';  // библиотека с набором кодов статусов ответов от серверов
+import {StatusCodes} from 'http-status-codes'; // библиотека с набором кодов статусов ответов от серверов
 
 import { getToken } from './token';
 import {errorHandler} from '../services/error-handler';

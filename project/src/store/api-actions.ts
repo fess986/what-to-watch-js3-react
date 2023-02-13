@@ -58,15 +58,25 @@ export const checkAuthStatusAction = createAsyncThunk<void, undefined, createAsy
   },
 );
 
+// export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProps // AuthData - тип передаваемых данных, в данном случае {login, password}
+//   >(
+//     'user/login',
+//     async ({email, password}, {dispatch, extra: api}) => {
+//       const {data: {token}} = await api.post<UserData>(AppRouteAPI.LoginPost, {email, password});
+//       saveToken(token);
+//       dispatch(requireAutorization(AuthStatus.Auth));
+//     },
+//   );
+
 export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProps // AuthData - тип передаваемых данных, в данном случае {login, password}
-  >(
-    'user/login',
-    async ({login: login1, password}, {dispatch, extra: api}) => {
-      const {data: {token}} = await api.post<UserData>(AppRouteAPI.LoginPost, {login1, password});
-      saveToken(token);
-      dispatch(requireAutorization(AuthStatus.Auth));
-    },
-  );
+>(
+  'user/login',
+  async (requestData, {dispatch, extra: api}) => {
+    const responseData = await api.post<UserData>(AppRouteAPI.LoginPost, requestData);
+    saveToken(responseData.data.token);
+    dispatch(requireAutorization(AuthStatus.Auth));
+  },
+);
 
 export const logoutAction = createAsyncThunk<void, undefined, createAsyncThunkProps>(
   'user/logout',
