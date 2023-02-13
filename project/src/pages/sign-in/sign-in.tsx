@@ -1,9 +1,12 @@
 // страница регистрации
-import React, {useState, ChangeEvent, FormEvent} from 'react';
+import React, {useState, ChangeEvent, FormEvent, useRef} from 'react';
+import { useAppDispatch } from '../../hooks';
+import { useNavigate } from 'react-router-dom';
 
 import Logo from '../../components/logo/Logo';
 import { AppRoute } from '../../const/const';
 import { Link } from 'react-router-dom';
+import { loginAction } from '../../store/api-actions';
 
 function SignIn(): JSX.Element {
 
@@ -14,7 +17,13 @@ function SignIn(): JSX.Element {
     errorPass: 'errorPass',
   };
 
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const [loginStatus, setloginStatus] = useState(LOGIN_STATUS.errorPass);
+
+  const emailAdress = useRef<HTMLInputElement | null>(null);
+  const password = useRef<HTMLInputElement | null>(null);
 
   let message :string;
   let inputClassListAdress: string;
@@ -38,7 +47,7 @@ function SignIn(): JSX.Element {
       inputClassListPass = 'sign-in__field';
       break;
     case LOGIN_STATUS.errorPass :
-      message = 'Please enter a valid email address';
+      message = 'Please enter a valid password';
       inputClassListAdress = 'sign-in__field';
       inputClassListPass = 'sign-in__field sign-in__field--error';
       break;
@@ -56,9 +65,33 @@ function SignIn(): JSX.Element {
   const loginSubmit = (event : FormEvent) : void => {
     event.preventDefault();
     setloginStatus(LOGIN_STATUS.userNotFound);
+
+    if (emailAdress.current === null || emailAdress.current.value === '') {
+      setloginStatus(LOGIN_STATUS.errorAdress);
+      return;
+    }
+
+    if (password.current === null || password.current.value === '') {
+      setloginStatus(LOGIN_STATUS.errorPass);
+      return;
+    }
+
+    if (emailAdress.current !== null && password.current !== null) {
+      dispatch(loginAction({
+        email: emailAdress.current.value,
+        password: password.current.value
+      }));
+
+      navigate(AppRoute.Main);
+    }
+
   };
 
   const emailFocusHandler = () => {
+    setloginStatus(LOGIN_STATUS.normal);
+  };
+
+  const passwordFocusHandler = () => {
     setloginStatus(LOGIN_STATUS.normal);
   };
 
@@ -79,11 +112,27 @@ function SignIn(): JSX.Element {
           </div>
           <div className="sign-in__fields">
             <div className={inputClassListAdress}>
-              <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" onChange={emailChangeHandler} onFocus={emailFocusHandler}/>
+              <input
+                ref={emailAdress}
+                className="sign-in__input"
+                type="email"
+                placeholder="Email address"
+                name="user-email"
+                id="user-email"
+                onChange={emailChangeHandler} onFocus={emailFocusHandler}
+              />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className={inputClassListPass}>
-              <input className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" />
+              <input
+                ref={password}
+                className="sign-in__input"
+                type="password"
+                placeholder="Password"
+                name="user-password"
+                id="user-password"
+                onFocus={passwordFocusHandler}
+              />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
           </div>
