@@ -3,13 +3,13 @@ import { AxiosInstance } from 'axios';
 import {saveToken, removeToken} from '../services/token';
 import { adaptAllFilmAPItoProject, adaptFilmAPItoProject } from '../services/adapterAPI';
 import { store } from '.';
-import {loadFilms, setIsFilmsLoaded, requireAutorization, loadActiveFilm, setIsActiveFilmLoaded, setError} from './action';
+import {loadFilms, setIsFilmsLoaded, requireAutorization, loadActiveFilm, setIsActiveFilmLoaded, setError, redirectToRoute} from './action';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { ThunkActionResult } from '../types/state';
 import {AuthData, UserData} from '../types/user';
-import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT} from '../const/const';
+import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute} from '../const/const';
 
 // вариант без создания createAsyncThunk
 export const fetchFilms = () : ThunkActionResult<void> =>
@@ -75,6 +75,7 @@ export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProp
     const responseData = await api.post<UserData>(AppRouteAPI.LoginPost, requestData);
     saveToken(responseData.data.token);
     dispatch(requireAutorization(AuthStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 
