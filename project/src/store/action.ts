@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import { Film } from '../types/films';
-import { AuthStatus } from '../const/const';
+import { AuthStatus, AppRoute } from '../const/const';
 
 export enum ActionTypes {
   CHANGE_GENRE = 'films/changeGenre',
@@ -16,6 +16,7 @@ export enum ActionTypes {
   LOGIN = 'user/login',
   LOGOUT = 'user/logout',
   ERROR = 'app/error',
+  REDIRECT_TO_ROUTE = 'game/redirectToRoute',
 }
 
 export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({
@@ -43,4 +44,6 @@ export const resetFilms = createAction(ActionTypes.RESET_FILMS);
 export const addFilms = createAction(ActionTypes.ADD_FILMS);
 
 export const setError = createAction<string | null>(ActionTypes.ERROR); // если не указать <string | null>, то createAction будет создавать экшен без пэйлоада, те он будет в статусе undefined и поэтому если мы попробуем его где то применить, то TS нас уведомит об этом
+
+export const redirectToRoute = createAction<AppRoute>(ActionTypes.REDIRECT_TO_ROUTE); // использукм AppRoute в качестве типа
 

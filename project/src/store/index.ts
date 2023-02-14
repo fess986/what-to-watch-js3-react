@@ -1,6 +1,7 @@
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import createAPI from '../services/api';
-import {reducer} from './reduser';
+import { reducer } from './reduser';
+import { redirect } from './middlewares/redirect';
 
 
 export const api = createAPI();
@@ -17,5 +18,5 @@ export const store = configureStore({ // configureStore - из пакета @red
         extraArgument: api, // добавляем в thunk наш экземпляр api, теперь к нему всегда можно будет обращаться из экшена
       },
     }
-    )
+    ).concat(redirect),
 });

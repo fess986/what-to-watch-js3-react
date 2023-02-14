@@ -1,13 +1,15 @@
 // импорт рабочих инструментов
 
 import React, {useEffect} from 'react';
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmsAction } from '../../store/api-actions';
 import { resetFilms } from '../../store/action';
 import { getFilmList, getAuthStatus } from '../../store/selectors';
 import { PrivateRouteElement } from '../private-route/private-route';
+import HistoryRouter from '../../components/history-route/history-route';
+import browserHistory from '../../browser-history';
 
 // импорт констант и типов
 import { AppRoute } from '../../const/const';
@@ -51,7 +53,8 @@ function App({reviews} : AppProps): JSX.Element {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
+    // <BrowserRouter></BrowserRouter> - мы использовали до того как нам понадобился кастомный объект истории. Ему не нужно было передавать в параметрах историю
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -97,7 +100,7 @@ function App({reviews} : AppProps): JSX.Element {
         />
 
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

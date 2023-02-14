@@ -10,7 +10,7 @@ export interface HistoryRouterProps {
   children?: React.ReactNode
 }
 
-function HistoryRouter({
+function HistoryRouter({ // тут мы деструктурируем сразу объект props на его свойства, такие как props.history
   basename,
   children,
   history,
