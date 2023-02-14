@@ -1,7 +1,7 @@
 // страница регистрации
 import React, {useState, ChangeEvent, FormEvent, useRef} from 'react';
 import { useAppDispatch } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import Logo from '../../components/logo/Logo';
 import { AppRoute } from '../../const/const';
@@ -17,7 +17,7 @@ function SignIn(): JSX.Element {
     errorPass: 'errorPass',
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [loginStatus, setloginStatus] = useState(LOGIN_STATUS.errorPass);
