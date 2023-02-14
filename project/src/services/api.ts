@@ -1,8 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import {StatusCodes} from 'http-status-codes'; // библиотека с набором кодов статусов ответов от серверов
+import {toast} from 'react-toastify';
 
 import { getToken } from './token';
-import {errorHandler} from '../services/error-handler';
+// import {errorHandler} from '../services/error-handler';
 import { TIMEOUT_API } from '../const/const';
 
 
@@ -26,7 +27,8 @@ const createAPI = () : AxiosInstance => {
   api.interceptors.response.use((response) => response, // ответ пробрасываем дальше без изменений
     (error: AxiosError) => { // если есть ошибка, проверяем нужно ли её отобразить, и в любом случае пробрасываем её
       if (error.response && shouldDisplayError(error.response)) {
-        errorHandler(error.response.data.error);
+        // errorHandler(error.response.data.error);
+        toast.warn(error.response.data.error);
       }
 
       throw(error);
