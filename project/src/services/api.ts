@@ -6,7 +6,6 @@ import { getToken } from './token';
 // import {errorHandler} from '../services/error-handler';
 import { TIMEOUT_API } from '../const/const';
 
-
 // будем отображать ошибки только с выбранными статусами
 const StatusCodesMap: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -28,7 +27,7 @@ const createAPI = () : AxiosInstance => {
     (error: AxiosError) => { // если есть ошибка, проверяем нужно ли её отобразить, и в любом случае пробрасываем её
       if (error.response && shouldDisplayError(error.response)) {
         // errorHandler(error.response.data.error);
-        toast.warn(error.response.data.error);
+        toast.warn(error.response.data.error, {autoClose : 2000, draggable : true});
       }
 
       throw(error);
