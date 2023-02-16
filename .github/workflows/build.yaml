@@ -6,10 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
       - run: cd ./project/ && npm i
       - run: cd ./project/ && npm run build
-      - run: cd ./project/ && npm install -g serve
-      - run: cd ./project/ && serve -s build
