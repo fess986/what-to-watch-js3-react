@@ -7,3 +7,5 @@
 *.woff binary
 *.woff2 binary
 *.ttf binary
+
+markup/ export-ignore
