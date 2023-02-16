@@ -1,12 +1,10 @@
 name: build-project-on-push
-run-name: ${{ github.actor }} is pushing some branch
+run-name: ${{ github.actor }} build project ubuntu
 on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: cd project/
-      - run: npm ci
-      - run: npm run build
-      - run: serve -s build
+      - run: cd ./project/ && npm i
+      - run: cd ./project/ && npm run build
