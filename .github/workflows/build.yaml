@@ -7,5 +7,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cd ./project/ && npm i
-      - run: npm run build
-      - run: serve -s build
+      - run: cd ./project/ && npm run build
+      - run: cd ./project/ && serve -s build
