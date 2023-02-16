@@ -6,7 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: cd project/
+      - run: cd ./project/
+      - run: pwd
       - run: npm i
       - run: npm run build
       - run: serve -s build
