@@ -1,5 +1,5 @@
 name: build-project-on-push
-run-name: ${{ github.actor }} is pushing some branch
+run-name: ${{ github.actor }} build project ubuntu
 on: [push]
 jobs:
   build:
@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cd project/
-      - run: npm ci
+      - run: npm i
       - run: npm run build
       - run: serve -s build
