@@ -25,7 +25,7 @@ export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : stri
 
 // export const requireAutorization = createAction(ActionTypes.REQUIRE_AUTORIZATION, (auth : AuthStatusType) => ({
 //   payload : auth
-// }));  // так задаем через коллбек-функцию используется например тогда, если нужно создать объект в поле payload (payload: {...})
+// }));  // так задаем через коллбек-функцию используется например тогда, если нужно создать объект в поле payload. Можно обойтись и без этого, createAction под капотом сделает тоже самое, так может быть более наглядно (payload: {...})
 
 export const requireAutorization = createAction<AuthStatus>(ActionTypes.REQUIRE_AUTORIZATION); // создадим через дженерик <AuthStatus> - указывает какого типа будет payload
 
