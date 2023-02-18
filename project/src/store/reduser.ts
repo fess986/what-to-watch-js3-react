@@ -23,7 +23,7 @@ const initialStateFilms : initialStateFilmsProps = {
   activeFIlm: null,
   isActiveFilmLoaded: false,
   filmsShownCount: FILMS_COUNT_ON_START,
-  autorizationStatus: AuthStatus.UnKnown,
+  autorizationStatus: AuthStatus.UnKnown, // перенесено в UserState
   isFilmsLoaded: false,
   error: null,
 };
@@ -52,7 +52,7 @@ const reducer = createReducer(initialStateFilms, (builder) => {
     .addCase(addFilms, (state : State) => {
       state.filmsShownCount = state.filmsShownCount + SHOW_MORE_FILMS_COUNT;
     })
-    .addCase(requireAutorization, (state : State, action) => {
+    .addCase(requireAutorization, (state : State, action) => {  // в userReducer
       state.autorizationStatus = action.payload;
     })
     .addCase(setIsFilmsLoaded, (state : State, action) => {

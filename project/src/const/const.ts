@@ -51,6 +51,13 @@ export const FILM_MENU = {
   reviews: 'Reviews',
 };
 
+export enum StoreNames {
+  Films = 'FILMS',
+  Reviews = 'REVIEWS',
+  User = 'USER',
+}
+
+
 export const ALL_GENRES = 'All genres';
 
 export const GENRES_SHOWN_NUMBER = 9;
