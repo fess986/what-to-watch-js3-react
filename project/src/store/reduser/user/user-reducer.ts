@@ -10,7 +10,7 @@ const initialUserState : InitialUserType = {
   autorizationStatus : AuthStatus.NoAuth,
 };
 
-export const userReduser = createSlice({
+export const userReducer = createSlice({
   name: StoreNames.User,
   initialState: initialUserState,
   reducers: {
@@ -20,4 +20,4 @@ export const userReduser = createSlice({
   },
 });
 
-export const {requireAutorization} = userReduser.actions;
+export const {requireAutorization} = userReducer.actions;
