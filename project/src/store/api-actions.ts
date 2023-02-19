@@ -3,7 +3,10 @@ import { AxiosInstance } from 'axios';
 import {saveToken, removeToken} from '../services/token';
 import { adaptAllFilmAPItoProject, adaptFilmAPItoProject } from '../services/adapterAPI';
 import { store } from '.';
-import {loadFilms, setIsFilmsLoaded, requireAutorization, loadActiveFilm, setIsActiveFilmLoaded, setError, redirectToRoute} from './action';
+import {setIsFilmsLoaded, setIsActiveFilmLoaded, setError } from './reduser/app/app-reducer';
+import {loadFilms, loadActiveFilm} from './reduser/films/films-reducer';
+import {requireAutorization} from './reduser/user/user-reducer';
+import {redirectToRoute} from './action';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';

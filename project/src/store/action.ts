@@ -1,9 +1,9 @@
 import {createAction} from '@reduxjs/toolkit';
-import { Film } from '../types/films';
-import { AuthStatus, AppRoute } from '../const/const';
+// import { Film } from '../types/films';
+import { AppRoute } from '../const/const';
 
 export enum ActionTypes {
-  CHANGE_GENRE = 'films/changeGenre',
+  /* CHANGE_GENRE = 'films/changeGenre',
   GET_FILMS_BY_GENRE = 'films/getFilmsByGenre',
   LOAD_FILMS = 'films/loadFilms',
   LOAD_ACTIVE_FILM = 'films/loadActiveFilm',
@@ -15,11 +15,15 @@ export enum ActionTypes {
   CHECK_AUTH_STATUS = 'user/checkAuthStatus',
   LOGIN = 'user/login',
   LOGOUT = 'user/logout',
-  ERROR = 'app/error',
+  ERROR = 'app/error', */
   REDIRECT_TO_ROUTE = 'game/redirectToRoute',
 }
 
-export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({
+export const redirectToRoute = createAction<AppRoute>(ActionTypes.REDIRECT_TO_ROUTE); // использукм AppRoute в качестве типа
+
+// данные экшены нам больше не нужны, так как мы перешли на slices, в которых экшены создаются сразу в редьюсеры, и получают имена по названию
+
+/* export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({
   payload : genre1
 }));
 
@@ -43,7 +47,6 @@ export const resetFilms = createAction(ActionTypes.RESET_FILMS);
 
 export const addFilms = createAction(ActionTypes.ADD_FILMS);
 
-export const setError = createAction<string | null>(ActionTypes.ERROR); // если не указать <string | null>, то createAction будет создавать экшен без пэйлоада, те он будет в статусе undefined и поэтому если мы попробуем его где то применить, то TS нас уведомит об этом
+export const setError = createAction<string | null>(ActionTypes.ERROR); // если не указать <string | null>, то createAction будет создавать экшен без пэйлоада, те он будет в статусе undefined и поэтому если мы попробуем его где то применить, то TS нас уведомит об этом */
 
-export const redirectToRoute = createAction<AppRoute>(ActionTypes.REDIRECT_TO_ROUTE); // использукм AppRoute в качестве типа
 

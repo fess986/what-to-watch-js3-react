@@ -10,3 +10,5 @@ export const rootReducer = combineReducers({
   [StoreNames.User] : userReducer.reducer,
   [StoreNames.Films] : filmsReducer.reducer,
 });
+
+export type RootReducerType = ReturnType<typeof rootReducer>

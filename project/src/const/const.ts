@@ -53,7 +53,7 @@ export const FILM_MENU = {
 
 export enum StoreNames {
   App = 'APP',
-  Films = 'Films',
+  Films = 'FILMS',
   Reviews = 'REVIEWS',
   User = 'USER',
 }

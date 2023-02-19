@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { AppRoute, AuthStatus } from '../../const/const';
-import { getAuthStatus } from '../../store/selectors';
+import { getAuthStatus } from '../../store/reduser/user/user-selectors';
 
 const UserBlock = () : JSX.Element => {
   const dispatch = useAppDispatch();

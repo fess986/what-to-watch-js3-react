@@ -5,8 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmsAction } from '../../store/api-actions';
-import { resetFilms } from '../../store/action';
-import { getFilmList, getAuthStatus } from '../../store/selectors';
+import { resetFilms } from '../../store/reduser/app/app-reducer';
+import { getFilmList } from '../../store/reduser/films/films-selectors';
+import { getAuthStatus } from '../../store/reduser/user/user-selectors';
 import { PrivateRouteElement } from '../private-route/private-route';
 import HistoryRouter from '../../components/history-route/history-route';
 import browserHistory from '../../browser-history';

@@ -5,7 +5,7 @@ type State = {
   [StoreNames.App] : InitialAppType,
 }
 
-export const getFilmList = (state : State) => state[StoreNames.App].genre;
+export const getGenre = (state : State) => state[StoreNames.App].genre;
 
 export const getIsActiveFilmLoaded = (state : State) => state[StoreNames.App].isActiveFilmLoaded;
 

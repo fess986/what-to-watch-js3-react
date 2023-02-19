@@ -10,7 +10,8 @@ import UserBlock from '../../components/user-block/user-block';
 import Loading from '../../components/Loading/loading';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {getActiveFilm, getIsActiveFilmLoaded} from '../../store/selectors';
+import {getActiveFilm} from '../../store/reduser/films/films-selectors';
+import { getIsActiveFilmLoaded } from '../../store/reduser/app/app-selectors';
 import { appRouteWithId } from '../../const/const';
 import { fetchActiveFilmAction } from '../../store/api-actions';
 import { Film } from '../../types/films';

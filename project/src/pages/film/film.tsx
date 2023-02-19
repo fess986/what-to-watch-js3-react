@@ -15,7 +15,8 @@ import MoreLikeThisList from '../../components/more-like-this-list/more-like-thi
 import UserBlock from '../../components/user-block/user-block';
 import Loading from '../../components/Loading/loading';
 
-import { getFilmList, getActiveFilm, getIsActiveFilmLoaded } from '../../store/selectors';
+import { getFilmList, getActiveFilm } from '../../store/reduser/films/films-selectors';
+import { getIsActiveFilmLoaded } from '../../store/reduser/app/app-selectors';
 import { useAppSelector } from '../../hooks';
 import { fetchActiveFilmAction } from '../../store/api-actions';
 
@@ -44,11 +45,7 @@ function FilmCard(props : FilmProps): JSX.Element {
     );
   }
 
-
-  //const film : any = useAppSelector(getActiveFilm) || Films[0];
-
   const {reviews} = props;
-
   const {backgroundImage, name, genre, posterImage} = film;
 
   return (
