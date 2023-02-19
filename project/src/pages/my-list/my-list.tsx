@@ -8,7 +8,7 @@ import UserBlock from '../../components/user-block/user-block';
 
 import { Film } from '../../types/films';
 import { useAppSelector } from '../../hooks';
-import { getFilmList } from '../../store/selectors';
+import { getFilmList } from '../../store/reduser/films/films-selectors';
 
 function MyList(): JSX.Element {
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useAppSelector } from '../../hooks';
+import { getError } from '../../store/reduser/app/app-selectors';
 import './error-message.css';
 
 const ErrorMessage = () : JSX.Element | null => {
 
-  const {error} = useAppSelector((state) => state); // без геттера селектора
+  const error = useAppSelector(getError);
 
   return (
     (error)

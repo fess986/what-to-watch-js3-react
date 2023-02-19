@@ -6,5 +6,5 @@ type State = {
 }
 
 export const getFilmList = (state : State) => state[StoreNames.Films].filmList;
-export const getActiveFilm = (state : State) => state[StoreNames.Films].activeFIlm;
 
+export const getActiveFilm = (state : State) => state[StoreNames.Films].activeFIlm;

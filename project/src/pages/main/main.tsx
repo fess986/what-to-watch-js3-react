@@ -10,8 +10,10 @@ import ShowMoreButton from '../../components/buttons/show-more-button/show-more-
 import Genres from '../../components/genres/genres';
 import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getGenre, getfilmsShownCount, getFilmList } from '../../store/selectors';
-import { resetFilms, addFilms, changeGenre } from '../../store/action';
+import { getfilmsShownCount } from '../../store/reduser/app/app-selectors';
+import { getGenre } from '../../store/reduser/app/app-selectors';
+import {getFilmList} from '../../store/reduser/films/films-selectors';
+import { resetFilms, addFilms, changeGenre } from '../../store/reduser/app/app-reducer';
 import { ALL_GENRES } from '../../const/const';
 
 function Main(): JSX.Element {

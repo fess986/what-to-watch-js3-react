@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {StoreNames, ALL_GENRES, FILMS_COUNT_ON_START} from '../../../const/const';
+import {StoreNames, ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../../../const/const';
 
 export type InitialAppType = {
   genre: string,
@@ -34,7 +34,7 @@ export const appReducer = createSlice({
       state.filmsShownCount = FILMS_COUNT_ON_START;
     },
     addFilms : (state) => {
-      state.filmsShownCount = state.filmsShownCount + FILMS_COUNT_ON_START;
+      state.filmsShownCount = state.filmsShownCount + SHOW_MORE_FILMS_COUNT;
     },
     setIsFilmsLoaded : (state, action) => {
       state.isFilmsLoaded = action.payload;
