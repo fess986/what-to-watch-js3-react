@@ -8,19 +8,19 @@ import {ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../const/
 
 type initialStateFilmsProps = {
   genre: string,
-  filmList: Film[],
-  activeFIlm: Film | null,
+  filmList: Film[], // перенесено в FilmsState
+  activeFIlm: Film | null, // перенесено в FilmsState
   isActiveFilmLoaded: boolean,
   filmsShownCount: number,
-  autorizationStatus: AuthStatus,
+  autorizationStatus: AuthStatus, // перенесено в UserState
   isFilmsLoaded: boolean,
   error: string | null,
 }
 
 const initialStateFilms : initialStateFilmsProps = {
   genre: ALL_GENRES,
-  filmList: [],
-  activeFIlm: null,
+  filmList: [], // перенесено в FilmsState
+  activeFIlm: null, // перенесено в FilmsState
   isActiveFilmLoaded: false,
   filmsShownCount: FILMS_COUNT_ON_START,
   autorizationStatus: AuthStatus.UnKnown, // перенесено в UserState
@@ -35,15 +35,15 @@ const reducer = createReducer(initialStateFilms, (builder) => {
         state.genre = action.payload;
       }
     })
-    .addCase(getFilmsByGenre, (state : State, action) => {
+    .addCase(getFilmsByGenre, (state : State, action) => { // лишний?
       if (action.payload) {
         state.filmList = action.payload;
       }
     })
-    .addCase(loadFilms, (state : State, action1) => {
+    .addCase(loadFilms, (state : State, action1) => { // filmsReducer
       state.filmList = action1.payload;
     })
-    .addCase(loadActiveFilm, (state : State, action1) => {
+    .addCase(loadActiveFilm, (state : State, action1) => { // filmsReducer
       state.activeFIlm = action1.payload;
     })
     .addCase(resetFilms, (state : State) => {
@@ -52,7 +52,7 @@ const reducer = createReducer(initialStateFilms, (builder) => {
     .addCase(addFilms, (state : State) => {
       state.filmsShownCount = state.filmsShownCount + SHOW_MORE_FILMS_COUNT;
     })
-    .addCase(requireAutorization, (state : State, action) => {  // в userReducer
+    .addCase(requireAutorization, (state : State, action) => { // в userReducer
       state.autorizationStatus = action.payload;
     })
     .addCase(setIsFilmsLoaded, (state : State, action) => {
