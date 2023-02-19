@@ -52,7 +52,8 @@ export const FILM_MENU = {
 };
 
 export enum StoreNames {
-  Films = 'FILMS',
+  Data = 'DATA',
+  Films = 'Films',
   Reviews = 'REVIEWS',
   User = 'USER',
 }

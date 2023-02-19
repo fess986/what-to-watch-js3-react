@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 import {StoreNames, AuthStatus} from '../../../const/const';
 
-type InitialUserType = {
+export type InitialUserType = {
   autorizationStatus: AuthStatus,
 }
 
