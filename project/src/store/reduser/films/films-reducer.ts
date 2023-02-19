@@ -26,4 +26,4 @@ export const filmsReducer = createSlice({
   },
 });
 
-export const { loadFilms } = filmsReducer.actions;
+export const { loadFilms, loadActiveFilm } = filmsReducer.actions;

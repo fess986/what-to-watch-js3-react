@@ -4,7 +4,7 @@ import './error-message.css';
 
 const ErrorMessage = () : JSX.Element | null => {
 
-  const {error} = useAppSelector((state) => state);
+  const {error} = useAppSelector((state) => state); // без геттера селектора
 
   return (
     (error)
