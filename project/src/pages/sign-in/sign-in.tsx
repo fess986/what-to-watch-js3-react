@@ -1,7 +1,7 @@
 // страница регистрации
-import React, {useState, ChangeEvent, FormEvent, useRef} from 'react';
+import React, { ChangeEvent, FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks';
-// import { useNavigate } from 'react-router-dom';
+import {useLoginFormView} from '../../hooks/use-login-form-view';
 
 import Logo from '../../components/logo/Logo';
 import { AppRoute } from '../../const/const';
@@ -10,53 +10,12 @@ import { loginAction } from '../../store/api-actions';
 
 function SignIn(): JSX.Element {
 
-  const LOGIN_STATUS = {
-    normal: 'normal',
-    userNotFound : 'noUser',
-    errorAdress: 'errorAdress',
-    errorPass: 'errorPass',
-  };
+  const formView = useLoginFormView();
 
-  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const [loginStatus, setloginStatus] = useState(LOGIN_STATUS.normal);
 
   const emailAdress = useRef<HTMLInputElement | null>(null);
   const password = useRef<HTMLInputElement | null>(null);
-
-  let message :string;
-  let inputClassListAdress: string;
-  let inputClassListPass: string;
-
-  switch (loginStatus) {
-    case LOGIN_STATUS.normal :
-      message = '';
-      inputClassListAdress = 'sign-in__field';
-      inputClassListPass = 'sign-in__field';
-      break;
-    case LOGIN_STATUS.userNotFound :
-      message = `We can’t recognize this email
-      and password combination. Please try again.`;
-      inputClassListAdress = 'sign-in__field';
-      inputClassListPass = 'sign-in__field';
-      break;
-    case LOGIN_STATUS.errorAdress :
-      message = 'Please enter a valid email address';
-      inputClassListAdress = 'sign-in__field sign-in__field--error';
-      inputClassListPass = 'sign-in__field';
-      break;
-    case LOGIN_STATUS.errorPass :
-      message = 'Please enter a valid password';
-      inputClassListAdress = 'sign-in__field';
-      inputClassListPass = 'sign-in__field sign-in__field--error';
-      break;
-    default :
-      message = '';
-      inputClassListAdress = 'sign-in__field';
-      inputClassListPass = 'sign-in__field';
-      break;
-  }
 
   const emailChangeHandler = (event : ChangeEvent<HTMLInputElement>) : void => {
     event.preventDefault();
@@ -64,15 +23,15 @@ function SignIn(): JSX.Element {
 
   const loginSubmit = (event : FormEvent) : void => {
     event.preventDefault();
-    setloginStatus(LOGIN_STATUS.userNotFound);
+    formView.setUserNotFound();
 
     if (emailAdress.current === null || emailAdress.current.value === '') {
-      setloginStatus(LOGIN_STATUS.errorAdress);
+      formView.setErrorAdress();
       return;
     }
 
     if (password.current === null || password.current.value === '') {
-      setloginStatus(LOGIN_STATUS.errorPass);
+      formView.setErrorPass();
       return;
     }
 
@@ -88,11 +47,11 @@ function SignIn(): JSX.Element {
   };
 
   const emailFocusHandler = () => {
-    setloginStatus(LOGIN_STATUS.normal);
+    formView.setNormal();
   };
 
   const passwordFocusHandler = () => {
-    setloginStatus(LOGIN_STATUS.normal);
+    formView.setNormal();
   };
 
   return (
@@ -107,11 +66,11 @@ function SignIn(): JSX.Element {
       <div className="sign-in user-page__content">
         <form className="sign-in__form" onSubmit={loginSubmit}>
           <div className="sign-in__message">
-            <p>{message}</p>
+            <p>{formView.values.message}</p>
             {/* Please enter a valid email address */}
           </div>
           <div className="sign-in__fields">
-            <div className={inputClassListAdress}>
+            <div className={formView.values.inputClassListAdress}>
               <input
                 ref={emailAdress}
                 className="sign-in__input"
@@ -123,7 +82,7 @@ function SignIn(): JSX.Element {
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
-            <div className={inputClassListPass}>
+            <div className={formView.values.inputClassListPass}>
               <input
                 ref={password}
                 className="sign-in__input"

@@ -7,7 +7,20 @@ const LOGIN_STATUS = {
   errorPass: 'errorPass',
 };
 
-export const useLoginFormView = () => {
+type UseLoginForm = {
+  values: {
+    message : string,
+    inputClassListAdress: string,
+    inputClassListPass: string,
+  },
+
+  setUserNotFound: () => void,
+  setErrorAdress: () => void,
+  setErrorPass: () => void,
+  setNormal: () => void,
+}
+
+export const useLoginFormView = () : UseLoginForm => {
 
   const [loginStatus, setloginStatus] = useState(LOGIN_STATUS.normal);
 
