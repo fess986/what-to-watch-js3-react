@@ -10,7 +10,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 // import { ThunkActionResult } from '../types/state';
 import {AuthData, UserData} from '../types/user';
-import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute} from '../const/const';
+import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute, ActionTypesAPI} from '../const/const';
 
 // вариант без создания createAsyncThunk
 // export const fetchFilms = () : ThunkActionResult<void> =>
@@ -29,7 +29,7 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
     state: State,
     extra: AxiosInstance
   }>(
-    'data/fetchFilms',
+    ActionTypesAPI.FETCH_FILMS,
     async (_arg, {dispatch, extra: api}) => { // в качестве _arg - передаваемые параметры
       const {data} = await api.get(AppRouteAPI.Films);
       // dispatch(setIsFilmsLoaded(true));  // перенесено в appSlice
@@ -39,7 +39,7 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
   );
 
 export const fetchActiveFilmAction = createAsyncThunk<unknown, number, createAsyncThunkProps>(
-  'data/fetchActiveFilm',
+  ActionTypesAPI.FETCH_ACTIVE_FILM,
   async (id, {dispatch, extra: api}) => { // в качестве _arg - передаваемые параметры
     const {data} = await api.get(`1${AppRouteAPI.Film}${id}`);
     // dispatch(loadActiveFilm(adaptFilmAPItoProject(data))); // перенесено в filmsSlice
@@ -49,7 +49,7 @@ export const fetchActiveFilmAction = createAsyncThunk<unknown, number, createAsy
 );
 
 export const checkAuthStatusAction = createAsyncThunk<void, undefined, createAsyncThunkProps>(
-  'user/checkAuth',
+  ActionTypesAPI.CHECK_AUTH_STATUS,
   async (_arg, {dispatch, extra: api}) => {
     try {
       await api.get(AppRouteAPI.LoginCheck);
@@ -73,7 +73,7 @@ export const checkAuthStatusAction = createAsyncThunk<void, undefined, createAsy
 
 export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProps // AuthData - тип передаваемых данных, в данном случае {login, password}
 >(
-  'user/login',
+  ActionTypesAPI.LOGIN,
   async (requestData, {dispatch, extra: api}) => {
     const responseData = await api.post<UserData>(AppRouteAPI.LoginPost, requestData);
     saveToken(responseData.data.token);
@@ -83,7 +83,7 @@ export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProp
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, createAsyncThunkProps>(
-  'user/logout',
+  ActionTypesAPI.LOGOUT,
   async (_, {dispatch, extra: api}) => {
     await api.delete(AppRouteAPI.Logout);
     removeToken();
@@ -92,7 +92,7 @@ export const logoutAction = createAsyncThunk<void, undefined, createAsyncThunkPr
 );
 
 export const clearErrorActionAPI = createAsyncThunk<void, undefined, createAsyncThunkProps>(
-  'app/clearError',
+  ActionTypesAPI.CLEAR_ERROR,
   async (_, {dispatch, extra: api}) => {
     setTimeout(() => {
       // dispatch(setError(null)); // нельзя диспатчить, из за лексической ошибки, перенесено в app-reducer
