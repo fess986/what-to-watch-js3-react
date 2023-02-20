@@ -1,9 +1,8 @@
 // импорт рабочих инструментов
 
-import React, {useEffect} from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 // import { fetchFilmsAction } from '../../store/api-actions';
 // import { resetFilms } from '../../store/reduser/app/app-reducer';
 import { getFilmList } from '../../store/reduser/films/films-selectors';

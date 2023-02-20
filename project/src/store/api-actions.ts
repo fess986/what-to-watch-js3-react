@@ -1,10 +1,8 @@
 import { AxiosInstance } from 'axios';
 
 import {saveToken, removeToken} from '../services/token';
-import { adaptAllFilmAPItoProject, adaptFilmAPItoProject } from '../services/adapterAPI';
 // import { store } from '.';
-import {setIsFilmsLoaded, setIsActiveFilmLoaded, setError } from './reduser/app/app-reducer';
-import {loadFilms, loadActiveFilm} from './reduser/films/films-reducer';
+// import {loadFilms, loadActiveFilm} from './reduser/films/films-reducer'; // мы не можем использовать экшены из films-reducer, так как туда мы отсылаем часть данных и получаем лексическую ошибку декларации
 import {requireAutorization} from './reduser/user/user-reducer';
 import {redirectToRoute} from './action';
 
@@ -20,8 +18,6 @@ import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute} from '../const/const'
 //     api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data)));
 //   };
 
-export const ASS = 'ass';
-
 type createAsyncThunkProps = {
   dispatch: AppDispatch;
   state: State;
@@ -36,10 +32,9 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
     'data/fetchFilms',
     async (_arg, {dispatch, extra: api}) => { // в качестве _arg - передаваемые параметры
       const {data} = await api.get(AppRouteAPI.Films);
-      // dispatch(setIsFilmsLoaded(true));
+      // dispatch(setIsFilmsLoaded(true));  // перенесено в appSlice
+      // dispatch(loadFilms(adaptAllFilmAPItoProject(data))); // перенесено в filmsSlice
       return data;
-      // dispatch(loadFilms(adaptAllFilmAPItoProject(data)));
-      // console.log(loadFilms)
     },
   );
 
