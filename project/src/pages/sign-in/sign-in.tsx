@@ -20,7 +20,7 @@ function SignIn(): JSX.Element {
   // const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [loginStatus, setloginStatus] = useState(LOGIN_STATUS.errorPass);
+  const [loginStatus, setloginStatus] = useState(LOGIN_STATUS.normal);
 
   const emailAdress = useRef<HTMLInputElement | null>(null);
   const password = useRef<HTMLInputElement | null>(null);

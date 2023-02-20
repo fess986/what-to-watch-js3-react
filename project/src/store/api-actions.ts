@@ -41,7 +41,7 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
 export const fetchActiveFilmAction = createAsyncThunk<unknown, number, createAsyncThunkProps>(
   ActionTypesAPI.FETCH_ACTIVE_FILM,
   async (id, {dispatch, extra: api}) => { // в качестве _arg - передаваемые параметры
-    const {data} = await api.get(`1${AppRouteAPI.Film}${id}`);
+    const {data} = await api.get(`${AppRouteAPI.Film}${id}`);
     // dispatch(loadActiveFilm(adaptFilmAPItoProject(data))); // перенесено в filmsSlice
     // dispatch(setIsActiveFilmLoaded(true)); // перенесено в appSlice
     return data;
