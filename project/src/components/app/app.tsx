@@ -4,8 +4,8 @@ import React, {useEffect} from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilmsAction } from '../../store/api-actions';
-import { resetFilms } from '../../store/reduser/app/app-reducer';
+// import { fetchFilmsAction } from '../../store/api-actions';
+// import { resetFilms } from '../../store/reduser/app/app-reducer';
 import { getFilmList } from '../../store/reduser/films/films-selectors';
 import { getAuthStatus } from '../../store/reduser/user/user-selectors';
 import { PrivateRouteElement } from '../private-route/private-route';
@@ -35,23 +35,24 @@ type AppProps = {
 
 function App({reviews} : AppProps): JSX.Element {
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   const films : Film[] = useAppSelector(getFilmList);
   const authStatus = useAppSelector(getAuthStatus);
+  // dispatch(fetchFilmsAction());
 
   // const filmListAPI = useAppSelector(getFilmList);
   // const films: Film[] = adaptAllFilmAPItoProject(filmListAPI) ?? []; // проверка - если не существует выражение adaptAllFilmAPItoProject(filmList), то передаем пустой массив
 
-  useEffect(() => {
-    // dispatch(fetchFilms());
-    // api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data))); // грузим первоначальный список фильмов
-    dispatch(fetchFilmsAction());
+  // useEffect(() => {
+  //   // dispatch(fetchFilms());
+  //   // api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data))); // грузим первоначальный список фильмов
+  //   dispatch(fetchFilmsAction());
 
-    return () => {
-      dispatch(resetFilms());
-    };
-  }, [dispatch]);
+  //   return () => {
+  //     dispatch(resetFilms());
+  //   };
+  // }, [dispatch]);
 
   return (
     // <BrowserRouter></BrowserRouter> - мы использовали до того как нам понадобился кастомный объект истории. Ему не нужно было передавать в параметрах историю

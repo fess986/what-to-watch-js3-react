@@ -7,12 +7,11 @@ import App from './components/app/app';
 import { Reviews } from './mocks/reviews-mock';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import { checkAuthStatusAction } from './store/api-actions';
-
-// import ErrorMessage from './components/error-message/error-message';
+import { checkAuthStatusAction, fetchFilmsAction } from './store/api-actions';
 
 // в самом начале запуска приложения проверим статус авторизации
 store.dispatch(checkAuthStatusAction());
+store.dispatch(fetchFilmsAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

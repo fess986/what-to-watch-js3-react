@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 
 import {saveToken, removeToken} from '../services/token';
 import { adaptAllFilmAPItoProject, adaptFilmAPItoProject } from '../services/adapterAPI';
-import { store } from '.';
+// import { store } from '.';
 import {setIsFilmsLoaded, setIsActiveFilmLoaded, setError } from './reduser/app/app-reducer';
 import {loadFilms, loadActiveFilm} from './reduser/films/films-reducer';
 import {requireAutorization} from './reduser/user/user-reducer';
@@ -10,15 +10,17 @@ import {redirectToRoute} from './action';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { ThunkActionResult } from '../types/state';
+// import { ThunkActionResult } from '../types/state';
 import {AuthData, UserData} from '../types/user';
 import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute} from '../const/const';
 
 // вариант без создания createAsyncThunk
-export const fetchFilms = () : ThunkActionResult<void> =>
-  async (dispatch, _getState , api): Promise<void> => { // возвращаемое значение должно совпадать с дженериком типа ThunkActionResult, в сл
-    api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data)));
-  };
+// export const fetchFilms = () : ThunkActionResult<void> =>
+//   async (dispatch, _getState , api): Promise<void> => { // возвращаемое значение должно совпадать с дженериком типа ThunkActionResult, в сл
+//     api.get(AppRouteAPI.Films).then((response) => dispatch(loadFilms(response.data)));
+//   };
+
+export const ASS = 'ass';
 
 type createAsyncThunkProps = {
   dispatch: AppDispatch;
@@ -26,7 +28,7 @@ type createAsyncThunkProps = {
   extra: AxiosInstance;
 }
 
-export const fetchFilmsAction = createAsyncThunk<void, undefined, { // void - в данном случае тип возврата из функции, undefined - тип передаваемого аргумента _arg
+export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void - в данном случае тип возврата из функции, undefined - тип передаваемого аргумента _arg
     dispatch: AppDispatch,
     state: State,
     extra: AxiosInstance
@@ -34,17 +36,20 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, { // void - в
     'data/fetchFilms',
     async (_arg, {dispatch, extra: api}) => { // в качестве _arg - передаваемые параметры
       const {data} = await api.get(AppRouteAPI.Films);
-      dispatch(loadFilms(adaptAllFilmAPItoProject(data)));
-      dispatch(setIsFilmsLoaded(true));
+      // dispatch(setIsFilmsLoaded(true));
+      return data;
+      // dispatch(loadFilms(adaptAllFilmAPItoProject(data)));
+      // console.log(loadFilms)
     },
   );
 
-export const fetchActiveFilmAction = createAsyncThunk<void, number, createAsyncThunkProps>(
+export const fetchActiveFilmAction = createAsyncThunk<unknown, number, createAsyncThunkProps>(
   'data/fetchActiveFilm',
   async (id, {dispatch, extra: api}) => { // в качестве _arg - передаваемые параметры
-    const {data} = await api.get(`${AppRouteAPI.Film}${id}`);
-    dispatch(loadActiveFilm(adaptFilmAPItoProject(data)));
-    dispatch(setIsActiveFilmLoaded(true));
+    const {data} = await api.get(`1${AppRouteAPI.Film}${id}`);
+    // dispatch(loadActiveFilm(adaptFilmAPItoProject(data))); // перенесено в filmsSlice
+    // dispatch(setIsActiveFilmLoaded(true)); // перенесено в appSlice
+    return data;
   },
 );
 
@@ -91,14 +96,22 @@ export const logoutAction = createAsyncThunk<void, undefined, createAsyncThunkPr
   },
 );
 
-// так ка мы не используем никакие параметры в коллбеке, нам не нужно описывать типы
-export const clearErrorActionAPI = createAsyncThunk(
+export const clearErrorActionAPI = createAsyncThunk<void, undefined, createAsyncThunkProps>(
   'app/clearError',
-  () => {
+  async (_, {dispatch, extra: api}) => {
     setTimeout(() => {
-      store.dispatch(setError(null));
+      // dispatch(setError(null)); // нельзя диспатчить, из за лексической ошибки, перенесено в app-reducer
     }, ERROR_TIMEOUT);
   },
 );
 
+// так ка мы не используем никакие параметры в коллбеке, нам не нужно описывать типы. Но если мы используем тут сам store, то получаем ошибку доступа к переменным в других модулях
+// export const clearErrorActionAPI = createAsyncThunk(
+//   'app/clearError',
+//   async () => {
+//     setTimeout(() => {
+//       store.dispatch(setError(null));
+//     }, ERROR_TIMEOUT);
+//   },
+// );
 
