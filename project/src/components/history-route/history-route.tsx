@@ -15,6 +15,7 @@ function HistoryRouter({ // тут мы деструктурируем сраз�
   children,
   history,
 }: HistoryRouterProps) : JSX.Element {
+
   const [state, setState] = useState({ // параметры для обновления истории
     action: history.action,
     location: history.location,
