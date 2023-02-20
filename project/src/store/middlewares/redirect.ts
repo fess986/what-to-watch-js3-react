@@ -3,7 +3,7 @@ import {Middleware} from 'redux';
 // import {reducer} from '../reduser';
 import { RootReducerType } from '../reduser/root-reducer';
 import { ActionTypes } from '../action';
-import { AppRoute } from '../../const/const';
+import { AppRoute, ActionTypesAPI } from '../../const/const';
 
 // type Reducer = ReturnType<typeof reducer>;
 
@@ -27,7 +27,7 @@ export const redirect: Middleware<unknown, RootReducerType> =
           browserHistory.push(action.payload);
         }
 
-        if (action.type === 'data/fetchActiveFilm/rejected') {
+        if (action.type === `${ActionTypesAPI.FETCH_ACTIVE_FILM}/rejected`) {
           browserHistory.push(AppRoute.Main);
         }
 

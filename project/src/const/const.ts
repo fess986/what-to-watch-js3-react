@@ -58,6 +58,15 @@ export enum StoreNames {
   User = 'USER',
 }
 
+export enum ActionTypesAPI {
+  FETCH_FILMS = 'films/fetchFilms',
+  FETCH_ACTIVE_FILM = 'films/fetchActiveFilm',
+  CHECK_AUTH_STATUS = 'user/checkAuth',
+  LOGIN = 'user/login',
+  LOGOUT = 'user/logout',
+  CLEAR_ERROR = 'app/clearError',
+}
+
 
 export const ALL_GENRES = 'All genres';
 
