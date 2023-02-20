@@ -26,7 +26,7 @@ export const adaptFilmAPItoProject = (film : any) : Film => (
 
 // описывать тип для входящих по api данных - так себе развлечение
 // eslint-disable-next-line
-export const adaptAllFilmAPItoProject = (films : any[]) => {
+export const adaptAllFilmAPItoProject = (films : unknown[]) => {
   const filmsAPI = films.map((film) => adaptFilmAPItoProject(film));
 
   return filmsAPI;

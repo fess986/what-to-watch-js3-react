@@ -31,6 +31,7 @@ function FilmCard(props : FilmProps): JSX.Element {
   const dispatch = useAppDispatch();
   const idParam = useParams().id;
   const id = Number(useParams().id) ?? 1;
+  // dispatch(fetchActiveFilmAction(id));
   const isFilmLoaded = useAppSelector(getIsActiveFilmLoaded);
   const films = useAppSelector(getFilmList);
   const film = useAppSelector(getActiveFilm) as Film; // воспользуемся приведением типа, для того чтобы TS не ругался на нас, когда мы пробуем деструкторизировать film, который может оказаться null. На самом деле, если там будет null,  мы рендерим заглушку и до самой деструкторизации дело не дойдет

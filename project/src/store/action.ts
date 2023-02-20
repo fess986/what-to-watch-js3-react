@@ -21,6 +21,7 @@ export enum ActionTypes {
 
 export const redirectToRoute = createAction<AppRoute>(ActionTypes.REDIRECT_TO_ROUTE); // использукм AppRoute в качестве типа
 
+// !!!!!!!!!!!!!!!!
 // данные экшены нам больше не нужны, так как мы перешли на slices, в которых экшены создаются сразу в редьюсеры, и получают имена по названию
 
 /* export const changeGenre = createAction(ActionTypes.CHANGE_GENRE, (genre1 : string) => ({

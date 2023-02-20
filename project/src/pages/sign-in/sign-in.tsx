@@ -82,7 +82,7 @@ function SignIn(): JSX.Element {
         password: password.current.value
       }));
 
-      // navigate(AppRoute.Main);  // раньше перенаправляли так, теперь делаем это через middleware
+      // navigate(AppRoute.Main); // раньше перенаправляли так, теперь делаем это через middleware
     }
 
   };
