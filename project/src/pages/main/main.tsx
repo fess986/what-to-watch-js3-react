@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 
 import Logo from '../../components/logo/Logo';
-import { Film } from '../../types/films';
 import FilmList from '../../components/film-list/film-list';
 import MyListButton from '../../components/buttons/my-list-button/my-list-button';
 import PlayButton from '../../components/buttons/play-button/play-button';
@@ -12,9 +11,10 @@ import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { getfilmsShownCount } from '../../store/reduser/app/app-selectors';
 import { getGenre } from '../../store/reduser/app/app-selectors';
-import {getFilmList} from '../../store/reduser/films/films-selectors';
+import {getFilmList, getFilteredFilmList} from '../../store/reduser/films/films-selectors';
+// import {getFilmList} from '../../store/reduser/films/films-selectors';
+
 import { resetFilms, addFilms, changeGenre } from '../../store/reduser/app/app-reducer';
-import { ALL_GENRES } from '../../const/const';
 
 function Main(): JSX.Element {
 
@@ -25,14 +25,10 @@ function Main(): JSX.Element {
   const filmsShownCount = useAppSelector(getfilmsShownCount);
   const films = useAppSelector(getFilmList);
 
-  const filterFilms = (filmList : Film[]) => {
-    if (genre === ALL_GENRES) {
-      return filmList;
-    }
-    return filmList.filter((film : Film) => film.genre === genre);
-  };
+  //const ass = useSelector(getFilteredFilmList('ass', 'ass'))
+  // console.log(ass)
 
-  const filteredFilmList = filterFilms(films);
+  const filteredFilms = useAppSelector(getFilteredFilmList);
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
@@ -91,10 +87,10 @@ function Main(): JSX.Element {
 
           <Genres films={films} genre={genre} genreClickHandler={genreClickHandler}/>
 
-          <FilmList films={filteredFilmList} filmsShownCount={filmsShownCount}/>
+          <FilmList films={filteredFilms} filmsShownCount={filmsShownCount}/>
 
           {
-            filteredFilmList.length > filmsShownCount ? <ShowMoreButton showMoreButtonHandler={showMoreButtonHandler}/> : ''
+            filteredFilms.length > filmsShownCount ? <ShowMoreButton showMoreButtonHandler={showMoreButtonHandler}/> : ''
           }
 
         </section>
