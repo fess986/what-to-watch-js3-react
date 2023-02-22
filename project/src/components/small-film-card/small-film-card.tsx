@@ -1,7 +1,7 @@
 // компонент одной карточки фильма
 import { Film } from '../../types/films';
 import {Link, useNavigate} from 'react-router-dom';
-import { useState, MouseEvent } from 'react';
+import React, { useState, MouseEvent } from 'react';
 
 type SmallFilmCardProps = {
   film: Film;
@@ -44,4 +44,4 @@ function SmallFilmCard(props : SmallFilmCardProps): JSX.Element {
   );
 }
 
-export default SmallFilmCard;
+export default React.memo(SmallFilmCard); //мемоизируем элемент. При этом предварительно оборачиваем в предке передаваемые пропсы useMemo для хранении стабильной ссылки на передаваемый объект
