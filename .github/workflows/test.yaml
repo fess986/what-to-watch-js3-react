@@ -2,7 +2,7 @@ name: test-project-on-push
 run-name: ${{ github.actor }} test project 
 on: [push]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
