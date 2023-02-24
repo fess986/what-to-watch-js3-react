@@ -1,4 +1,5 @@
 {
     "open-in-browser.default": "google-chrome",
-    "liveServer.settings.CustomBrowser": "chrome"
+    "liveServer.settings.CustomBrowser": "chrome",
+    "jest.jestCommandLine": "npm run test --"
 }
