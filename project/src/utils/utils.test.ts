@@ -1,4 +1,4 @@
-import { getDuration, parseCommentDate } from './utils';
+import { getDuration, parseCommentDate, parseMinutes } from './utils';
 import {fakerObject} from './mocks';
 
 let globalTestValue : number;
@@ -60,6 +60,30 @@ describe('Utils functiions tests', () => {
 
     test('should return not Array Prototype', ()=> {
       expect(parseCommentDate('2019-05-08T14:13:56.569Z')).not.toBeInstanceOf(Array);
+    });
+
+  });
+
+  describe('Function: parseMinutes', () => {
+
+    beforeEach(() => { // инициализируется перед каждым запуском
+      globalTestValue = 30;
+    });
+
+    test('should return something', ()=> {
+      expect(parseMinutes(fakerObject.number)).toBeDefined();
+    });
+
+    test('should return 00:00:30', ()=> {
+      expect(parseMinutes(globalTestValue)).toBe('00:00:30');
+    });
+
+    test('should return 00:15:01', ()=> {
+      expect(parseMinutes(901)).toBe('00:15:01');
+    });
+
+    test('should return 01:01:40', ()=> {
+      expect(parseMinutes(3700)).toBe('01:01:40');
     });
 
   });
