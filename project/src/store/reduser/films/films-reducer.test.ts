@@ -1,7 +1,8 @@
-import {filmsReducer, loadFilms, loadActiveFilm} from './films-reducer';
+import {filmsReducer, loadFilms, loadActiveFilm } from './films-reducer';
 import { StoreNames } from '../../../const/const';
 import {Films} from '../../../mocks/films-mock';
-import {fetchFilmsAction} from '../../api-actions';
+import {fetchFilmsAction, fetchActiveFilmAction} from '../../api-actions';
+import { adaptFilmAPItoProject } from '../../../services/adapterAPI';
 
 const initState = {
   filmList: [],
@@ -82,7 +83,7 @@ describe('Testing of films reducer', () => {
 
   });
 
-  // проверка экшена loadActiveFilm
+  // проверка экшена fetchFilmsAction.fulfilled
   describe('testing of fetchFilmsAction.fulfilled action', () => {
 
     // передаем в payload, и должны получить пустой массив
@@ -97,6 +98,24 @@ describe('Testing of films reducer', () => {
 
     it('should change only filmList field', () => {
       expect(filmsReducer.reducer({...initState, activeFIlm: Films[0]} , {type: fetchFilmsAction.fulfilled.type, payload: null})).toEqual({ filmList: [], activeFIlm: Films[0] });
+    });
+
+  });
+
+  // проверка экшена fetchActiveFilmAction.fulfilled
+  describe('testing of fetchActiveFilmAction.fulfilled action', () => {
+
+    // передаем в payload, и должны получить пустой массив
+    it('testing with action-object', () => {
+      expect(filmsReducer.reducer(initState , {type: 'films/fetchActiveFilm/fulfilled', payload: Films[0]})).toEqual({ filmList: [], activeFIlm: Films[0] });
+    });
+
+    it('testing with object', () => {
+      expect(filmsReducer.reducer(initState , {type: fetchActiveFilmAction.fulfilled.type, payload: Films[0]})).toEqual({ filmList: [], activeFIlm: Films[0] });
+    });
+
+    it('should change only filmList field', () => {
+      expect(filmsReducer.reducer({...initState, filmList: Films} , {type: fetchActiveFilmAction.fulfilled.type, payload: Films[0]})).toEqual({ filmList: Films, activeFIlm: Films[0] });
     });
 
   });
