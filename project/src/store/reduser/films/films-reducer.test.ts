@@ -1,6 +1,7 @@
 import {filmsReducer, loadFilms, loadActiveFilm} from './films-reducer';
 import { StoreNames } from '../../../const/const';
 import {Films} from '../../../mocks/films-mock';
+import {fetchFilmsAction} from '../../api-actions';
 
 const initState = {
   filmList: [],
@@ -77,6 +78,25 @@ describe('Testing of films reducer', () => {
 
     it('testing with empty state, should create anyway', () => {
       expect(filmsReducer.reducer(void 0 , loadActiveFilm(Films[0]))).toEqual({ filmList: [], activeFIlm: Films[0] });
+    });
+
+  });
+
+  // проверка экшена loadActiveFilm
+  describe('testing of fetchFilmsAction.fulfilled action', () => {
+
+    // передаем в payload, и должны получить пустой массив
+    it('testing with action-object', () => {
+      expect(filmsReducer.reducer(initState , {type: 'films/fetchFilms/fulfilled', payload: null})).toEqual(initState);
+    });
+
+    // передаем тип экшена через его статус fetchFilmsAction.fulfilled, так как это промис
+    it('testing with object', () => {
+      expect(filmsReducer.reducer(initState , {type: fetchFilmsAction.fulfilled.type, payload: null})).toEqual(initState);
+    });
+
+    it('should change only filmList field', () => {
+      expect(filmsReducer.reducer({...initState, activeFIlm: Films[0]} , {type: fetchFilmsAction.fulfilled.type, payload: null})).toEqual({ filmList: [], activeFIlm: Films[0] });
     });
 
   });
