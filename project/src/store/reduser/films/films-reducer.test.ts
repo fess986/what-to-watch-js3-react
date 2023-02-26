@@ -1,4 +1,4 @@
-import {filmsReducer, loadFilms} from './films-reducer';
+import {filmsReducer, loadFilms, loadActiveFilm} from './films-reducer';
 import { StoreNames } from '../../../const/const';
 import {Films} from '../../../mocks/films-mock';
 
@@ -59,6 +59,25 @@ describe('Testing of films reducer', () => {
     // });
 
   });
-});
 
-export {};
+  // проверка экшена loadActiveFilm
+  describe('testing of loadActiveFilm action', () => {
+
+    it('testing with action-object', () => {
+      expect(filmsReducer.reducer(initState , {type: `${StoreNames.Films}/loadActiveFilm`, payload: Films[0]})).toEqual({ filmList: [], activeFIlm: Films[0] });
+    });
+
+    it('should change only activeFIlm field', () => {
+      expect(filmsReducer.reducer({...initState, filmList: [Films[0],Films[1]]} , {type: `${StoreNames.Films}/loadActiveFilm`, payload:Films[0]})).toEqual({ filmList: [Films[0],Films[1]], activeFIlm: Films[0] });
+    });
+
+    it('testing with object', () => {
+      expect(filmsReducer.reducer(initState , loadActiveFilm([1,2,3]))).toEqual({ filmList: [], activeFIlm: [1,2,3] });
+    });
+
+    it('testing with empty state, should create anyway', () => {
+      expect(filmsReducer.reducer(void 0 , loadActiveFilm(Films[0]))).toEqual({ filmList: [], activeFIlm: Films[0] });
+    });
+
+  });
+});
