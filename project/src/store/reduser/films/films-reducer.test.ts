@@ -2,7 +2,6 @@ import {filmsReducer, loadFilms, loadActiveFilm } from './films-reducer';
 import { StoreNames } from '../../../const/const';
 import {Films} from '../../../mocks/films-mock';
 import {fetchFilmsAction, fetchActiveFilmAction} from '../../api-actions';
-import { adaptFilmAPItoProject } from '../../../services/adapterAPI';
 
 const initState = {
   filmList: [],
