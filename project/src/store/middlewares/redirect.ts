@@ -12,6 +12,9 @@ export const redirect: Middleware<unknown, RootReducerType> =
     (next) =>
       (action) => {
 
+        // отображение экшенов при отладке
+        // console.log(action.type);
+
         // Все обычные экшены тут проходят, этот код будет вызываттся при смене жанра
         // if (action.type === 'APP/changeGenre') {
         //   console.log(action);
