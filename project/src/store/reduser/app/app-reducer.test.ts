@@ -10,6 +10,17 @@ const initialAppState = {
 };
 
 describe('appReducer tests', () => {
+
+  describe('General reducer behavior tests', () => {
+    test('testing with empty state, and wrong type. Should return initState state', () => {
+      expect(appReducer.reducer(void 0 , {type: 'wrong type'})).toEqual(initialAppState);
+    });
+
+    it('wrong type, should\'t change state object', () => {
+      expect(appReducer.reducer({...initialAppState, isFilmsLoaded: true} , {type: 'wrong type'})).toEqual({...initialAppState, isFilmsLoaded: true});
+    });
+  });
+
   describe('standard reducers tests', () => {
     describe('changeGenre action tests', () => {
       it('normal action work', () => {
