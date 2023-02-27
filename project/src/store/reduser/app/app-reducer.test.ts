@@ -1,4 +1,4 @@
-import { appReducer, changeGenre } from './app-reducer';
+import { appReducer, changeGenre, setIsActiveFilmLoaded } from './app-reducer';
 import { ALL_GENRES, FILMS_COUNT_ON_START, StoreNames } from '../../../const/const';
 
 const initialAppState = {
@@ -22,6 +22,7 @@ describe('appReducer tests', () => {
   });
 
   describe('standard reducers tests', () => {
+
     describe('changeGenre action tests', () => {
       it('normal action work', () => {
         expect(appReducer.reducer(initialAppState, changeGenre('genre'))).toEqual({...initialAppState, genre: 'genre'});
@@ -31,6 +32,18 @@ describe('appReducer tests', () => {
       });
       it('should change only genre field', () => {
         expect(appReducer.reducer({...initialAppState, isActiveFilmLoaded : true}, changeGenre('genre'))).toEqual({...initialAppState, genre: 'genre', isActiveFilmLoaded : true});
+      });
+    });
+
+    describe('setIsActiveFilmLoaded action tests', () => {
+      it('normal action work', () => {
+        expect(appReducer.reducer(initialAppState, setIsActiveFilmLoaded(true))).toEqual({...initialAppState, isActiveFilmLoaded: true});
+      });
+      it('string action', () => {
+        expect(appReducer.reducer(initialAppState, {type: `${StoreNames.App}/setIsActiveFilmLoaded`, payload: true})).toEqual({...initialAppState, isActiveFilmLoaded: true });
+      });
+      it('should change only isActiveFilmLoaded field', () => {
+        expect(appReducer.reducer({...initialAppState, isFilmsLoaded : true}, setIsActiveFilmLoaded(true))).toEqual({...initialAppState, isActiveFilmLoaded: true, isFilmsLoaded : true});
       });
     });
   });
