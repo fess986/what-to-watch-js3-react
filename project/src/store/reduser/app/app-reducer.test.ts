@@ -113,5 +113,17 @@ describe('appReducer tests', () => {
     });
   });
 
+  describe('fetchActiveFilmAction.fulfilled action tests', () => {
+    it('normal action work', () => {
+      expect(appReducer.reducer({...initialAppState, isActiveFilmLoaded : false}, {type : fetchActiveFilmAction.fulfilled.type})).toEqual({...initialAppState, isActiveFilmLoaded : true});
+    });
+    it('string action', () => {
+      expect(appReducer.reducer(initialAppState, {type: 'films/fetchActiveFilm/fulfilled', payload: Films[0]})).toEqual({...initialAppState, isActiveFilmLoaded : true});
+    });
+    it('should change only isActiveFilmLoaded field', () => {
+      expect(appReducer.reducer({...initialAppState, isFilmsLoaded : true}, {type : fetchActiveFilmAction.fulfilled.type})).toEqual({...initialAppState, isFilmsLoaded : true, isActiveFilmLoaded : true});
+    });
+  });
+
 });
 
