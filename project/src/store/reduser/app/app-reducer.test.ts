@@ -125,5 +125,17 @@ describe('appReducer tests', () => {
     });
   });
 
+  describe('fetchActiveFilmAction.rejected action tests', () => {
+    it('normal action work', () => {
+      expect(appReducer.reducer({...initialAppState, isActiveFilmLoaded : false}, {type : fetchActiveFilmAction.rejected.type})).toEqual({...initialAppState, error: 'ошибка при загрузке активного фильма'});
+    });
+    it('string action', () => {
+      expect(appReducer.reducer(initialAppState, {type: 'films/fetchActiveFilm/rejected', payload: Films[0]})).toEqual({...initialAppState, error: 'ошибка при загрузке активного фильма'});
+    });
+    it('should change only error field', () => {
+      expect(appReducer.reducer({...initialAppState, isFilmsLoaded : true}, {type : fetchActiveFilmAction.rejected.type})).toEqual({...initialAppState, isFilmsLoaded : true, error: 'ошибка при загрузке активного фильма'});
+    });
+  });
+
 });
 
