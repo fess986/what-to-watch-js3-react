@@ -1,6 +1,6 @@
 import { appReducer, changeGenre, setIsActiveFilmLoaded, resetFilms, addFilms, setIsFilmsLoaded, setError } from './app-reducer';
 import { ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT, StoreNames } from '../../../const/const';
-import { fetchActiveFilmAction } from '../../api-actions';
+import { fetchActiveFilmAction, fetchFilmsAction } from '../../api-actions';
 import { Films } from '../../../mocks/films-mock';
 
 const initialAppState = {
@@ -134,6 +134,18 @@ describe('appReducer tests', () => {
     });
     it('should change only error field', () => {
       expect(appReducer.reducer({...initialAppState, isFilmsLoaded : true}, {type : fetchActiveFilmAction.rejected.type})).toEqual({...initialAppState, isFilmsLoaded : true, error: 'ошибка при загрузке активного фильма'});
+    });
+  });
+
+  describe('fetchFilmsAction.fulfilled action tests', () => {
+    it('normal action work', () => {
+      expect(appReducer.reducer({...initialAppState, isFilmsLoaded : false}, {type : fetchFilmsAction.fulfilled.type})).toEqual({...initialAppState, isFilmsLoaded : true});
+    });
+    it('string action', () => {
+      expect(appReducer.reducer(initialAppState, {type: 'films/fetchFilms/fulfilled'})).toEqual({...initialAppState, isFilmsLoaded : true});
+    });
+    it('should change only error field', () => {
+      expect(appReducer.reducer({...initialAppState, isActiveFilmLoaded : true}, {type : fetchFilmsAction.fulfilled.type})).toEqual({...initialAppState, isActiveFilmLoaded : true, isFilmsLoaded : true});
     });
   });
 
