@@ -1,4 +1,4 @@
-import { appReducer, changeGenre, setIsActiveFilmLoaded, resetFilms, addFilms, setIsFilmsLoaded } from './app-reducer';
+import { appReducer, changeGenre, setIsActiveFilmLoaded, resetFilms, addFilms, setIsFilmsLoaded, setError } from './app-reducer';
 import { ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT, StoreNames } from '../../../const/const';
 
 const initialAppState = {
@@ -78,8 +78,20 @@ describe('appReducer tests', () => {
       it('string action', () => {
         expect(appReducer.reducer(initialAppState, {type: `${StoreNames.App}/setIsFilmsLoaded`, payload : true})).toEqual({...initialAppState, isFilmsLoaded : true});
       });
-      it('should change only filmsShownCount field', () => {
+      it('should change only isFilmsLoaded field', () => {
         expect(appReducer.reducer({...initialAppState, isActiveFilmLoaded : true}, setIsFilmsLoaded(true))).toEqual({...initialAppState, isActiveFilmLoaded : true, isFilmsLoaded : true});
+      });
+    });
+
+    describe('setError action tests', () => {
+      it('normal action work', () => {
+        expect(appReducer.reducer(initialAppState, setError('big errooooor'))).toEqual({...initialAppState, error : 'big errooooor'});
+      });
+      it('string action', () => {
+        expect(appReducer.reducer(initialAppState, {type: `${StoreNames.App}/setError`, payload : 'big errooooor'})).toEqual({...initialAppState, error : 'big errooooor'});
+      });
+      it('should change only error field', () => {
+        expect(appReducer.reducer({...initialAppState, isActiveFilmLoaded : true}, setError('big errooooor'))).toEqual({...initialAppState, isActiveFilmLoaded : true, error : 'big errooooor'});
       });
     });
 
