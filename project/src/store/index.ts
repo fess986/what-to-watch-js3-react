@@ -17,7 +17,7 @@ export const store = configureStore({ // configureStore - из пакета @red
   middleware: (getDefaultMiddleware) => // в поле middleware нужно передать массив со всеми используемыми middleware ([mw1, mw2, ...]), но можем использовать специальную функцию, которая должна будет вернуть массив с mw. getDefaultMiddleware - предостовляет доступ к дефолтным mw, таким как thunk и logIt
     getDefaultMiddleware({
       thunk: {
-        extraArgument: api, // добавляем в thunk наш экземпляр api, теперь к нему всегда можно будет обращаться из экшена
+        extraArgument: api, // добавляем в thunk наш экземпляр api, теперь к нему всегда можно будет обращаться из экшена. Если так не сделать то у нас не всегда может быть доступ к этому объекту в асинхронных действиях
       },
     }
     ).concat(redirect), // так как передается массив, при помощи concat мы приклеиваим к нему дополнительные mw
