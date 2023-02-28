@@ -40,6 +40,33 @@ describe('Async actions', () => {
 
   });
 
+  it('should authorization status is «no auth» when server return 400', async () => {
+    const store = mockStore();
+
+    mockAPI // настраиваем поведение фейкового api
+      .onGet(AppRouteAPI.LoginCheck)
+      .reply(400, []); // негативный ответ
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(checkAuthStatusAction());
+
+    type payload = {
+      type: string | unknown,
+      payload?: string | unknown,
+    }
+
+    const arr = store.getActions() as payload[]; // делаем заглушку, так как TS не уверен, что у полученного массива точно будет свойство payload. И он, кстати, прав. Но нам на это все равно, так что насильно его приводим к собственному типу
+    const actions = arr.map((item) => item.payload); // если item.payload не определено, он так же просто будет возращать undefined. Мы это знаем и можем контролировать
+
+    expect(actions).toEqual([
+      undefined,
+      'NOAUTH', // убеждаемся что в этом случае вызывается аргумент именно NOAUTH
+      undefined,
+    ]);
+
+  });
+
 
   it('loginAction api action should dispath requireAutorization and redirectToRoute', async () => {
     const store = mockStore();
@@ -57,6 +84,7 @@ describe('Async actions', () => {
     await store.dispatch(loginAction(fakeUser));
 
     const actions = store.getActions().map((action) => action.type);
+
 
     expect(actions).toEqual([
       loginAction.pending.type, // 'user/checkAuth/pending'
