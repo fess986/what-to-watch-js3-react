@@ -6,9 +6,10 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {State} from '../types/state';
 import { AppRouteAPI } from '../const/const';
 import { AuthData } from '../types/user';
-import { checkAuthStatusAction, loginAction } from './api-actions';
+import { checkAuthStatusAction, loginAction, logoutAction, fetchFilmsAction } from './api-actions';
 import { requireAutorization } from './reduser/user/user-reducer';
 import { redirectToRoute } from './action';
+import { Films } from '../mocks/films-mock';
 // import { requireAutorization } from './reduser/user/user-reducer';
 // import { AuthStatus } from '../const/const';
 
@@ -67,8 +68,7 @@ describe('Async actions', () => {
 
   });
 
-
-  it('loginAction api action should dispath requireAutorization and redirectToRoute', async () => {
+  it('loginAction api action should dispath requireAutorization and redirectToRoute, and add token to local storage', async () => {
     const store = mockStore();
     const fakeUser : AuthData = {email: 'test@mail.ru', password: '123'};
 
@@ -78,13 +78,11 @@ describe('Async actions', () => {
       .onPost(AppRouteAPI.LoginPost)
       .reply(200, {token: 'secret'});
 
-
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(loginAction(fakeUser));
 
     const actions = store.getActions().map((action) => action.type);
-
 
     expect(actions).toEqual([
       loginAction.pending.type, // 'user/checkAuth/pending'
@@ -97,4 +95,51 @@ describe('Async actions', () => {
     expect(Storage.prototype.setItem).toBeCalledWith('token', 'secret'); // вызывалась с аргументами 'token', 'secret'
 
   });
+
+  it('logoutAction api action should dispath requireAutorization and clean localStorage', async () => {
+    const store = mockStore();
+
+    Storage.prototype.removeItem = jest.fn();
+
+    mockAPI
+      .onDelete(AppRouteAPI.Logout)
+      .reply(204);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(logoutAction());
+
+    const actions = store.getActions().map((action) => action.type);
+
+    expect(actions).toEqual([
+      logoutAction.pending.type, // 'user/checkAuth/pending'
+      requireAutorization.type, // 'USER/requireAutorization'
+      logoutAction.fulfilled.type, // 'user/checkAuth/fulfilled'
+    ]);
+
+    expect(Storage.prototype.removeItem).toBeCalledTimes(1);
+    expect(Storage.prototype.removeItem).toBeCalledWith('token');
+
+  });
+
+  it('fetchFilmsAction api action should dispathed', async () => {
+    const store = mockStore();
+
+    mockAPI
+      .onGet(AppRouteAPI.Films)
+      .reply(200, Films);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(fetchFilmsAction());
+
+    const actions = store.getActions().map((action) => action.type);
+
+    expect(actions).toEqual([
+      fetchFilmsAction.pending.type,
+      fetchFilmsAction.fulfilled.type,
+    ]);
+
+  });
+
 });
