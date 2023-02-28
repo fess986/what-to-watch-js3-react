@@ -6,7 +6,7 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {State} from '../types/state';
 import { AppRouteAPI } from '../const/const';
 import { AuthData } from '../types/user';
-import { checkAuthStatusAction, loginAction, logoutAction, fetchFilmsAction } from './api-actions';
+import { checkAuthStatusAction, loginAction, logoutAction, fetchFilmsAction, fetchActiveFilmAction } from './api-actions';
 import { requireAutorization } from './reduser/user/user-reducer';
 import { redirectToRoute } from './action';
 import { Films } from '../mocks/films-mock';
@@ -138,6 +138,26 @@ describe('Async actions', () => {
     expect(actions).toEqual([
       fetchFilmsAction.pending.type,
       fetchFilmsAction.fulfilled.type,
+    ]);
+
+  });
+
+  it('fetchActiveFilmAction api action should dispathed', async () => {
+    const store = mockStore();
+
+    mockAPI
+      .onGet(`${AppRouteAPI.Film}1`)
+      .reply(200, Films[0]);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(fetchActiveFilmAction(1));
+
+    const actions = store.getActions().map((action) => action.type);
+
+    expect(actions).toEqual([
+      fetchActiveFilmAction.pending.type,
+      fetchActiveFilmAction.fulfilled.type,
     ]);
 
   });
