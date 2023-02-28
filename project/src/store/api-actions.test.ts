@@ -5,7 +5,10 @@ import MockAdapter from 'axios-mock-adapter';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {State} from '../types/state';
 import { AppRouteAPI } from '../const/const';
-import { checkAuthStatusAction } from './api-actions';
+import { AuthData } from '../types/user';
+import { checkAuthStatusAction, loginAction } from './api-actions';
+import { requireAutorization } from './reduser/user/user-reducer';
+import { redirectToRoute } from './action';
 // import { requireAutorization } from './reduser/user/user-reducer';
 // import { AuthStatus } from '../const/const';
 
@@ -34,6 +37,36 @@ describe('Async actions', () => {
       'USER/requireAutorization', // диспатч в нем requireAutorization(AuthStatus.Auth) при ответе сервера 200
       'user/checkAuth/fulfilled' // завершение промиса с положительным статусом fulfilled
     ]);
+
+  });
+
+
+  it('loginAction api action should dispath requireAutorization and redirectToRoute', async () => {
+    const store = mockStore();
+    const fakeUser : AuthData = {email: 'test@mail.ru', password: '123'};
+
+    Storage.prototype.setItem = jest.fn();
+
+    mockAPI
+      .onPost(AppRouteAPI.LoginPost)
+      .reply(200, {token: 'secret'});
+
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(loginAction(fakeUser));
+
+    const actions = store.getActions().map((action) => action.type);
+
+    expect(actions).toEqual([
+      loginAction.pending.type, // 'user/checkAuth/pending'
+      requireAutorization.type, // 'USER/requireAutorization'
+      redirectToRoute.type, // 'game/redirectToRoute'
+      loginAction.fulfilled.type, // 'user/checkAuth/fulfilled'
+    ]);
+
+    expect(Storage.prototype.setItem).toBeCalledTimes(1); // проверяем запись в storage. Так как мы используем в качестве заглушки jest.fn() , мы имеем доступ к таким методам, как toBeCalledTimes
+    expect(Storage.prototype.setItem).toBeCalledWith('token', 'secret'); // вызывалась с аргументами 'token', 'secret'
 
   });
 });
