@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing Page404 render Should render correctly 1`] = `
+<div>
+  <div
+    class="wrapper404"
+  >
+    <div
+      class="mainbox"
+    >
+      <div
+        class="err404"
+      >
+        4
+      </div>
+      <div
+        class="err404-2"
+      >
+        0
+      </div>
+      <div
+        class="err404-3"
+      >
+        4
+      </div>
+      <div
+        class="msg404"
+      >
+        Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place?
+        <p>
+          Let
+          '
+          s go
+          <a
+            class="link404"
+            href="/"
+          >
+            home
+          </a>
+          and try from there.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
