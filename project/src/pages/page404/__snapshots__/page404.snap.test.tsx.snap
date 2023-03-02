@@ -26,7 +26,7 @@ exports[`testing Page404 render Should render correctly 1`] = `
       <div
         class="msg404"
       >
-        Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place?
+        Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place? Maybe..
         <p>
           Let
           '

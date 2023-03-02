@@ -9,7 +9,7 @@ function Page404(): JSX.Element {
         <div className="err404">4</div>
         <div className="err404-2">0</div>
         <div className="err404-3">4</div>
-        <div className="msg404">Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place?
+        <div className="msg404">Maybe this page moved? Got deleted? Is hiding out in quarantine? Never existed in the first place? Maybe..
           <p>
             Let{'\''}s go
             <Link className='link404' to={AppRoute.Main}>home</Link>
