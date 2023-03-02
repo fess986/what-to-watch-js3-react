@@ -75,9 +75,10 @@ function SignIn(): JSX.Element {
                 ref={emailAdress}
                 className="sign-in__input"
                 type="email"
-                placeholder="Email address"
+                placeholder="E-mail address"
                 name="user-email"
                 id="user-email"
+                data-testid="login"
                 onChange={emailChangeHandler} onFocus={emailFocusHandler}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
@@ -90,6 +91,7 @@ function SignIn(): JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                data-testid="password"
                 onFocus={passwordFocusHandler}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
