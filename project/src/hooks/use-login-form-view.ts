@@ -35,8 +35,7 @@ export const useLoginFormView = () : UseLoginForm => {
       inputClassListPass = 'sign-in__field';
       break;
     case LOGIN_STATUS.userNotFound :
-      message = `We can’t recognize this email
-      and password combination. Please try again.`;
+      message = 'We can’t recognize this email and password combination. Please try again.';
       inputClassListAdress = 'sign-in__field';
       inputClassListPass = 'sign-in__field';
       break;
