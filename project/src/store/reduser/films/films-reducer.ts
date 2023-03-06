@@ -10,7 +10,7 @@ export type InitialFilmsType = {
   activeFIlm: Film | null,
 }
 
-const InitialFilmsState: InitialFilmsType = {
+export const InitialFilmsState: InitialFilmsType = {
   filmList: [],
   activeFIlm: null,
 };
