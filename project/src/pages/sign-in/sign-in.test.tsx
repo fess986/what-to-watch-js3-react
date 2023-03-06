@@ -9,7 +9,7 @@ import HistoryRouter from '../../components/history-route/history-route';
 
 describe('testing SignIn Component', () => {
 
-  const history = createMemoryHistory(); // соковый объект истории
+  const history = createMemoryHistory(); // моковый объект истории
 
   // вариант с такой историей тут не пройдет, так как нет обращения к этому модулю из вложенных модулей
   // const fakeHistory = {
@@ -21,7 +21,7 @@ describe('testing SignIn Component', () => {
   // jest.mock('../../browser-history', () => fakeHistory);
 
   const mockStore = configureMockStore(); // моковый стор
-  const store = mockStore({}); // указываем пустой объект в качестве параметра, для того, чтобы сохранить параметры по умолчанию объекта состояния. Конкретно тут, сработает и без этого, видимо работает перегрузка данных
+  const store = mockStore({}); // указываем пустой объект в качестве параметра, для того, чтобы сохранить параметры по умолчанию объекта состояния. Конкретно тут, сработает и без этого, видимо работает перегрузка данных. Передавать похожую на настоящую структуру тут не нужно, так как в компоненте нет обращения к полям хранилища
 
   it('Should render correctly', async () => {
 

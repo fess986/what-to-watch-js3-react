@@ -3,7 +3,7 @@ import { requireAutorization } from './user-reducer';
 import { AuthStatus, StoreNames } from '../../../const/const';
 
 const initialUserState = {
-  autorizationStatus : AuthStatus.NoAuth,
+  autorizationStatus : AuthStatus.UnKnown,
 };
 
 describe('userReducer tests', () => {

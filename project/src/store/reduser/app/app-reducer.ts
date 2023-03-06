@@ -12,7 +12,7 @@ export type InitialAppType = {
   error: string | null,
 }
 
-const initialAppState : InitialAppType = {
+export const initialAppState : InitialAppType = {
   genre: ALL_GENRES,
   isActiveFilmLoaded: false,
   filmsShownCount: FILMS_COUNT_ON_START,

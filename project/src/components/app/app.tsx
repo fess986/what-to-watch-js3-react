@@ -8,8 +8,6 @@ import { useAppSelector } from '../../hooks';
 import { getFilmList } from '../../store/reduser/films/films-selectors';
 import { getAuthStatus } from '../../store/reduser/user/user-selectors';
 import { PrivateRouteElement } from '../private-route/private-route';
-import HistoryRouter from '../../components/history-route/history-route';
-import browserHistory from '../../browser-history';
 
 // импорт констант и типов
 import { AppRoute } from '../../const/const';
@@ -55,53 +53,51 @@ function App({reviews} : AppProps): JSX.Element {
 
   return (
     // <BrowserRouter></BrowserRouter> - мы использовали до того как нам понадобился кастомный объект истории. Ему не нужно было передавать в параметрах историю
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<Main />}
-        />
+    <Routes>
+      <Route
+        path={AppRoute.Main}
+        element={<Main />}
+      />
 
-        <Route
-          path={AppRoute.Login}
-          element={<SignIn />}
-        />
+      <Route
+        path={AppRoute.Login}
+        element={<SignIn />}
+      />
 
-        <Route
-          path={AppRoute.MyList}
-          element={
-            <PrivateRouteElement authStatus={authStatus}>
-              <MyList />
-            </PrivateRouteElement>
-          }
-        />
+      <Route
+        path={AppRoute.MyList}
+        element={
+          <PrivateRouteElement authStatus={authStatus}>
+            <MyList />
+          </PrivateRouteElement>
+        }
+      />
 
-        <Route
-          path={AppRoute.Film}
-          element={<FilmCard reviews={reviews}/>}
-        />
+      <Route
+        path={AppRoute.Film}
+        element={<FilmCard reviews={reviews}/>}
+      />
 
-        <Route
-          path={AppRoute.AddReview}
-          element={
-            <PrivateRouteElement authStatus={authStatus}>
-              <AddReview />
-            </PrivateRouteElement>
-          }
-        />
+      <Route
+        path={AppRoute.AddReview}
+        element={
+          <PrivateRouteElement authStatus={authStatus}>
+            <AddReview />
+          </PrivateRouteElement>
+        }
+      />
 
-        <Route
-          path={AppRoute.Player}
-          element={<Player films={films}/>}
-        />
+      <Route
+        path={AppRoute.Player}
+        element={<Player films={films}/>}
+      />
 
-        <Route
-          path='*'
-          element={<Page404 />}
-        />
+      <Route
+        path='*'
+        element={<Page404 />}
+      />
 
-      </Routes>
-    </HistoryRouter>
+    </Routes>
   );
 }
 

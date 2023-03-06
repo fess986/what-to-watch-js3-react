@@ -6,8 +6,8 @@ export type InitialUserType = {
   autorizationStatus: AuthStatus,
 }
 
-const initialUserState : InitialUserType = {
-  autorizationStatus : AuthStatus.NoAuth,
+export const initialUserState : InitialUserType = {
+  autorizationStatus : AuthStatus.UnKnown,
 };
 
 export const userReducer = createSlice({
