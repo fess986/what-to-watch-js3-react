@@ -3,11 +3,9 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks';
-// import { fetchFilmsAction } from '../../store/api-actions';
-// import { resetFilms } from '../../store/reduser/app/app-reducer';
 import { getFilmList } from '../../store/reduser/films/films-selectors';
 import { getAuthStatus } from '../../store/reduser/user/user-selectors';
-import { PrivateRouteElement } from '../private-route/private-route';
+import PrivateRouteElement from '../private-route/private-route';
 
 // импорт констант и типов
 import { AppRoute } from '../../const/const';
@@ -22,9 +20,6 @@ import MyList from '../../pages/my-list/my-list';
 import Player from '../../pages/player/player';
 import Page404 from '../../pages/page404/page404';
 import SignIn from '../../pages/sign-in/sign-in';
-
-// дополнительные
-// import HeadGuest from '../../pages/head-guest/head-guest';  // кнопка sign-in
 
 type AppProps = {
   reviews: Review[],
