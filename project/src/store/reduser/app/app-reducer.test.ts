@@ -1,15 +1,7 @@
-import { appReducer, changeGenre, setIsActiveFilmLoaded, resetFilms, addFilms, setIsFilmsLoaded, setError } from './app-reducer';
-import { ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT, StoreNames } from '../../../const/const';
+import { appReducer, changeGenre, setIsActiveFilmLoaded, resetFilms, addFilms, setIsFilmsLoaded, setError, initialAppState } from './app-reducer';
+import { FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT, StoreNames } from '../../../const/const';
 import { fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI } from '../../api-actions';
 import { Films } from '../../../mocks/films-mock';
-
-const initialAppState = {
-  genre: ALL_GENRES,
-  isActiveFilmLoaded: false,
-  filmsShownCount: FILMS_COUNT_ON_START,
-  isFilmsLoaded: false,
-  error: null,
-};
 
 describe('appReducer tests', () => {
 
