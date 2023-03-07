@@ -4,11 +4,11 @@ import {ALL_GENRES, GENRES_SHOWN_NUMBER} from '../../const/const';
 
 type GenresProps = {
   films: Film[],
-  genre: string,
+  activeGenre: string,
   genreClickHandler: (filmgenre: string) => void
 }
 
-const Genres = ({films, genre, genreClickHandler} : GenresProps) => {
+const Genres = ({films, activeGenre, genreClickHandler} : GenresProps) => {
 
   const fullGenreList = films.map((film) => film.genre);
   let genreList = Array.from(new Set(fullGenreList));
@@ -19,9 +19,9 @@ const Genres = ({films, genre, genreClickHandler} : GenresProps) => {
     <ul className="catalog__genres-list">
 
       {
-        genreList.map((genres) => (
-          <li key={Math.random()} className={`catalog__genres-item ${genres === genre ? 'catalog__genres-item--active' : ''}`} onClick={() => genreClickHandler(genres)}>
-            <span className="catalog__genres-link">{genres}</span>
+        genreList.map((genre) => (
+          <li key={Math.random()} className={`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active' : ''}`} onClick={() => genreClickHandler(genre)}>
+            <span className="catalog__genres-link">{genre}</span>
           </li>
         ))
       }

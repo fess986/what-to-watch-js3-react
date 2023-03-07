@@ -85,7 +85,7 @@ function Main(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <Genres films={films} genre={genre} genreClickHandler={genreClickHandler}/>
+          <Genres films={films} activeGenre={genre} genreClickHandler={genreClickHandler}/>
 
           <FilmList films={filteredFilms} filmsShownCount={filmsShownCount}/>
 
