@@ -7,10 +7,10 @@ import {State} from '../types/state';
 import { AppRouteAPI } from '../const/const';
 import { AuthData } from '../types/user';
 import { checkAuthStatusAction, loginAction, logoutAction, fetchFilmsAction, fetchActiveFilmAction } from './api-actions';
-import { requireAutorization } from './reduser/user/user-reducer';
+import { setAutorizationStatus } from './reduser/user/user-reducer';
 import { redirectToRoute } from './action';
 import { Films } from '../mocks/films-mock';
-// import { requireAutorization } from './reduser/user/user-reducer';
+// import { setAutorizationStatus } from './reduser/user/user-reducer';
 // import { AuthStatus } from '../const/const';
 
 describe('Async actions', () => {
@@ -31,11 +31,11 @@ describe('Async actions', () => {
 
     await store.dispatch(checkAuthStatusAction()); // выполняем проверяемый в тесте асинхронный запрос к серверу "авторизованы ли мы?"
 
-    const actions = store.getActions().map(({type}) => type); // так как мы создавали хранилище и экшены через слайсы, в store будут выполняться промис user/checkAuth и в нем происходить диспатч requireAutorization(AuthStatus.Auth) при статусе ответа 200. Так же в экшенах-запросах будет некоторая мета информация, чтобы с нею не париться, мы массив объектов превратим в массив type
+    const actions = store.getActions().map(({type}) => type); // так как мы создавали хранилище и экшены через слайсы, в store будут выполняться промис user/checkAuth и в нем происходить диспатч setAutorizationStatus(AuthStatus.Auth) при статусе ответа 200. Так же в экшенах-запросах будет некоторая мета информация, чтобы с нею не париться, мы массив объектов превратим в массив type
 
     expect(actions).toEqual([
       'user/checkAuth/pending', // начало выполнение асинхронного промиса checkAuthStatusAction
-      'USER/requireAutorization', // диспатч в нем requireAutorization(AuthStatus.Auth) при ответе сервера 200
+      'USER/setAutorizationStatus', // диспатч в нем setAutorizationStatus(AuthStatus.Auth) при ответе сервера 200
       'user/checkAuth/fulfilled' // завершение промиса с положительным статусом fulfilled
     ]);
 
@@ -68,7 +68,7 @@ describe('Async actions', () => {
 
   });
 
-  it('loginAction api action should dispath requireAutorization and redirectToRoute, and add token to local storage', async () => {
+  it('loginAction api action should dispath setAutorizationStatus and redirectToRoute, and add token to local storage', async () => {
     const store = mockStore();
     const fakeUser : AuthData = {email: 'test@mail.ru', password: '123'};
 
@@ -86,7 +86,7 @@ describe('Async actions', () => {
 
     expect(actions).toEqual([
       loginAction.pending.type, // 'user/checkAuth/pending'
-      requireAutorization.type, // 'USER/requireAutorization'
+      setAutorizationStatus.type, // 'USER/setAutorizationStatus'
       redirectToRoute.type, // 'game/redirectToRoute'
       loginAction.fulfilled.type, // 'user/checkAuth/fulfilled'
     ]);
@@ -96,7 +96,7 @@ describe('Async actions', () => {
 
   });
 
-  it('logoutAction api action should dispath requireAutorization and clean localStorage', async () => {
+  it('logoutAction api action should dispath setAutorizationStatus and clean localStorage', async () => {
     const store = mockStore();
 
     Storage.prototype.removeItem = jest.fn();
@@ -113,7 +113,7 @@ describe('Async actions', () => {
 
     expect(actions).toEqual([
       logoutAction.pending.type, // 'user/checkAuth/pending'
-      requireAutorization.type, // 'USER/requireAutorization'
+      setAutorizationStatus.type, // 'USER/setAutorizationStatus'
       logoutAction.fulfilled.type, // 'user/checkAuth/fulfilled'
     ]);
 

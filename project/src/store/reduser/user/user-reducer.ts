@@ -14,10 +14,10 @@ export const userReducer = createSlice({
   name: StoreNames.User,
   initialState: initialUserState,
   reducers: {
-    requireAutorization : (state, action) => {
+    setAutorizationStatus : (state, action) => {
       state.autorizationStatus = action.payload;
     }
   },
 });
 
-export const {requireAutorization} = userReducer.actions;
+export const {setAutorizationStatus} = userReducer.actions;
