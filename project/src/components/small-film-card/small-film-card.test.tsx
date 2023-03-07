@@ -57,5 +57,3 @@ describe('SmallFilmCard Component tests', () => {
 
   });
 });
-
-export {};
