@@ -13,13 +13,13 @@ function FilmList({films, filmsShownCount = films.length}: FilmListProps): JSX.E
 
   // const shownList = films.slice(0, filmsShownCount);
 
-  const stableShounList = useMemo(()=> films.slice(0, filmsShownCount), [filmsShownCount, films]); // сохраняем стабильную версию shownList-а
+  const stableShownList = useMemo(()=> films.slice(0, filmsShownCount), [filmsShownCount, films]); // сохраняем стабильную версию shownList-а
 
   return (
 
     <div className="catalog__films-list" >
       {
-        stableShounList.map((film : Film) : JSX.Element => (
+        stableShownList.map((film : Film) : JSX.Element => (
           <SmallFilmCard film = {film} key = {film.id}/>
         ))
       }
