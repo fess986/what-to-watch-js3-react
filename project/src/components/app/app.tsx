@@ -31,6 +31,7 @@ function App({reviews} : AppProps): JSX.Element {
 
   const films : Film[] = useAppSelector(getFilmList);
   const authStatus = useAppSelector(getAuthStatus);
+
   // dispatch(fetchFilmsAction());
 
   // const filmListAPI = useAppSelector(getFilmList);

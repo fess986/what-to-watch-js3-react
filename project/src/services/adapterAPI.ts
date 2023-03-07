@@ -17,7 +17,7 @@ export const adaptFilmAPItoProject = (film : any) : Film => {
     director: film.director,
     genre: film.genre,
     id: film.id,
-    isFavorite: film.isFavorite,
+    isFavorite: film.is_favorite,
     name: film.name,
     posterImage: film.poster_image,
     previewImage: film.preview_image,
