@@ -1,17 +1,17 @@
 import { userReducer } from './user-reducer';
-import { requireAutorization, initialUserState } from './user-reducer';
+import { setAutorizationStatus, initialUserState } from './user-reducer';
 import { AuthStatus, StoreNames } from '../../../const/const';
 
 describe('userReducer tests', () => {
 
-  describe('requireAutorization action tests', () => {
+  describe('setAutorizationStatus action tests', () => {
 
     test('type as string test', () => {
-      expect(userReducer.reducer(initialUserState, {type: `${StoreNames.User}/requireAutorization`, payload: AuthStatus.Auth})).toEqual({ autorizationStatus : AuthStatus.Auth });
+      expect(userReducer.reducer(initialUserState, {type: `${StoreNames.User}/setAutorizationStatus`, payload: AuthStatus.Auth})).toEqual({ autorizationStatus : AuthStatus.Auth });
     });
 
     test('action-object test', () => {
-      expect(userReducer.reducer(initialUserState, requireAutorization(AuthStatus.NoAuth))).toEqual({ autorizationStatus : AuthStatus.NoAuth });
+      expect(userReducer.reducer(initialUserState, setAutorizationStatus(AuthStatus.NoAuth))).toEqual({ autorizationStatus : AuthStatus.NoAuth });
     });
 
     test('testing with empty state, and wrong type. Should return initState state', () => {

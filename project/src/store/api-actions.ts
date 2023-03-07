@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import {saveToken, removeToken} from '../services/token';
 // import { store } from '.';
 // import {loadFilms, loadActiveFilm} from './reduser/films/films-reducer'; // мы не можем использовать экшены из films-reducer, так как туда мы отсылаем часть данных и получаем лексическую ошибку декларации
-import {requireAutorization} from './reduser/user/user-reducer';
+import {setAutorizationStatus} from './reduser/user/user-reducer';
 import {redirectToRoute} from './action';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -53,10 +53,10 @@ export const checkAuthStatusAction = createAsyncThunk<void, undefined, createAsy
   async (_arg, {dispatch, extra: api}) => {
     try {
       await api.get(AppRouteAPI.LoginCheck);
-      dispatch(requireAutorization(AuthStatus.Auth));
+      dispatch(setAutorizationStatus(AuthStatus.Auth));
 
     } catch {
-      dispatch(requireAutorization(AuthStatus.NoAuth));
+      dispatch(setAutorizationStatus(AuthStatus.NoAuth));
     }
   },
 );
@@ -67,7 +67,7 @@ export const checkAuthStatusAction = createAsyncThunk<void, undefined, createAsy
 //     async ({email, password}, {dispatch, extra: api}) => {
 //       const {data: {token}} = await api.post<UserData>(AppRouteAPI.LoginPost, {email, password});
 //       saveToken(token);
-//       dispatch(requireAutorization(AuthStatus.Auth));
+//       dispatch(setAutorizationStatus(AuthStatus.Auth));
 //     },
 //   );
 
@@ -77,7 +77,7 @@ export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProp
   async (requestData, {dispatch, extra: api}) => {
     const responseData = await api.post<UserData>(AppRouteAPI.LoginPost, requestData);
     saveToken(responseData.data.token);
-    dispatch(requireAutorization(AuthStatus.Auth));
+    dispatch(setAutorizationStatus(AuthStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Main));
   },
 );
@@ -87,7 +87,7 @@ export const logoutAction = createAsyncThunk<void, undefined, createAsyncThunkPr
   async (_, {dispatch, extra: api}) => {
     await api.delete(AppRouteAPI.Logout);
     removeToken();
-    dispatch(requireAutorization(AuthStatus.NoAuth));
+    dispatch(setAutorizationStatus(AuthStatus.NoAuth));
   },
 );
 
