@@ -16,28 +16,27 @@ import UserBlock from '../../components/user-block/user-block';
 import Loading from '../../components/Loading/loading';
 
 import { getFilmList, getActiveFilm } from '../../store/reduser/films/films-selectors';
+import {getReviewsList} from '../../store/reduser/reviews/reviews-selectors';
 import { getIsActiveFilmLoaded } from '../../store/reduser/app/app-selectors';
 import { useAppSelector } from '../../hooks';
 import { fetchActiveFilmAction } from '../../store/api-actions';
+import { fetchReviews } from '../../store/api-actions';
 
 import { FILM_MENU, AuthStatus } from '../../const/const';
 import { Film, Review } from '../../types/films';
 
-type FilmProps = {
-  reviews: Review[];
-}
-
-function FilmCard(props : FilmProps): JSX.Element {
+function FilmCard(): JSX.Element {
   const dispatch = useAppDispatch();
   const idParam = useParams().id;
   const id = Number(useParams().id) ?? 1;
-  // dispatch(fetchActiveFilmAction(id));
   const isFilmLoaded = useAppSelector(getIsActiveFilmLoaded);
   const films = useAppSelector(getFilmList);
+  const reviews = useAppSelector(getReviewsList) as Review[];
   const film = useAppSelector(getActiveFilm) as Film; // воспользуемся приведением типа, для того чтобы TS не ругался на нас, когда мы пробуем деструкторизировать film, который может оказаться null. На самом деле, если там будет null,  мы рендерим заглушку и до самой деструкторизации дело не дойдет
 
   useEffect(() => {
     dispatch(fetchActiveFilmAction(id));
+    dispatch(fetchReviews(id));
   }, [id, dispatch]);
 
   if (!isFilmLoaded) {
@@ -46,7 +45,6 @@ function FilmCard(props : FilmProps): JSX.Element {
     );
   }
 
-  const {reviews} = props;
   const {backgroundImage, name, genre, posterImage} = film;
 
   return (

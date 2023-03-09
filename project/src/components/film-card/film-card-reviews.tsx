@@ -2,12 +2,16 @@
 import React from 'react';
 import { Review } from '../../types/films';
 import FilmReview from './review/review';
+import { useAppSelector } from '../../hooks';
+import {getReviewsLoadedStatus} from '../../store/reduser/reviews/reviews-selectors';
 
 type FilmReviewsProps = {
   reviews : Review[];
 }
 
 function FilmReviews(props: FilmReviewsProps): JSX.Element {
+
+  const isReviewsLoaded = useAppSelector(getReviewsLoadedStatus);
 
   const {reviews} = props;
 
@@ -22,18 +26,22 @@ function FilmReviews(props: FilmReviewsProps): JSX.Element {
   };
 
   return (
-    <div className="film-card__reviews film-card__row">
-      <div className="film-card__reviews-col">
+    ((isReviewsLoaded === true) && (reviews.length !== 0))
+      ?
+      <div className="film-card__reviews film-card__row">
+        <div className="film-card__reviews-col">
 
-        {getReviews(0, firstColEnd)}
+          {getReviews(0, firstColEnd)}
 
+        </div>
+        <div className="film-card__reviews-col">
+
+          {getReviews(firstColEnd, reviews.length)}
+
+        </div>
       </div>
-      <div className="film-card__reviews-col">
-
-        {getReviews(firstColEnd, reviews.length)}
-
-      </div>
-    </div>
+      :
+      <h1>No reviews!!!</h1>
   );
 }
 

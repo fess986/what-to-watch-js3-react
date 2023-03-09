@@ -11,7 +11,6 @@ function FilmReview(props : FilmReviewProps): JSX.Element {
   const {review} = props;
   const {comment, user, rating, date} = review;
 
-
   const calculatedDate = parseCommentDate(date);
 
   return (
