@@ -1,15 +1,14 @@
 import { AxiosInstance } from 'axios';
 
 import {saveToken, removeToken} from '../services/token';
-// import { store } from '.';
 // import {loadFilms, loadActiveFilm} from './reduser/films/films-reducer'; // мы не можем использовать экшены из films-reducer, так как туда мы отсылаем часть данных и получаем лексическую ошибку декларации
 import {setAutorizationStatus} from './reduser/user/user-reducer';
 import {redirectToRoute} from './action';
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-// import { ThunkActionResult } from '../types/state';
 import {AuthData, UserData} from '../types/user';
+import { Review } from '../types/films';
 import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute, ActionTypesAPI} from '../const/const';
 
 // вариант без создания createAsyncThunk
@@ -34,6 +33,21 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
       const {data} = await api.get(AppRouteAPI.Films);
       // dispatch(setIsFilmsLoaded(true));  // перенесено в appSlice
       // dispatch(loadFilms(adaptAllFilmAPItoProject(data))); // перенесено в filmsSlice
+      return data;
+    },
+  );
+
+export const fetchReviews = createAsyncThunk<Review[], number, { // void - в данном случае тип возврата из функции, undefined - тип передаваемого аргумента _arg
+    dispatch: AppDispatch,
+    state: State,
+    extra: AxiosInstance
+  }>(
+    ActionTypesAPI.FETCH_REVIEWS,
+    async (id, {dispatch, extra: api}) => {
+      // dispatch(changeReviewsLoadedStatus(false));
+      const {data} = await api.get(`${AppRouteAPI.Comments}${id}`);
+      // dispatch(loadReviews(data));
+      // dispatch(changeReviewsLoadedStatus(true));
       return data;
     },
   );
