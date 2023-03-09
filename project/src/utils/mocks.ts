@@ -8,5 +8,3 @@ export const fakerObject = {
   internet: internet.avatar(),
   date: faker.datatype.datetime(),
 };
-
-export {};
