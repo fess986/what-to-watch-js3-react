@@ -6,10 +6,10 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import App from './app';
 import HistoryRouter from '../history-route/history-route';
 import { AppRoute } from '../../const/const';
-import { Reviews } from '../../mocks/reviews-mock';
 import { initialAppState } from '../../store/reduser/app/app-reducer';
 import { InitialFilmsState } from '../../store/reduser/films/films-reducer';
 import { initialUserState } from '../../store/reduser/user/user-reducer';
+import { InitialReviewsState } from '../../store/reduser/reviews/reviews-reducer';
 import { StoreNames } from '../../const/const';
 import createAPI from '../../services/api';
 import thunk from 'redux-thunk';
@@ -27,12 +27,13 @@ const store = mockStore({
   [StoreNames.App] : initialAppState,
   [StoreNames.User] : initialUserState,
   [StoreNames.Films] : InitialFilmsState,
+  [StoreNames.Reviews] : InitialReviewsState,
 });
 
 const fakeApp = (
   <Provider store={store}>
     <HistoryRouter history={history}>
-      <App reviews={Reviews}/>
+      <App />
     </HistoryRouter>
   </Provider>
 );
@@ -85,6 +86,5 @@ describe('App Component testing', () => {
 
     expect(screen.getByRole('link')).toBeInTheDocument(); // Попадаем на страницу 404 со ссылкой на главную
   });
-
 
 });

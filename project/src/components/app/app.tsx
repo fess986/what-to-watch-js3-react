@@ -9,7 +9,7 @@ import PrivateRouteElement from '../private-route/private-route';
 
 // импорт констант и типов
 import { AppRoute } from '../../const/const';
-import { Film, Review } from '../../types/films';
+import { Film } from '../../types/films';
 
 // импорт страниц
 // стартовые
@@ -21,11 +21,7 @@ import Player from '../../pages/player/player';
 import Page404 from '../../pages/page404/page404';
 import SignIn from '../../pages/sign-in/sign-in';
 
-type AppProps = {
-  reviews: Review[],
-}
-
-function App({reviews} : AppProps): JSX.Element {
+function App(): JSX.Element {
 
   // const dispatch = useAppDispatch();
 
