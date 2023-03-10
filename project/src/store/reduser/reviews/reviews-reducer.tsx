@@ -2,16 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { StoreNames } from '../../../const/const';
 import {Review} from '../../../types/films';
-import { fetchReviews } from '../../api-actions';
+import { fetchReviews, sendReviewAction } from '../../api-actions';
 
 export type InitialReviewsType = {
   reviewsList: Review[],
   isReviewsLoaded: boolean,
+  isReviewSending: boolean,
 }
 
 export const InitialReviewsState: InitialReviewsType = {
   reviewsList: [],
   isReviewsLoaded: false,
+  isReviewSending: false,
 };
 
 export const reviewsReducer = createSlice({
@@ -23,7 +25,10 @@ export const reviewsReducer = createSlice({
     },
     changeReviewsLoadedStatus : (state, action) => {
       state.isReviewsLoaded = action.payload;
-    }
+    },
+    changeReviewSendingStatus : (state, action) => {
+      state.isReviewSending = action.payload;
+    },
   },
   extraReducers(builder) { // сюда мы можем добавлять сторонние действия, например из других слайсов, из api-actions и обычных стандартных экшенов
     builder
@@ -33,6 +38,13 @@ export const reviewsReducer = createSlice({
       .addCase(fetchReviews.fulfilled, (state, action) => {
         state.reviewsList = action.payload;
         state.isReviewsLoaded = true;
+      })
+      .addCase(sendReviewAction.pending, (state, action) => {
+        state.isReviewSending = true;
+      })
+      .addCase(sendReviewAction.fulfilled, (state, action) => {
+        state.reviewsList = action.payload;
+        state.isReviewSending = false;
       });
 
   },

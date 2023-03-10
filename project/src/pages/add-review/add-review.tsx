@@ -13,8 +13,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import {getActiveFilm} from '../../store/reduser/films/films-selectors';
 import { getIsActiveFilmLoaded } from '../../store/reduser/app/app-selectors';
 import { appRouteWithId, INITIAL_COUNT_STARS_COUNT, MINIMUM_CHARACTERS_COUNT, MAXIMUM_CHARACTERS_COUNT } from '../../const/const';
-import { fetchActiveFilmAction } from '../../store/api-actions';
+import { fetchActiveFilmAction, sendReviewAction } from '../../store/api-actions';
 import { Film } from '../../types/films';
+import { CommentPost } from '../../types/films';
 
 function AddReview(): JSX.Element {
 
@@ -29,6 +30,12 @@ function AddReview(): JSX.Element {
   const film = useAppSelector(getActiveFilm) as Film;
 
   const previewPlaceholder = `Review text (${MINIMUM_CHARACTERS_COUNT}-${MAXIMUM_CHARACTERS_COUNT} characters)`;
+
+  const comment : CommentPost = {
+    id : reviewID,
+    rating: starCount,
+    comment: reviewMessage
+  };
 
   useEffect(() => {
     dispatch(fetchActiveFilmAction(reviewID));
@@ -99,7 +106,11 @@ function AddReview(): JSX.Element {
             >
             </textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" disabled = {postDisabled}>Post</button>
+              <button className="add-review__btn" type="submit" disabled = {postDisabled}onClick={ () =>{
+                dispatch(sendReviewAction(comment));
+              }}
+              >Post
+              </button>
             </div>
 
           </div>

@@ -79,7 +79,8 @@ export enum ActionTypesAPI {
   LOGIN = 'user/login',
   LOGOUT = 'user/logout',
   CLEAR_ERROR = 'app/clearError',
-  FETCH_REVIEWS = 'reviews/fetchReviews'
+  FETCH_REVIEWS = 'reviews/fetchReviews',
+  POST_COMMENT = 'reviews/postReviews',
 }
 
 
