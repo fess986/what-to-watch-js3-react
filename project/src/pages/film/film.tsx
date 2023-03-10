@@ -23,7 +23,7 @@ import { useAppSelector } from '../../hooks';
 import { fetchActiveFilmAction } from '../../store/api-actions';
 import { fetchReviews } from '../../store/api-actions';
 
-import { FILM_MENU, AuthStatus } from '../../const/const';
+import { FILM_MENU } from '../../const/const';
 import { Film, Review } from '../../types/films';
 
 function FilmCard(): JSX.Element {

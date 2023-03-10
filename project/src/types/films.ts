@@ -28,3 +28,9 @@ export type Review = {
     comment: string,
     date: string,
 }
+
+export type CommentPost = {
+  id : number,
+  rating: number,
+  comment: string
+}

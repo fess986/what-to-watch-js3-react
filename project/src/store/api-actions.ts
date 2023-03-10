@@ -8,7 +8,7 @@ import {redirectToRoute} from './action';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import {AuthData, UserData} from '../types/user';
-import { Review } from '../types/films';
+import { Review, CommentPost } from '../types/films';
 import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute, ActionTypesAPI} from '../const/const';
 
 // вариант без создания createAsyncThunk
@@ -37,7 +37,7 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
     },
   );
 
-export const fetchReviews = createAsyncThunk<Review[], number, { // void - в данном случае тип возврата из функции, undefined - тип передаваемого аргумента _arg
+export const fetchReviews = createAsyncThunk<Review[], number, { // Review[] - в данном случае тип возврата из функции, number - тип передаваемого аргумента id
     dispatch: AppDispatch,
     state: State,
     extra: AxiosInstance
@@ -93,6 +93,19 @@ export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProp
     saveToken(responseData.data.token);
     dispatch(setAutorizationStatus(AuthStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Main));
+  },
+);
+
+export const sendReviewAction = createAsyncThunk<Review[], CommentPost, createAsyncThunkProps
+>(
+  ActionTypesAPI.POST_COMMENT,
+  async (requestData, {dispatch, extra: api}) => {
+    const {data} = await api.post(`${AppRouteAPI.CommentsPost}${requestData.id}`, {
+      'rating': requestData.rating,
+      'comment': requestData.comment,
+    });
+
+    return data;
   },
 );
 
