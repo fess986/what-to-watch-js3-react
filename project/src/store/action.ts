@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 // import { Film } from '../types/films';
-import { AppRoute } from '../const/const';
+import { AppRoute, AppRouteWithId } from '../const/const';
 
 export enum ActionTypes {
   /* CHANGE_GENRE = 'APP/changeGenre', // app-reducer
@@ -18,7 +18,7 @@ export enum ActionTypes {
   REDIRECT_TO_ROUTE = 'game/redirectToRoute', // используем в MW - перехватываем этот тип
 }
 
-export const redirectToRoute = createAction<AppRoute>(ActionTypes.REDIRECT_TO_ROUTE); // использукм AppRoute в качестве типа
+export const redirectToRoute = createAction<AppRoute | AppRouteWithId>(ActionTypes.REDIRECT_TO_ROUTE); // использукм AppRoute в качестве типа
 
 // !!!!!!!!!!!!!!!!
 // данные экшены нам больше не нужны, так как мы перешли на slices, в которых экшены создаются сразу в редьюсеры, и получают имена по названию

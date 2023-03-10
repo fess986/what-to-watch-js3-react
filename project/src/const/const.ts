@@ -37,7 +37,9 @@ export enum AppRouteAPI {
 
 type appRouteWithIdProps = keyof (typeof AppRoute);
 
-export function appRouteWithId(line : appRouteWithIdProps, id: number|string|undefined) {
+export type AppRouteWithId = string;
+
+export function appRouteWithId(line : appRouteWithIdProps, id: number|string|undefined) :AppRouteWithId {
   let finalString: string;
 
   if (line === 'Film') {

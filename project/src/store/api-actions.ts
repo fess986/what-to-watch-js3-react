@@ -9,7 +9,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import {AuthData, UserData} from '../types/user';
 import { Review, CommentPost } from '../types/films';
-import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute, ActionTypesAPI} from '../const/const';
+import { AppRouteAPI, AuthStatus, ERROR_TIMEOUT, AppRoute, ActionTypesAPI, appRouteWithId} from '../const/const';
 
 // вариант без создания createAsyncThunk
 // export const fetchFilms = () : ThunkActionResult<void> =>
@@ -104,6 +104,8 @@ export const sendReviewAction = createAsyncThunk<Review[], CommentPost, createAs
       'rating': requestData.rating,
       'comment': requestData.comment,
     });
+
+    dispatch(redirectToRoute(appRouteWithId('Film', requestData.id)));
 
     return data;
   },
