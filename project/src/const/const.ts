@@ -1,3 +1,17 @@
+
+export const ALL_GENRES = 'All genres';
+export const GENRES_SHOWN_NUMBER = 9;
+
+export const FILMS_COUNT_ON_START = 6;
+export const SHOW_MORE_FILMS_COUNT = 1;
+
+export const ERROR_TIMEOUT = 2000;
+export const TIMEOUT_API = 5000;
+
+export const INITIAL_COUNT_STARS_COUNT = 5;
+export const MINIMUM_CHARACTERS_COUNT = 50;
+export const MAXIMUM_CHARACTERS_COUNT = 400;
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -68,16 +82,4 @@ export enum ActionTypesAPI {
   FETCH_REVIEWS = 'reviews/fetchReviews'
 }
 
-
-export const ALL_GENRES = 'All genres';
-
-export const GENRES_SHOWN_NUMBER = 9;
-
-export const FILMS_COUNT_ON_START = 6;
-
-export const SHOW_MORE_FILMS_COUNT = 1;
-
-export const ERROR_TIMEOUT = 2000;
-
-export const TIMEOUT_API = 5000;
 

@@ -12,20 +12,23 @@ import Loading from '../../components/Loading/loading';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {getActiveFilm} from '../../store/reduser/films/films-selectors';
 import { getIsActiveFilmLoaded } from '../../store/reduser/app/app-selectors';
-import { appRouteWithId } from '../../const/const';
+import { appRouteWithId, INITIAL_COUNT_STARS_COUNT, MINIMUM_CHARACTERS_COUNT, MAXIMUM_CHARACTERS_COUNT } from '../../const/const';
 import { fetchActiveFilmAction } from '../../store/api-actions';
 import { Film } from '../../types/films';
 
 function AddReview(): JSX.Element {
-  const INITIAL_COUNT = 5;
-  const [starCount, setStarCount] = useState(INITIAL_COUNT);
+
+  const [starCount, setStarCount] = useState(INITIAL_COUNT_STARS_COUNT);
   const [reviewMessage, setReviewMessage] = useState('');
+  const [postDisabled, setPostDisabled] = useState(true);
 
   const dispatch = useAppDispatch();
   const reviewID = Number(useParams().id) ?? 1;
   const navigate : NavigateFunction = useNavigate();
   const isFilmLoaded = useAppSelector(getIsActiveFilmLoaded);
   const film = useAppSelector(getActiveFilm) as Film;
+
+  const previewPlaceholder = `Review text (${MINIMUM_CHARACTERS_COUNT}-${MAXIMUM_CHARACTERS_COUNT} characters)`;
 
   useEffect(() => {
     dispatch(fetchActiveFilmAction(reviewID));
@@ -83,14 +86,20 @@ function AddReview(): JSX.Element {
           />
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"
+            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder={previewPlaceholder}
               onChange={(evt) => {
                 setReviewMessage(evt.target.value);
+
+                if ((reviewMessage.length > MINIMUM_CHARACTERS_COUNT) && (reviewMessage.length < MAXIMUM_CHARACTERS_COUNT)) {
+                  setPostDisabled(false);
+                } else {
+                  setPostDisabled(true);
+                }
               }}
             >
             </textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" disabled = {reviewMessage === ''}>Post</button>
+              <button className="add-review__btn" type="submit" disabled = {postDisabled}>Post</button>
             </div>
 
           </div>
