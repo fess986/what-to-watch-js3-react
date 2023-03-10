@@ -18,6 +18,7 @@ import Loading from '../../components/Loading/loading';
 import { getFilmList, getActiveFilm } from '../../store/reduser/films/films-selectors';
 import {getReviewsList} from '../../store/reduser/reviews/reviews-selectors';
 import { getIsActiveFilmLoaded } from '../../store/reduser/app/app-selectors';
+import { getAuthStatus } from '../../store/reduser/user/user-selectors';
 import { useAppSelector } from '../../hooks';
 import { fetchActiveFilmAction } from '../../store/api-actions';
 import { fetchReviews } from '../../store/api-actions';
@@ -33,6 +34,7 @@ function FilmCard(): JSX.Element {
   const films = useAppSelector(getFilmList);
   const reviews = useAppSelector(getReviewsList) as Review[];
   const film = useAppSelector(getActiveFilm) as Film; // воспользуемся приведением типа, для того чтобы TS не ругался на нас, когда мы пробуем деструкторизировать film, который может оказаться null. На самом деле, если там будет null,  мы рендерим заглушку и до самой деструкторизации дело не дойдет
+  const isAuth = useAppSelector(getAuthStatus);
 
   useEffect(() => {
     dispatch(fetchActiveFilmAction(id));
@@ -78,7 +80,7 @@ function FilmCard(): JSX.Element {
 
                 <PlayButton id={idParam}/>
                 <MyListButton />
-                {AuthStatus.Auth === 'AUTH' ? <AddReviewButton /> : ''}
+                {isAuth === 'AUTH' ? <AddReviewButton /> : ''}
 
 
               </div>
