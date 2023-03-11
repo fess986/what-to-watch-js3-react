@@ -119,6 +119,22 @@ describe('Testing of reviews reducer', () => {
 
     });
 
+    describe('sendReviewAction.fullfiled action tests', () => {
+
+      it('normal action work', () => {
+        expect(reviewsReducer.reducer({...InitialReviewsState, isReviewSending : true}, {type : sendReviewAction.fulfilled.type, payload: reviews})).toEqual({...InitialReviewsState, isReviewSending : false, reviewsList: reviews});
+      });
+
+      it('string action', () => {
+        expect(reviewsReducer.reducer({...InitialReviewsState, isReviewSending : true}, {type: 'reviews/postReviews/fulfilled', payload: reviews})).toEqual({...InitialReviewsState, isReviewSending : false, reviewsList: reviews});
+      });
+
+      it('should change only isReviewSending and reviewsList field', () => {
+        expect(reviewsReducer.reducer({...InitialReviewsState, isReviewSending : true, isReviewsLoaded: true, reviewsList: []}, {type : sendReviewAction.fulfilled.type, payload: reviews})).toEqual({...InitialReviewsState, isReviewSending : false, isReviewsLoaded: true, reviewsList: reviews});
+      });
+
+    });
+
   });
 
 });
