@@ -24,15 +24,10 @@ function Main(): JSX.Element {
   const genre = useAppSelector(getGenre);
   const filmsShownCount = useAppSelector(getfilmsShownCount);
   const films = useAppSelector(getFilmList);
-
-  //const ass = useSelector(getFilteredFilmList('ass', 'ass'))
-  // console.log(ass)
-
   const filteredFilms = useAppSelector(getFilteredFilmList);
 
   const showMoreButtonHandler = () => {
-    // dispatch(addFilms());
-    console.log(dispatch(addFilms()))
+    dispatch(addFilms());
   };
 
   const genreClickHandler = (filmGenre : string) => {

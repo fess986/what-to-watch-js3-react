@@ -40,8 +40,7 @@ function FilmCard(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchActiveFilmAction(id));
-    //dispatch(fetchReviews(id));
-    console.log(dispatch(fetchReviews(id)))
+    dispatch(fetchReviews(id));
     dispatch(fetchSimilarFilms(id));
 
     // диспатч возвращает промис,
@@ -91,6 +90,7 @@ function FilmCard(): JSX.Element {
               <div className="film-card__buttons">
 
                 <PlayButton id={idParam}/>
+
                 <MyListButton />
                 {isAuth === 'AUTH' ? <AddReviewButton /> : ''}
 
