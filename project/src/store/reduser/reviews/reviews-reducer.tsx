@@ -64,4 +64,4 @@ export const reviewsReducer = createSlice({
   },
 });
 
-export const { loadReviews, changeReviewsLoadedStatus } = reviewsReducer.actions;
+export const { loadReviews, changeReviewsLoadedStatus, changeReviewSendingStatus } = reviewsReducer.actions;
