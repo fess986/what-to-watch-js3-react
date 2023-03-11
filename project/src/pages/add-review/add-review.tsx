@@ -12,7 +12,7 @@ import Loading from '../../components/Loading/loading';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {getActiveFilm} from '../../store/reduser/films/films-selectors';
 import { getIsActiveFilmLoaded } from '../../store/reduser/app/app-selectors';
-import {getReviewsLoadedStatus} from '../../store/reduser/reviews/reviews-selectors';
+import {getReviewsSendingStatus} from '../../store/reduser/reviews/reviews-selectors';
 import { appRouteWithId, INITIAL_COUNT_STARS_COUNT, MINIMUM_CHARACTERS_COUNT, MAXIMUM_CHARACTERS_COUNT } from '../../const/const';
 import { fetchActiveFilmAction, sendReviewAction } from '../../store/api-actions';
 import { Film } from '../../types/films';
@@ -29,7 +29,7 @@ function AddReview(): JSX.Element {
   const isFilmLoaded = useAppSelector(getIsActiveFilmLoaded);
   const film = useAppSelector(getActiveFilm) as Film;
 
-  const formBloked = useAppSelector(getReviewsLoadedStatus);
+  const formBloked = useAppSelector(getReviewsSendingStatus);
 
   const previewPlaceholder = `Review text (${MINIMUM_CHARACTERS_COUNT}-${MAXIMUM_CHARACTERS_COUNT} characters)`;
 
