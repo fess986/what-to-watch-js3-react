@@ -1,4 +1,4 @@
-import {loadReviews, changeReviewsLoadedStatus } from './reviews-reducer';
+import {loadReviews, changeReviewsLoadedStatus, changeReviewSendingStatus } from './reviews-reducer';
 import { StoreNames } from '../../../const/const';
 import {Reviews} from '../../../mocks/reviews-mock';
 import {fetchReviews} from '../../api-actions';
@@ -55,9 +55,23 @@ describe('Testing of reviews reducer', () => {
       it('should change only isReviewsLoaded field', () => {
         expect(reviewsReducer.reducer({...InitialReviewsState, reviewsList : reviews} , changeReviewsLoadedStatus(true))).toEqual({ ...InitialReviewsState, reviewsList : reviews, isReviewsLoaded : true });
       });
-
-
     });
+
+    describe('testing of changeReviewSendingStatus action', () => {
+
+      it('testing with action-object', () => {
+        expect(reviewsReducer.reducer(InitialReviewsState , {type: `${StoreNames.Reviews}/changeReviewSendingStatus`, payload:true})).toEqual({ ...InitialReviewsState, isReviewSending : true });
+      });
+
+      it('testing with object', () => {
+        expect(reviewsReducer.reducer(InitialReviewsState , changeReviewSendingStatus(true))).toEqual({ ...InitialReviewsState, isReviewSending : true });
+      });
+
+      it('should change only isReviewSending field', () => {
+        expect(reviewsReducer.reducer({...InitialReviewsState, reviewsList : reviews} , changeReviewSendingStatus(true))).toEqual({ ...InitialReviewsState, reviewsList : reviews, isReviewSending : true });
+      });
+    });
+
   });
 
   describe('extra reducers tests', () => {
@@ -88,55 +102,9 @@ describe('Testing of reviews reducer', () => {
         expect(reviewsReducer.reducer({...InitialReviewsState}, {type : 'reviews/fetchReviews/fulfilled', payload: reviews})).toEqual({...InitialReviewsState, reviewsList: reviews, isReviewsLoaded : true});
       });
 
-      // it('string action', () => {
-      //   expect(reviewsReducer.reducer({...InitialReviewsState, isReviewsLoaded : true}, {type: 'reviews/fetchReviews/pending'})).toEqual({...InitialReviewsState, isReviewsLoaded : false});
-      // });
-
-      // it('should change only isReviewsLoaded field', () => {
-      //   expect(reviewsReducer.reducer({...InitialReviewsState, isReviewsLoaded : true, reviewsList: reviews}, {type : fetchReviews.pending.type})).toEqual({...InitialReviewsState, isReviewsLoaded : false, reviewsList: reviews});
-      // });
-
     });
 
 
   });
 
 });
-
-//   // проверка экшена fetchFilmsAction.fulfilled
-//   describe('testing of fetchFilmsAction.fulfilled action', () => {
-
-//     // передаем в payload, и должны получить пустой массив
-//     it('testing with action-object', () => {
-//       expect(filmsReducer.reducer(InitialFilmsState , {type: 'films/fetchFilms/fulfilled', payload: null})).toEqual(InitialFilmsState);
-//     });
-
-//     // передаем тип экшена через его статус fetchFilmsAction.fulfilled, так как это промис
-//     it('testing with object', () => {
-//       expect(filmsReducer.reducer(InitialFilmsState , {type: fetchFilmsAction.fulfilled.type, payload: null})).toEqual(InitialFilmsState);
-//     });
-
-//     it('should change only filmList field', () => {
-//       expect(filmsReducer.reducer({...InitialFilmsState, activeFIlm: Films[0]} , {type: fetchFilmsAction.fulfilled.type, payload: null})).toEqual({ filmList: [], activeFIlm: Films[0] });
-//     });
-
-//   });
-
-//   // проверка экшена fetchActiveFilmAction.fulfilled
-//   describe('testing of fetchActiveFilmAction.fulfilled action', () => {
-
-//     // передаем в payload, и должны получить пустой массив
-//     it('testing with action-object', () => {
-//       expect(filmsReducer.reducer(InitialFilmsState , {type: 'films/fetchActiveFilm/fulfilled', payload: Films[0]})).toEqual({ filmList: [], activeFIlm: Films[0] });
-//     });
-
-//     it('testing with object', () => {
-//       expect(filmsReducer.reducer(InitialFilmsState , {type: fetchActiveFilmAction.fulfilled.type, payload: Films[0]})).toEqual({ filmList: [], activeFIlm: Films[0] });
-//     });
-
-//     it('should change only filmList field', () => {
-//       expect(filmsReducer.reducer({...InitialFilmsState, filmList: Films} , {type: fetchActiveFilmAction.fulfilled.type, payload: Films[0]})).toEqual({ filmList: Films, activeFIlm: Films[0] });
-//     });
-
-//   });
-// });
