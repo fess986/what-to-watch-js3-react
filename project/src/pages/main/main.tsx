@@ -31,7 +31,8 @@ function Main(): JSX.Element {
   const filteredFilms = useAppSelector(getFilteredFilmList);
 
   const showMoreButtonHandler = () => {
-    dispatch(addFilms());
+    // dispatch(addFilms());
+    console.log(dispatch(addFilms()))
   };
 
   const genreClickHandler = (filmGenre : string) => {

@@ -23,6 +23,7 @@ type createAsyncThunkProps = {
   extra: AxiosInstance;
 }
 
+// скачиваем фильмы
 export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void - в данном случае тип возврата из функции, undefined - тип передаваемого аргумента _arg
     dispatch: AppDispatch,
     state: State,
@@ -37,7 +38,8 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
     },
   );
 
-export const fetchReviews = createAsyncThunk<Review[], number, { // Review[] - в данном случае тип возврата из функции, number - тип передаваемого аргумента id
+// скачиваем отзывы для текущего фильма
+  export const fetchReviews = createAsyncThunk<Review[], number, { // Review[] - в данном случае тип возврата из функции, number - тип передаваемого аргумента id
     dispatch: AppDispatch,
     state: State,
     extra: AxiosInstance
@@ -52,6 +54,16 @@ export const fetchReviews = createAsyncThunk<Review[], number, { // Review[] - �
     },
   );
 
+// скачиваем "похожие фильмы"
+export const fetchSimilarFilms = createAsyncThunk<unknown[], number, createAsyncThunkProps>(
+  ActionTypesAPI.FETCH_SIMILAR_FILMS,
+  async (id, {dispatch, extra: api}) => {
+    const fetchedData = await api.get(`${AppRouteAPI.Similar}${id}/similar`);
+    return fetchedData.data;
+  },
+);
+
+// скачиваем активный фильм
 export const fetchActiveFilmAction = createAsyncThunk<unknown, number, createAsyncThunkProps>(
   ActionTypesAPI.FETCH_ACTIVE_FILM,
   async (id, {dispatch, extra: api}) => { // в качестве _arg - передаваемые параметры
@@ -62,6 +74,7 @@ export const fetchActiveFilmAction = createAsyncThunk<unknown, number, createAsy
   },
 );
 
+// проверяем статус авторизации пользователя
 export const checkAuthStatusAction = createAsyncThunk<void, undefined, createAsyncThunkProps>(
   ActionTypesAPI.CHECK_AUTH_STATUS,
   async (_arg, {dispatch, extra: api}) => {
@@ -85,6 +98,7 @@ export const checkAuthStatusAction = createAsyncThunk<void, undefined, createAsy
 //     },
 //   );
 
+// логинимся в системе
 export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProps // AuthData - тип передаваемых данных, в данном случае {login, password}
 >(
   ActionTypesAPI.LOGIN,
@@ -96,6 +110,7 @@ export const loginAction = createAsyncThunk<void, AuthData, createAsyncThunkProp
   },
 );
 
+// отправляем отзыв, при этом получаем новый список отзывов
 export const sendReviewAction = createAsyncThunk<Review[], CommentPost, createAsyncThunkProps
 >(
   ActionTypesAPI.POST_COMMENT,

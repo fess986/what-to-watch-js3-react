@@ -11,6 +11,7 @@ type State = {
 
 // обычные селекторы
 export const getFilmList = (state : State) => state[StoreNames.Films].filmList;
+export const getSimilarFilmList = (state : State) => state[StoreNames.Films].similarFilmList;
 export const getActiveFilm = (state : State) => state[StoreNames.Films].activeFIlm;
 
 // // умные селекторы из библиотеки reselect
