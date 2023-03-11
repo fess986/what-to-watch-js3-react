@@ -91,6 +91,7 @@ describe('appReducer tests', () => {
 
   });
 
+
   describe('extra reducers tests', () => {
     describe('fetchActiveFilmAction.pending action tests', () => {
       it('normal action work', () => {

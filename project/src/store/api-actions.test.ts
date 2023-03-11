@@ -6,10 +6,13 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {State} from '../types/state';
 import { AppRouteAPI } from '../const/const';
 import { AuthData } from '../types/user';
-import { checkAuthStatusAction, loginAction, logoutAction, fetchFilmsAction, fetchActiveFilmAction } from './api-actions';
+import { checkAuthStatusAction, loginAction, logoutAction, fetchFilmsAction, fetchActiveFilmAction, sendReviewAction } from './api-actions';
 import { setAutorizationStatus } from './reduser/user/user-reducer';
 import { redirectToRoute } from './action';
 import { Films } from '../mocks/films-mock';
+import { CommentPost } from '../types/films';
+import { Reviews } from '../mocks/reviews-mock';
+
 // import { setAutorizationStatus } from './reduser/user/user-reducer';
 // import { AuthStatus } from '../const/const';
 
@@ -158,6 +161,31 @@ describe('Async actions', () => {
     expect(actions).toEqual([
       fetchActiveFilmAction.pending.type,
       fetchActiveFilmAction.fulfilled.type,
+    ]);
+
+  });
+
+  it('sendReviewAction api action should send data and redirectToRoute, and add token to local storage', async () => {
+    const store = mockStore();
+    const fakeComment : CommentPost = {comment: 'comment', id: 5, rating: 4};
+    const reviews = Reviews;
+
+    Storage.prototype.setItem = jest.fn();
+
+    mockAPI
+      .onPost(`${AppRouteAPI.CommentsPost}${fakeComment.id}`)
+      .reply(200, reviews);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(sendReviewAction(fakeComment));
+
+    const actions = store.getActions().map((action) => action.type);
+
+    expect(actions).toEqual([
+      sendReviewAction.pending.type,
+      redirectToRoute.type,
+      sendReviewAction.fulfilled.type,
     ]);
 
   });
