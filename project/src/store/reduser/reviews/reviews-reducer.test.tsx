@@ -1,7 +1,7 @@
 import {loadReviews, changeReviewsLoadedStatus, changeReviewSendingStatus } from './reviews-reducer';
 import { StoreNames } from '../../../const/const';
 import {Reviews} from '../../../mocks/reviews-mock';
-import {fetchReviews} from '../../api-actions';
+import {fetchReviews, sendReviewAction} from '../../api-actions';
 import { InitialReviewsState } from './reviews-reducer';
 import { reviewsReducer } from './reviews-reducer';
 
@@ -89,7 +89,6 @@ describe('Testing of reviews reducer', () => {
       it('should change only isReviewsLoaded field', () => {
         expect(reviewsReducer.reducer({...InitialReviewsState, isReviewsLoaded : true, reviewsList: reviews}, {type : fetchReviews.pending.type})).toEqual({...InitialReviewsState, isReviewsLoaded : false, reviewsList: reviews});
       });
-
     });
 
     describe('fetchReviews.fullfiled action tests', () => {
@@ -104,6 +103,21 @@ describe('Testing of reviews reducer', () => {
 
     });
 
+    describe('sendReviewAction.pending action tests', () => {
+
+      it('normal action work', () => {
+        expect(reviewsReducer.reducer({...InitialReviewsState, isReviewSending : false}, {type : sendReviewAction.pending.type})).toEqual({...InitialReviewsState, isReviewSending : true});
+      });
+
+      it('string action', () => {
+        expect(reviewsReducer.reducer({...InitialReviewsState, isReviewSending : false}, {type: 'reviews/postReviews/pending'})).toEqual({...InitialReviewsState, isReviewSending : true});
+      });
+
+      it('should change only isReviewSending field', () => {
+        expect(reviewsReducer.reducer({...InitialReviewsState, isReviewSending : false, reviewsList: reviews}, {type : sendReviewAction.pending.type})).toEqual({...InitialReviewsState, isReviewSending : true, reviewsList: reviews});
+      });
+
+    });
 
   });
 
