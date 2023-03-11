@@ -39,7 +39,7 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
   );
 
 // скачиваем отзывы для текущего фильма
-  export const fetchReviews = createAsyncThunk<Review[], number, { // Review[] - в данном случае тип возврата из функции, number - тип передаваемого аргумента id
+export const fetchReviews = createAsyncThunk<Review[], number, { // Review[] - в данном случае тип возврата из функции, number - тип передаваемого аргумента id
     dispatch: AppDispatch,
     state: State,
     extra: AxiosInstance
