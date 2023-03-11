@@ -24,7 +24,7 @@ export enum AppRoute {
 export enum AppRouteAPI {
   Films = '/films', // get - получение списка фильмов
   Film = '/films/', // get /films/:id - Получение фильма с идентификатором id .
-  Similar = '/films/', // get /films/: id/similar - Получение списка похожих фильмов.
+  Similar = '/films/', // get /films/: id/similar - Получение списка похожих фильмов. // нужны тесты
   Promo = '/promo', // get /promo - Получение промо-фильма.
   Favorite = '/favorite', // get - Получение списка фильмов «к просмотру».
   FavoritePost = '/favorite/', // post /favorite/: film_id/: status
@@ -83,6 +83,7 @@ export enum ActionTypesAPI {
   CLEAR_ERROR = 'app/clearError',
   FETCH_REVIEWS = 'reviews/fetchReviews',
   POST_COMMENT = 'reviews/postReviews',
+  FETCH_SIMILAR_FILMS = 'films/fetchSimilarFilms',
 }
 
 

@@ -9,6 +9,8 @@ export const getGenre = (state : State) => state[StoreNames.App].genre;
 
 export const getIsActiveFilmLoaded = (state : State) => state[StoreNames.App].isActiveFilmLoaded;
 
+export const getIsSimilarFilmsLoaded = (state : State) => state[StoreNames.App].isSimilarFilmsLoaded;
+
 export const getfilmsShownCount = (state : State) => state[StoreNames.App].filmsShownCount;
 
 export const getIsFilmsLoaded = (state : State) => state[StoreNames.App].isFilmsLoaded;

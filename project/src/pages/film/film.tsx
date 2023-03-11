@@ -15,13 +15,13 @@ import MoreLikeThisList from '../../components/more-like-this-list/more-like-thi
 import UserBlock from '../../components/user-block/user-block';
 import Loading from '../../components/Loading/loading';
 
-import { getFilmList, getActiveFilm } from '../../store/reduser/films/films-selectors';
+import { getActiveFilm, getSimilarFilmList } from '../../store/reduser/films/films-selectors';
 import {getReviewsList} from '../../store/reduser/reviews/reviews-selectors';
-import { getIsActiveFilmLoaded } from '../../store/reduser/app/app-selectors';
+import { getIsActiveFilmLoaded, getIsSimilarFilmsLoaded } from '../../store/reduser/app/app-selectors';
 import { getAuthStatus } from '../../store/reduser/user/user-selectors';
 import { useAppSelector } from '../../hooks';
 import { fetchActiveFilmAction } from '../../store/api-actions';
-import { fetchReviews } from '../../store/api-actions';
+import { fetchReviews, fetchSimilarFilms } from '../../store/api-actions';
 
 import { FILM_MENU } from '../../const/const';
 import { Film, Review } from '../../types/films';
@@ -30,16 +30,27 @@ function FilmCard(): JSX.Element {
   const dispatch = useAppDispatch();
   const idParam = useParams().id;
   const id = Number(useParams().id) ?? 1;
+  const isAuth = useAppSelector(getAuthStatus);
+  const similarFilms = useAppSelector(getSimilarFilmList);
   const isFilmLoaded = useAppSelector(getIsActiveFilmLoaded);
-  const films = useAppSelector(getFilmList);
+  const isSimilarFilmsLoaded = useAppSelector(getIsSimilarFilmsLoaded);
   const reviews = useAppSelector(getReviewsList) as Review[];
   const film = useAppSelector(getActiveFilm) as Film; // воспользуемся приведением типа, для того чтобы TS не ругался на нас, когда мы пробуем деструкторизировать film, который может оказаться null. На самом деле, если там будет null,  мы рендерим заглушку и до самой деструкторизации дело не дойдет
-  const isAuth = useAppSelector(getAuthStatus);
+
 
   useEffect(() => {
     dispatch(fetchActiveFilmAction(id));
     dispatch(fetchReviews(id));
+    dispatch(fetchSimilarFilms(id));
+
+    // диспатч возвращает промис,
+    // dispatch(fetchSimilarFilms(id)).then((action) => { // диспатч - промис, который передает нам данные из возврата fetchSimilarFilms, он создает поля type / payload для action.
+    //   console.log(action); // объект экшена с полями type / payload
+    //   return action;
+    // });
+
   }, [id, dispatch]);
+
 
   if (!isFilmLoaded) {
     return (
@@ -79,6 +90,7 @@ function FilmCard(): JSX.Element {
               <div className="film-card__buttons">
 
                 <PlayButton id={idParam}/>
+
                 <MyListButton />
                 {isAuth === 'AUTH' ? <AddReviewButton /> : ''}
 
@@ -120,7 +132,9 @@ function FilmCard(): JSX.Element {
 
           <div className="catalog__films-list">
 
-            <MoreLikeThisList film={films}/>
+            {isSimilarFilmsLoaded
+              ? <MoreLikeThisList film={similarFilms}/>
+              : <h1>No Similar Films</h1>}
 
           </div>
         </section>

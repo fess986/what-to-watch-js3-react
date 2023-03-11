@@ -3,15 +3,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import { StoreNames } from '../../../const/const';
 import {Film} from '../../../types/films';
 import {adaptAllFilmAPItoProject, adaptFilmAPItoProject} from '../../../services/adapterAPI';
-import { fetchFilmsAction, fetchActiveFilmAction } from '../../../store/api-actions';
+import { fetchFilmsAction, fetchActiveFilmAction, fetchSimilarFilms } from '../../../store/api-actions';
 
 export type InitialFilmsType = {
   filmList: Film[],
+  similarFilmList: Film[],
   activeFIlm: Film | null,
 }
 
 export const InitialFilmsState: InitialFilmsType = {
   filmList: [],
+  similarFilmList: [],
   activeFIlm: null,
 };
 
@@ -34,6 +36,9 @@ export const filmsReducer = createSlice({
       .addCase(fetchActiveFilmAction.fulfilled, (state, action) => { // тут может быть и самый обычный экшен, но мы используем api-action под названием fetchActiveFilmAction и обращаемся к его статусу fulfilled
         // console.log(action.payload);
         state.activeFIlm = adaptFilmAPItoProject(action.payload);
+      })
+      .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
+        state.similarFilmList = adaptAllFilmAPItoProject(action.payload);
       });
   },
 });

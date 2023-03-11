@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI} from '../../api-actions';
+import {fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI, fetchSimilarFilms} from '../../api-actions';
 import {toast} from 'react-toastify';
 
 import {StoreNames, ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../../../const/const';
@@ -9,6 +9,7 @@ export type InitialAppType = {
   isActiveFilmLoaded: boolean,
   filmsShownCount: number,
   isFilmsLoaded: boolean,
+  isSimilarFilmsLoaded: boolean,
   error: string | null,
 }
 
@@ -17,6 +18,7 @@ export const initialAppState : InitialAppType = {
   isActiveFilmLoaded: false,
   filmsShownCount: FILMS_COUNT_ON_START,
   isFilmsLoaded: false,
+  isSimilarFilmsLoaded: false,
   error: null,
 };
 
@@ -63,7 +65,18 @@ export const appReducer = createSlice({
       })
       .addCase(clearErrorActionAPI.fulfilled, (state) => {
         state.error = null;
+      })
+      .addCase(fetchSimilarFilms.pending, (state) => {
+        state.isSimilarFilmsLoaded = false;
+      })
+      .addCase(fetchSimilarFilms.fulfilled, (state) => {
+        state.isSimilarFilmsLoaded = true;
+      })
+      .addCase(fetchSimilarFilms.rejected, (state) => {
+        toast.warn('Ошибка загрузки похожих фильмов', {autoClose : 2000, draggable : true});
+        state.isSimilarFilmsLoaded = false;
       });
+
     // .addCase(sendReviewAction.rejected, (state, action) => {
     // дубль этого экшена из слайса review
     //   console.log('app', action.error.message);
