@@ -64,6 +64,12 @@ export const appReducer = createSlice({
       .addCase(clearErrorActionAPI.fulfilled, (state) => {
         state.error = null;
       });
+    // .addCase(sendReviewAction.rejected, (state, action) => {
+    // дубль этого экшена из слайса review
+    //   console.log('app', action.error.message);
+    //   state.error = 'ошибка при отправке сообщения';
+    //   toast.warn(state.error, {autoClose : 2000, draggable : true});
+    // })
   },
 
 });
