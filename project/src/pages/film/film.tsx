@@ -37,7 +37,6 @@ function FilmCard(): JSX.Element {
   const reviews = useAppSelector(getReviewsList) as Review[];
   const film = useAppSelector(getActiveFilm) as Film; // воспользуемся приведением типа, для того чтобы TS не ругался на нас, когда мы пробуем деструкторизировать film, который может оказаться null. На самом деле, если там будет null,  мы рендерим заглушку и до самой деструкторизации дело не дойдет
 
-
   useEffect(() => {
     dispatch(fetchActiveFilmAction(id));
     dispatch(fetchReviews(id));

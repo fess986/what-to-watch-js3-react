@@ -3,13 +3,11 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks';
-import { getFilmList } from '../../store/reduser/films/films-selectors';
 import { getAuthStatus } from '../../store/reduser/user/user-selectors';
 import PrivateRouteElement from '../private-route/private-route';
 
 // импорт констант и типов
 import { AppRoute } from '../../const/const';
-import { Film } from '../../types/films';
 
 // импорт страниц
 // стартовые
@@ -25,7 +23,6 @@ function App(): JSX.Element {
 
   // const dispatch = useAppDispatch();
 
-  const films : Film[] = useAppSelector(getFilmList);
   const authStatus = useAppSelector(getAuthStatus);
 
   // dispatch(fetchFilmsAction());
@@ -81,7 +78,7 @@ function App(): JSX.Element {
 
       <Route
         path={AppRoute.Player}
-        element={<Player films={films}/>}
+        element={<Player />}
       />
 
       <Route

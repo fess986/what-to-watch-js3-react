@@ -26,6 +26,7 @@ function Main(): JSX.Element {
   const films = useAppSelector(getFilmList);
   const filteredFilms = useAppSelector(getFilteredFilmList);
 
+
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
   };

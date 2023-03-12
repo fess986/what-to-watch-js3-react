@@ -5,23 +5,28 @@ import { useState, useEffect, useRef, SyntheticEvent, MouseEvent } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 
 import { Film } from '../../types/films';
+import { Films } from '../../mocks/films-mock';
 import {parseMinutes} from '../../utils/utils';
 import { appRouteWithId } from '../../const/const';
+import { getActiveFilm } from '../../store/reduser/films/films-selectors';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { fetchActiveFilmAction } from '../../store/api-actions';
 
-type PlayerProps = {
-  films : Film[];
-}
-
-function Player(props : PlayerProps): JSX.Element {
+function Player(): JSX.Element {
   const [isLoading, setIsloading] = useState(true);
   const [isPlaying, setIsPlaing] = useState(false);
   const [currentTimePlaying, setCurrentTimePlaying] = useState(0);
   const [filmDuration, setfilmDuration] = useState(0);
   const [playRowPosition, setPlayRowPosition] = useState(0);
 
+  const dispatch = useAppDispatch();
   const params = useParams();
   const navigate : NavigateFunction = useNavigate();
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const id = Number(params.id) || 1; // чтобы не было проблем с доступом к этой переменной, даем вариант на выбор
+
+  const film2 = useAppSelector(getActiveFilm) as Film;
 
   useEffect(() => {
     if (videoRef.current === null) {
@@ -42,18 +47,23 @@ function Player(props : PlayerProps): JSX.Element {
 
   useEffect(() => {
     setPlayRowPosition(Math.floor(currentTimePlaying / filmDuration * 100));
-
   }, [currentTimePlaying, filmDuration]);
 
+  // прогружаем активный фильм при смене адреса
+  useEffect(() => {
+    dispatch(fetchActiveFilmAction(id));
+  }, [id, dispatch]);
 
-  let film;
-  if (params.id) {
-    film = props.films[Number(params.id)];
-  } else { film = props.films[0]; }
+
+  // let film;
+  // if (params.id) {
+  //   film = props.films[Number(params.id)];
+  // } else { film = props.films[0]; }
 
   // const fullFilmTime = film.runTime * 60;  - пока что используем моки, поэтому длинну видео рассчитываем по факту. Возможно потом будем брать из данных карточки фильма.
 
-  const {videoLink} = film;
+  const {videoLink} = film2 || Films[0];
+  const {backgroundImage} = film2 || Films[0];
 
   const handleCurrentTimePlaying = (evt : SyntheticEvent<HTMLVideoElement>) => {
     setCurrentTimePlaying((evt.target as HTMLVideoElement).currentTime);
@@ -115,7 +125,7 @@ function Player(props : PlayerProps): JSX.Element {
       <video
         ref={videoRef}
         src={videoLink} className="player__video"
-        poster={film.backgroundImage}
+        poster={backgroundImage}
         onTimeUpdate={handleCurrentTimePlaying}
         onClick={playButtonClick}
       >
