@@ -69,7 +69,7 @@ function Main(): JSX.Element {
 
               <div className="film-card__buttons">
 
-                <PlayButton id={0}/>
+                <PlayButton id={1}/>
                 <MyListButton />
 
               </div>

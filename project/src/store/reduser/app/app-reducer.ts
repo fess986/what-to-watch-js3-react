@@ -62,7 +62,7 @@ export const appReducer = createSlice({
       })
       .addCase(fetchFilmsAction.fulfilled, (state) => {
         state.isFilmsLoaded = true;
-        state.isActiveFilmLoaded = true;
+        // state.isActiveFilmLoaded = true;
       })
       .addCase(clearErrorActionAPI.fulfilled, (state) => {
         state.error = null;

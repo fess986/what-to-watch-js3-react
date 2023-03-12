@@ -71,7 +71,7 @@ function Player(): JSX.Element {
 
   const exitButtonClickHandler = (evt : MouseEvent) => {
     evt.preventDefault();
-    navigate(appRouteWithId('Film', params.id));
+    navigate(appRouteWithId('Film', id));
   };
 
   const playButtonClick = () => {

@@ -77,6 +77,7 @@ describe('Testing of films reducer', () => {
 
   });
 
+
   // проверка экшена fetchFilmsAction.fulfilled
   describe('testing of fetchFilmsAction.fulfilled action', () => {
 
