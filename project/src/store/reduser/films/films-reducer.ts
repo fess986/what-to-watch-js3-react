@@ -32,6 +32,7 @@ export const filmsReducer = createSlice({
     builder
       .addCase(fetchFilmsAction.fulfilled, (state, action) => { // тут может быть и самый обычный экшен, но мы используем api-action под названием fetchFilmsAction и обращаемся к его статусу fulfilled
         state.filmList = adaptAllFilmAPItoProject(action.payload);
+        state.activeFIlm = adaptFilmAPItoProject(action.payload[0]);
       })
       .addCase(fetchActiveFilmAction.fulfilled, (state, action) => { // тут может быть и самый обычный экшен, но мы используем api-action под названием fetchActiveFilmAction и обращаемся к его статусу fulfilled
         // console.log(action.payload);
