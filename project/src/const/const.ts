@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export const ALL_GENRES = 'All genres';
 export const GENRES_SHOWN_NUMBER = 9;
 
