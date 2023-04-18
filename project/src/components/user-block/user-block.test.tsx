@@ -89,7 +89,7 @@ describe('UserBlock Component tests', () => {
 
   });
 
-  it('render component AuthStatus = Auth', async () => {
+  it('render component AuthStatus = Auth. Check "Sign Out" ref', async () => {
     const store = mockStore(initStateAuth);
 
     render(
@@ -109,10 +109,10 @@ describe('UserBlock Component tests', () => {
       </Provider>
     );
 
-    expect(screen.getByRole('link')).toHaveTextContent('Sign out');
+    expect(screen.getByText('Sign out')).toBeInTheDocument();
     expect(store.getActions()).toStrictEqual([]);
 
-    await userEvent.click(screen.getByRole('link')); // при нажатии ссылки должен произойти переход на главную страницу приложения и выполниться действия лог-аута
+    await userEvent.click(screen.getByText('Sign out')); // при нажатии ссылки должен произойти переход на главную страницу приложения и выполниться действия лог-аута
 
     expect(screen.getByText('main page')).toBeInTheDocument();
 
@@ -120,6 +120,36 @@ describe('UserBlock Component tests', () => {
     const actions = store.getActions().map((item) => item.type); // превращаем массив объектов с экшенами в массив их типов
 
     expect(actions).toStrictEqual(['user/logout/pending', 'user/logout/rejected']);
+  });
+
+  it('render component AuthStatus = Auth. Check avatar click', async () => {
+    const store = mockStore(initStateAuth);
+
+    render(
+      <Provider store={store}>
+        <HistoryRouter history={history} >
+          <Routes>
+            <Route
+              path='/user'
+              element={<UserBlock />}
+            />
+            <Route
+              path={AppRoute.MyList}
+              element={<h1>myList page</h1>}
+            />
+          </Routes>
+        </HistoryRouter>
+      </Provider>
+    );
+
+    expect(screen.getByRole('img')).toBeInTheDocument(); // проверяем наличие изображения аватарки
+
+    // expect(store.getActions()).toStrictEqual([]);
+
+    await userEvent.click(screen.getByRole('img')); // при нажатии ссылки должен произойти переход на страницу myList приложения
+
+    expect(screen.getByText('myList page')).toBeInTheDocument();
+
   });
 
 });
