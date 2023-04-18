@@ -63,6 +63,15 @@ export const fetchSimilarFilms = createAsyncThunk<unknown[], number, createAsync
   },
 );
 
+// скачиваем список фильмов к просмотру фильмы"
+export const fetchMyListFilms = createAsyncThunk<unknown[], undefined, createAsyncThunkProps>(
+  ActionTypesAPI.FETCH_MY_LIST_FILMS,
+  async (_arg, {dispatch, extra: api}) => {
+    const fetchedData = await api.get(AppRouteAPI.Favorite);
+    return fetchedData.data;
+  },
+);
+
 // скачиваем активный фильм
 export const fetchActiveFilmAction = createAsyncThunk<unknown, number, createAsyncThunkProps>(
   ActionTypesAPI.FETCH_ACTIVE_FILM,

@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI, fetchSimilarFilms} from '../../api-actions';
+import {fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI, fetchSimilarFilms, fetchMyListFilms } from '../../api-actions';
 import {toast} from 'react-toastify';
 
 import {StoreNames, ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../../../const/const';
@@ -10,6 +10,7 @@ export type InitialAppType = {
   filmsShownCount: number,
   isFilmsLoaded: boolean,
   isSimilarFilmsLoaded: boolean,
+  isFavoriteFilmsLoaded: boolean,
   error: string | null,
 }
 
@@ -19,6 +20,7 @@ export const initialAppState : InitialAppType = {
   filmsShownCount: FILMS_COUNT_ON_START,
   isFilmsLoaded: false,
   isSimilarFilmsLoaded: false,
+  isFavoriteFilmsLoaded: false,
   error: null,
 };
 
@@ -76,6 +78,16 @@ export const appReducer = createSlice({
       .addCase(fetchSimilarFilms.rejected, (state) => {
         toast.warn('Ошибка загрузки похожих фильмов', {autoClose : 2000, draggable : true});
         state.isSimilarFilmsLoaded = false;
+      })
+      .addCase(fetchMyListFilms.pending, (state) => {
+        state.isFavoriteFilmsLoaded = false;
+      })
+      .addCase(fetchMyListFilms.fulfilled, (state) => {
+        state.isFavoriteFilmsLoaded = true;
+      })
+      .addCase(fetchMyListFilms.rejected, (state) => {
+        toast.warn('Ошибка загрузки любимых фильмов', {autoClose : 2000, draggable : true});
+        state.isFavoriteFilmsLoaded = false;
       });
 
     // .addCase(sendReviewAction.rejected, (state, action) => {
