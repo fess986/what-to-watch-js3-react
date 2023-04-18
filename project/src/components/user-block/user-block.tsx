@@ -19,9 +19,11 @@ const UserBlock = () : JSX.Element => {
       ?
       <ul className="user-block">
         <li className="user-block__item">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-          </div>
+          <Link to= {AppRoute.MyList}>
+            <div className="user-block__avatar">
+              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+            </div>
+          </Link>
         </li>
         <li className="user-block__item">
           <Link to={AppRoute.Main} className="user-block__link" onClick={clickHandle}>Sign out</Link>
