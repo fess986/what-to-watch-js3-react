@@ -3,17 +3,19 @@ import { createSlice } from '@reduxjs/toolkit';
 import { StoreNames } from '../../../const/const';
 import {Film} from '../../../types/films';
 import {adaptAllFilmAPItoProject, adaptFilmAPItoProject} from '../../../services/adapterAPI';
-import { fetchFilmsAction, fetchActiveFilmAction, fetchSimilarFilms } from '../../../store/api-actions';
+import { fetchFilmsAction, fetchActiveFilmAction, fetchSimilarFilms, fetchMyListFilms } from '../../../store/api-actions';
 
 export type InitialFilmsType = {
   filmList: Film[],
   similarFilmList: Film[],
+  myFilmList: Film[],
   activeFIlm: Film | null,
 }
 
 export const InitialFilmsState: InitialFilmsType = {
   filmList: [],
   similarFilmList: [],
+  myFilmList: [],
   activeFIlm: null,
 };
 
@@ -40,6 +42,10 @@ export const filmsReducer = createSlice({
       })
       .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
         state.similarFilmList = adaptAllFilmAPItoProject(action.payload);
+      })
+      .addCase(fetchMyListFilms.fulfilled, (state, action) => {
+        state.myFilmList = adaptAllFilmAPItoProject(action.payload);
+        console.log('ass')
       });
   },
 });

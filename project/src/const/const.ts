@@ -43,6 +43,7 @@ export enum ActionTypesAPI {
   FETCH_REVIEWS = 'reviews/fetchReviews',
   POST_COMMENT = 'reviews/postReviews',
   FETCH_SIMILAR_FILMS = 'films/fetchSimilarFilms',
+  FETCH_MY_LIST_FILMS = 'films/fetchMyListFilms',
 }
 
 type appRouteWithIdProps = keyof (typeof AppRoute);

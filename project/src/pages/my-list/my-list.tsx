@@ -8,11 +8,20 @@ import UserBlock from '../../components/user-block/user-block';
 
 import { Film } from '../../types/films';
 import { useAppSelector } from '../../hooks';
-import { getFilmList } from '../../store/reduser/films/films-selectors';
+import { getFavoriteFilmList } from '../../store/reduser/films/films-selectors';
+import { getIsFavoriteFilmsLoaded } from '../../store/reduser/app/app-selectors';
+import Loading from '../../components/Loading/loading';
 
 function MyList(): JSX.Element {
 
-  const films : Film[] = useAppSelector(getFilmList);
+  const isFavoriteFilmsLoaded = useAppSelector(getIsFavoriteFilmsLoaded);
+  const films : Film[] = useAppSelector(getFavoriteFilmList);
+
+  if (!isFavoriteFilmsLoaded) {
+    return (
+      <Loading />
+    );
+  }
 
   return (
     <div className="user-page">
@@ -29,7 +38,9 @@ function MyList(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmList films={films} />
+        { (films.length === 0)
+          ? <h1>You have no favorite Films</h1>
+          : <FilmList films={films} />}
 
       </section>
 

@@ -6,13 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import App from './components/app/app';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import { checkAuthStatusAction, fetchFilmsAction } from './store/api-actions';
+import { checkAuthStatusAction, fetchFilmsAction, fetchMyListFilms } from './store/api-actions';
 import HistoryRouter from './components/history-route/history-route';
 import browserHistory from './browser-history';
 
 // в самом начале запуска приложения проверим статус авторизации
 store.dispatch(checkAuthStatusAction());
 store.dispatch(fetchFilmsAction());
+store.dispatch(fetchMyListFilms());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
