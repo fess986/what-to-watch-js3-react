@@ -45,7 +45,6 @@ export const filmsReducer = createSlice({
       })
       .addCase(fetchMyListFilms.fulfilled, (state, action) => {
         state.myFilmList = adaptAllFilmAPItoProject(action.payload);
-        console.log('ass')
       });
   },
 });

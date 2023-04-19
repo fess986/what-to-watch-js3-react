@@ -17,11 +17,17 @@ function MyList(): JSX.Element {
   const isFavoriteFilmsLoaded = useAppSelector(getIsFavoriteFilmsLoaded);
   const films : Film[] = useAppSelector(getFavoriteFilmList);
 
-  if (!isFavoriteFilmsLoaded) {
+  const isFilms = (filmList : Film[] | []) : JSX.Element => {
+    if (filmList.length === 0) {
+      return (
+        <h1>You have no favorite films</h1>
+      );
+    }
+
     return (
-      <Loading />
+      <FilmList films={filmList} />
     );
-  }
+  };
 
   return (
     <div className="user-page">
@@ -38,9 +44,13 @@ function MyList(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        { (films.length === 0)
-          ? <h1>You have no favorite Films</h1>
-          : <FilmList films={films} />}
+        {
+          (!isFavoriteFilmsLoaded)
+            ?
+            <Loading />
+            :
+            isFilms(films)
+        }
 
       </section>
 
