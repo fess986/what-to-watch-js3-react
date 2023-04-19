@@ -2,8 +2,8 @@
 
 exports[`testing Loading screen render Should render correctly 1`] = `
 <div>
-  <p>
-    Loading
-  </p>
+  <h1>
+    Loading...
+  </h1>
 </div>
 `;
