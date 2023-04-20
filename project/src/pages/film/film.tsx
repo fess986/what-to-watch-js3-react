@@ -36,6 +36,7 @@ function FilmCard(): JSX.Element {
   const isSimilarFilmsLoaded = useAppSelector(getIsSimilarFilmsLoaded);
   const reviews = useAppSelector(getReviewsList) as Review[];
   const film = useAppSelector(getActiveFilm) as Film; // воспользуемся приведением типа, для того чтобы TS не ругался на нас, когда мы пробуем деструкторизировать film, который может оказаться null. На самом деле, если там будет null,  мы рендерим заглушку и до самой деструкторизации дело не дойдет
+  // console.log(film)
 
   useEffect(() => {
     dispatch(fetchActiveFilmAction(id));
@@ -57,7 +58,7 @@ function FilmCard(): JSX.Element {
     );
   }
 
-  const {backgroundImage, name, genre, posterImage} = film;
+  const {backgroundImage, name, genre, posterImage, isFavorite} = film;
 
   return (
     <>
@@ -90,7 +91,14 @@ function FilmCard(): JSX.Element {
 
                 <PlayButton id={idParam}/>
 
-                <MyListButton />
+                {
+                  (!isFavorite)
+                    ?
+                    <MyListButton status='add' id={id}/>
+                    :
+                    <MyListButton status='added' id={id}/>
+                }
+
                 {isAuth === 'AUTH' ? <AddReviewButton /> : ''}
 
 

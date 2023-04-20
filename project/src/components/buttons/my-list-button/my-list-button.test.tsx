@@ -15,7 +15,7 @@ describe('MyListButton Component tests', () => {
 
     render(
       <HistoryRouter history={history}>
-        <MyListButton />
+        <MyListButton status='add'/>
       </HistoryRouter>
     );
 
@@ -31,7 +31,7 @@ describe('MyListButton Component tests', () => {
         <Routes>
           <Route
             path='/this'
-            element= {<MyListButton />}
+            element= {<MyListButton status='add'/>}
           />
           <Route
             path={AppRoute.MyList}

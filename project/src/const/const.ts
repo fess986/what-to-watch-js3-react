@@ -44,6 +44,8 @@ export enum ActionTypesAPI {
   POST_COMMENT = 'reviews/postReviews',
   FETCH_SIMILAR_FILMS = 'films/fetchSimilarFilms',
   FETCH_MY_LIST_FILMS = 'films/fetchMyListFilms',
+  ADD_TO_FAVORIRIES = 'films/addToFavorities',
+  REMOVE_FROM_FAVORIRIES = 'films/removeFromFavorities',
 }
 
 type appRouteWithIdProps = keyof (typeof AppRoute);
