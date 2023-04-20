@@ -6,7 +6,7 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {State} from '../types/state';
 import { AppRouteAPI } from '../const/const';
 import { AuthData } from '../types/user';
-import { checkAuthStatusAction, loginAction, logoutAction, fetchFilmsAction, fetchActiveFilmAction } from './api-actions';
+import { checkAuthStatusAction, loginAction, logoutAction, fetchFilmsAction, fetchActiveFilmAction, fetchMyListFilms, addToFavoriteAction, removeFromFavoriteAction } from './api-actions';
 import { setAutorizationStatus } from './reduser/user/user-reducer';
 import { redirectToRoute } from './action';
 import { Films } from '../mocks/films-mock';
@@ -158,6 +158,66 @@ describe('Async actions', () => {
     expect(actions).toEqual([
       fetchActiveFilmAction.pending.type,
       fetchActiveFilmAction.fulfilled.type,
+    ]);
+
+  });
+
+  it('fetchMyListFilms api action should dispathed', async () => {
+    const store = mockStore();
+
+    mockAPI
+      .onGet(AppRouteAPI.Favorite)
+      .reply(200, Films);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(fetchMyListFilms());
+
+    const actions = store.getActions().map((action) => action.type);
+
+    expect(actions).toEqual([
+      fetchMyListFilms.pending.type,
+      fetchMyListFilms.fulfilled.type
+    ]);
+
+  });
+
+  it('addToFavoriteAction api action should dispathed', async () => {
+    const store = mockStore();
+
+    mockAPI
+      .onGet(`${AppRouteAPI.FavoritePost}2/1`)
+      .reply(200, Films[0]);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(addToFavoriteAction(2));
+
+    const actions = store.getActions().map((action) => action.type);
+
+    expect(actions).toEqual([
+      addToFavoriteAction.pending.type,
+      addToFavoriteAction.rejected.type
+    ]);
+
+  });
+
+  it('removeFromFavoriteAction api action should dispathed', async () => {
+    const store = mockStore();
+
+    mockAPI
+      .onGet(`${AppRouteAPI.FavoritePost}2/0`)
+      .reply(200, Films[0]);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(removeFromFavoriteAction(2));
+
+    const actions = store.getActions().map((action) => action.type);
+
+    expect(actions).toEqual([
+      removeFromFavoriteAction.pending.type,
+      removeFromFavoriteAction.rejected.type
     ]);
 
   });
