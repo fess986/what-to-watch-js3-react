@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI, fetchSimilarFilms, fetchMyListFilms } from '../../api-actions';
+import {fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI, fetchSimilarFilms, fetchMyListFilms, addToFavoriteAction, removeFromFavoriteAction } from '../../api-actions';
 import {toast} from 'react-toastify';
 
 import {StoreNames, ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../../../const/const';
@@ -88,6 +88,12 @@ export const appReducer = createSlice({
       .addCase(fetchMyListFilms.rejected, (state) => {
         toast.warn('Ошибка загрузки любимых фильмов', {autoClose : 2000, draggable : true});
         state.isFavoriteFilmsLoaded = false;
+      })
+      .addCase(addToFavoriteAction.rejected, (state) => {
+        toast.warn('Ошибка добавления фильма в список любимых', {autoClose : 2000, draggable : true});
+      })
+      .addCase(removeFromFavoriteAction.rejected, (state) => {
+        toast.warn('Ошибка удаления фильма из списка любимых', {autoClose : 2000, draggable : true});
       });
 
     // .addCase(sendReviewAction.rejected, (state, action) => {
