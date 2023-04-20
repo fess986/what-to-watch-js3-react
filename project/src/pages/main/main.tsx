@@ -26,6 +26,7 @@ function Main(): JSX.Element {
   const films = useAppSelector(getFilmList);
   const filteredFilms = useAppSelector(getFilteredFilmList);
 
+  // const favorite = films.map(film => film.isFavorite);
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
@@ -70,7 +71,7 @@ function Main(): JSX.Element {
               <div className="film-card__buttons">
 
                 <PlayButton id={1}/>
-                <MyListButton />
+                <MyListButton status='add' id={1}/>
 
               </div>
             </div>

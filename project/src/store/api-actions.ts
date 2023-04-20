@@ -135,6 +135,27 @@ export const sendReviewAction = createAsyncThunk<Review[], CommentPost, createAs
   },
 );
 
+// отправляем отзыв, при этом получаем новый список отзывов
+export const addToFavoriteAction = createAsyncThunk<unknown, number, createAsyncThunkProps
+>(
+  ActionTypesAPI.ADD_TO_FAVORIRIES,
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.post(`${AppRouteAPI.FavoritePost}${id}/1`);
+
+    return data;
+  },
+);
+
+export const removeFromFavoriteAction = createAsyncThunk<unknown, number, createAsyncThunkProps
+>(
+  ActionTypesAPI.REMOVE_FROM_FAVORIRIES,
+  async (id, {dispatch, extra: api}) => {
+    const {data} = await api.post(`${AppRouteAPI.FavoritePost}${id}/0`);
+
+    return data;
+  },
+);
+
 export const logoutAction = createAsyncThunk<void, undefined, createAsyncThunkProps>(
   ActionTypesAPI.LOGOUT,
   async (_, {dispatch, extra: api}) => {
