@@ -135,7 +135,7 @@ export const sendReviewAction = createAsyncThunk<Review[], CommentPost, createAs
   },
 );
 
-// отправляем отзыв, при этом получаем новый список отзывов
+// действие для добавления фильма к списку любимых. При этом при успехе получаем карточку фильма с измененными данными
 export const addToFavoriteAction = createAsyncThunk<unknown, number, createAsyncThunkProps
 >(
   ActionTypesAPI.ADD_TO_FAVORIRIES,
@@ -146,6 +146,7 @@ export const addToFavoriteAction = createAsyncThunk<unknown, number, createAsync
   },
 );
 
+// действие для исключения фильма из списка любимых. При этом при успехе получаем карточку фильма с измененными данными
 export const removeFromFavoriteAction = createAsyncThunk<unknown, number, createAsyncThunkProps
 >(
   ActionTypesAPI.REMOVE_FROM_FAVORIRIES,

@@ -1,21 +1,28 @@
 // список моих фмльмов
 
 import React from 'react';
+import { useEffect } from 'react';
 
 import Logo from '../../components/logo/Logo';
 import FilmList from '../../components/film-list/film-list';
 import UserBlock from '../../components/user-block/user-block';
 
 import { Film } from '../../types/films';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector,useAppDispatch } from '../../hooks';
 import { getFavoriteFilmList } from '../../store/reduser/films/films-selectors';
 import { getIsFavoriteFilmsLoaded } from '../../store/reduser/app/app-selectors';
 import Loading from '../../components/Loading/loading';
+import { fetchMyListFilms } from '../../store/api-actions';
 
 function MyList(): JSX.Element {
 
+  const dispatch = useAppDispatch();
   const isFavoriteFilmsLoaded = useAppSelector(getIsFavoriteFilmsLoaded);
   const films : Film[] = useAppSelector(getFavoriteFilmList);
+
+  useEffect(() => {
+    dispatch(fetchMyListFilms());
+  }, [dispatch]);
 
   const isFilms = (filmList : Film[] | []) : JSX.Element => {
     if (filmList.length === 0) {
