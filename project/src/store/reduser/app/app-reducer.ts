@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI, fetchSimilarFilms, fetchMyListFilms, addToFavoriteAction, removeFromFavoriteAction } from '../../api-actions';
+import {fetchActiveFilmAction, fetchFilmsAction, clearErrorActionAPI, fetchSimilarFilms, fetchMyListFilms, addToFavoriteAction, removeFromFavoriteAction, fetchPromoFilmAction } from '../../api-actions';
 import {toast} from 'react-toastify';
 
 import {StoreNames, ALL_GENRES, FILMS_COUNT_ON_START, SHOW_MORE_FILMS_COUNT} from '../../../const/const';
@@ -11,6 +11,7 @@ export type InitialAppType = {
   isFilmsLoaded: boolean,
   isSimilarFilmsLoaded: boolean,
   isFavoriteFilmsLoaded: boolean,
+  isPromoFilmLoaded: boolean,
   error: string | null,
 }
 
@@ -21,6 +22,7 @@ export const initialAppState : InitialAppType = {
   isFilmsLoaded: false,
   isSimilarFilmsLoaded: false,
   isFavoriteFilmsLoaded: false,
+  isPromoFilmLoaded: false,
   error: null,
 };
 
@@ -61,6 +63,16 @@ export const appReducer = createSlice({
         state.error = 'ошибка при загрузке активного фильма';
         toast.warn(state.error, {autoClose : 2000, draggable : true});
         // dispatch(redirectToRoute(AppRoute.Main));
+      })
+      .addCase(fetchPromoFilmAction.pending, (state) => {
+        state.isPromoFilmLoaded = false;
+      })
+      .addCase(fetchPromoFilmAction.fulfilled, (state) => {
+        state.isPromoFilmLoaded = true;
+      })
+      .addCase(fetchPromoFilmAction.rejected, (state) => {
+        state.error = 'ошибка при загрузке промо фильма';
+        toast.warn(state.error, {autoClose : 2000, draggable : true});
       })
       .addCase(fetchFilmsAction.fulfilled, (state) => {
         state.isFilmsLoaded = true;

@@ -3,13 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { StoreNames } from '../../../const/const';
 import {Film} from '../../../types/films';
 import {adaptAllFilmAPItoProject, adaptFilmAPItoProject} from '../../../services/adapterAPI';
-import { fetchFilmsAction, fetchActiveFilmAction, fetchSimilarFilms, fetchMyListFilms, addToFavoriteAction, removeFromFavoriteAction } from '../../../store/api-actions';
+import { fetchFilmsAction, fetchActiveFilmAction, fetchSimilarFilms, fetchMyListFilms, addToFavoriteAction, removeFromFavoriteAction, fetchPromoFilmAction} from '../../../store/api-actions';
 
 export type InitialFilmsType = {
   filmList: Film[],
   similarFilmList: Film[],
   myFilmList: Film[],
   activeFIlm: Film | null,
+  promoFilm: Film | null,
 }
 
 export const InitialFilmsState: InitialFilmsType = {
@@ -17,6 +18,7 @@ export const InitialFilmsState: InitialFilmsType = {
   similarFilmList: [],
   myFilmList: [],
   activeFIlm: null,
+  promoFilm: null,
 };
 
 export const filmsReducer = createSlice({
@@ -36,9 +38,11 @@ export const filmsReducer = createSlice({
         state.filmList = adaptAllFilmAPItoProject(action.payload);
         // state.activeFIlm = adaptFilmAPItoProject(action.payload[0]);
       })
-      .addCase(fetchActiveFilmAction.fulfilled, (state, action) => { // тут может быть и самый обычный экшен, но мы используем api-action под названием fetchActiveFilmAction и обращаемся к его статусу fulfilled
-        // console.log(action.payload);
+      .addCase(fetchActiveFilmAction.fulfilled, (state, action) => {
         state.activeFIlm = adaptFilmAPItoProject(action.payload);
+      })
+      .addCase(fetchPromoFilmAction.fulfilled, (state, action) => {
+        state.promoFilm = adaptFilmAPItoProject(action.payload);
       })
       .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
         state.similarFilmList = adaptAllFilmAPItoProject(action.payload);

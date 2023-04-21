@@ -22,6 +22,7 @@ export enum AppRoute {
 
 export enum AppRouteAPI {
   Films = '/films', // get - получение списка фильмов
+  Promo = '/promo', // get - получение промо фильма
   Film = '/films/', // get /films/:id - Получение фильма с идентификатором id .
   Similar = '/films/', // get /films/: id/similar - Получение списка похожих фильмов. // нужны тесты
   Favorite = '/favorite', // get - Получение списка фильмов «к просмотру».
@@ -35,6 +36,7 @@ export enum AppRouteAPI {
 
 export enum ActionTypesAPI {
   FETCH_FILMS = 'films/fetchFilms',
+  PROMO = 'films/fetchPromoFilm',
   FETCH_ACTIVE_FILM = 'films/fetchActiveFilm',
   CHECK_AUTH_STATUS = 'user/checkAuth',
   LOGIN = 'user/login',

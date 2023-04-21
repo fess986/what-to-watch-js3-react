@@ -11,9 +11,14 @@ type State = {
 
 // обычные селекторы
 export const getFilmList = (state : State) => state[StoreNames.Films].filmList;
+
 export const getSimilarFilmList = (state : State) => state[StoreNames.Films].similarFilmList;
+
 export const getFavoriteFilmList = (state : State) => state[StoreNames.Films].myFilmList;
+
 export const getActiveFilm = (state : State) => state[StoreNames.Films].activeFIlm;
+
+export const getPromoFilm = (state : State) => state[StoreNames.Films].promoFilm;
 
 // // умные селекторы из библиотеки reselect
 // // передаем один селектор
