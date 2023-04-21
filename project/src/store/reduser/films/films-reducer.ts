@@ -52,9 +52,11 @@ export const filmsReducer = createSlice({
       })
       .addCase(addToFavoriteAction.fulfilled, (state, action) => {
         state.activeFIlm = adaptFilmAPItoProject(action.payload);
+        state.promoFilm = adaptFilmAPItoProject(action.payload);
       })
       .addCase(removeFromFavoriteAction.fulfilled, (state, action) => {
         state.activeFIlm = adaptFilmAPItoProject(action.payload);
+        state.promoFilm = adaptFilmAPItoProject(action.payload);
       });
   },
 });

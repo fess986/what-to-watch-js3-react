@@ -8,11 +8,13 @@ import PlayButton from '../../components/buttons/play-button/play-button';
 import ShowMoreButton from '../../components/buttons/show-more-button/show-more-button';
 import Genres from '../../components/genres/genres';
 import UserBlock from '../../components/user-block/user-block';
+import Loading from '../../components/Loading/loading';
+
+import { fetchPromoFilmAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { getfilmsShownCount, getIsPromoFilmLoaded } from '../../store/reduser/app/app-selectors';
 import { getGenre } from '../../store/reduser/app/app-selectors';
 import {getFilmList, getFilteredFilmList, getPromoFilm} from '../../store/reduser/films/films-selectors';
-import { Films } from '../../mocks/films-mock';
 
 import { resetFilms, addFilms, changeGenre } from '../../store/reduser/app/app-reducer';
 import { Film } from '../../types/films';
@@ -26,13 +28,8 @@ function Main(): JSX.Element {
   const filmsShownCount = useAppSelector(getfilmsShownCount);
   const films = useAppSelector(getFilmList);
   const filteredFilms = useAppSelector(getFilteredFilmList);
-  const promo = useAppSelector(getPromoFilm) as Film;
+  const promoFilm = useAppSelector(getPromoFilm) as Film;
   const isPromoFilmLoaded : boolean = useAppSelector(getIsPromoFilmLoaded);
-
-  let promoFilm;
-  (isPromoFilmLoaded) ? promoFilm = promo : promoFilm = Films[0]; // сделаем моковую заглушку на случай, если не будет скачан промо фильм
-
-  const {backgroundImage, name, posterImage, genre, released, id} = promoFilm;
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
@@ -42,9 +39,21 @@ function Main(): JSX.Element {
     dispatch(changeGenre(filmGenre));
   };
 
+  useEffect(() => {
+    dispatch(fetchPromoFilmAction());
+  }, [dispatch]);
+
   useEffect(() => () => {
     dispatch(resetFilms());
   }, [dispatch]);
+
+  if (!isPromoFilmLoaded) {
+    return (
+      <Loading />
+    );
+  }
+
+  const {backgroundImage, name, posterImage, genre, released, id, isFavorite} = promoFilm;
 
   return (
     <>
@@ -77,7 +86,14 @@ function Main(): JSX.Element {
               <div className="film-card__buttons">
 
                 <PlayButton id={id}/>
-                <MyListButton status='add' id={id}/>
+
+                {
+                  (!isFavorite)
+                    ?
+                    <MyListButton status='add' id={id}/>
+                    :
+                    <MyListButton status='added' id={id}/>
+                }
 
               </div>
             </div>
