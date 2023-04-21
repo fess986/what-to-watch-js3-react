@@ -38,6 +38,15 @@ export const fetchFilmsAction = createAsyncThunk<unknown[], undefined, { // void
     },
   );
 
+// скачиваем промо фильм
+export const fetchPromoFilmAction = createAsyncThunk<unknown, undefined, createAsyncThunkProps>(
+  ActionTypesAPI.PROMO,
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get(AppRouteAPI.Promo);
+    return data;
+  },
+);
+
 // скачиваем отзывы для текущего фильма
 export const fetchReviews = createAsyncThunk<Review[], number, { // Review[] - в данном случае тип возврата из функции, number - тип передаваемого аргумента id
     dispatch: AppDispatch,

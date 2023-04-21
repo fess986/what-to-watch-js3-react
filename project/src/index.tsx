@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import App from './components/app/app';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import { checkAuthStatusAction, fetchFilmsAction, fetchMyListFilms } from './store/api-actions';
+import { checkAuthStatusAction, fetchFilmsAction, fetchMyListFilms, fetchPromoFilmAction } from './store/api-actions';
 import HistoryRouter from './components/history-route/history-route';
 import browserHistory from './browser-history';
 
@@ -14,6 +14,7 @@ import browserHistory from './browser-history';
 store.dispatch(checkAuthStatusAction());
 store.dispatch(fetchFilmsAction());
 store.dispatch(fetchMyListFilms());
+store.dispatch(fetchPromoFilmAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

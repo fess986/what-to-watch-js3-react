@@ -15,6 +15,7 @@ import {getFilmList, getFilteredFilmList} from '../../store/reduser/films/films-
 // import {getFilmList} from '../../store/reduser/films/films-selectors';
 
 import { resetFilms, addFilms, changeGenre } from '../../store/reduser/app/app-reducer';
+// import { Film } from '../../types/films';
 
 function Main(): JSX.Element {
 
@@ -26,7 +27,8 @@ function Main(): JSX.Element {
   const films = useAppSelector(getFilmList);
   const filteredFilms = useAppSelector(getFilteredFilmList);
 
-  // const favorite = films.map(film => film.isFavorite);
+  // const promoFilm = useAppSelector(getPromoFilm) as Film;
+  // const isPromoFilmLoaded : boolean = useAppSelector(getIsPromoFilmLoaded);
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
