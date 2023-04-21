@@ -44,7 +44,7 @@ describe('App Component testing', () => {
 
     render(fakeApp);
 
-    expect(screen.getByText(/Play/i)).toBeInTheDocument(); // убеждаемся в том что мы на главной по кнопке "Play"
+    expect(screen.getByText(/Main Page/i)).toBeInTheDocument(); // убеждаемся в том что мы на главной по кнопке "Play"
   });
 
   it('login page route testing', () => {

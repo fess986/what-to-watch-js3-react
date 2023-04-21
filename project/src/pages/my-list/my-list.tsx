@@ -54,7 +54,7 @@ function MyList(): JSX.Element {
         {
           (!isFavoriteFilmsLoaded)
             ?
-            <Loading />
+            <Loading caller=' MyList Page'/>
             :
             isFilms(films)
         }

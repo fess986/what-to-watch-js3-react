@@ -49,7 +49,7 @@ function Main(): JSX.Element {
 
   if (!isPromoFilmLoaded) {
     return (
-      <Loading />
+      <Loading caller=' Main Page'/>
     );
   }
 

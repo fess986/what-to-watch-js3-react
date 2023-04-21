@@ -1,5 +1,9 @@
-const Loading = () : JSX.Element => (
-  <h1>Loading...</h1>
+type LoadingProps = {
+  caller? : string;
+}
+
+const Loading = ({caller = ''} : LoadingProps) : JSX.Element => (
+  <h1>{`Loading${caller}...`}</h1>
 );
 
 export default Loading;
