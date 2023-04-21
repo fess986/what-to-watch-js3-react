@@ -9,26 +9,30 @@ import ShowMoreButton from '../../components/buttons/show-more-button/show-more-
 import Genres from '../../components/genres/genres';
 import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { getfilmsShownCount } from '../../store/reduser/app/app-selectors';
+import { getfilmsShownCount, getIsPromoFilmLoaded } from '../../store/reduser/app/app-selectors';
 import { getGenre } from '../../store/reduser/app/app-selectors';
-import {getFilmList, getFilteredFilmList} from '../../store/reduser/films/films-selectors';
-// import {getFilmList} from '../../store/reduser/films/films-selectors';
+import {getFilmList, getFilteredFilmList, getPromoFilm} from '../../store/reduser/films/films-selectors';
+import { Films } from '../../mocks/films-mock';
 
 import { resetFilms, addFilms, changeGenre } from '../../store/reduser/app/app-reducer';
-// import { Film } from '../../types/films';
+import { Film } from '../../types/films';
 
 function Main(): JSX.Element {
 
   const dispatch = useAppDispatch();
   // const genre = useAppSelector((state) => state.genre); // так мы напрямую используем useSelector через типизированную версию useAppSelector
   // а так мы обращаемся через вспомогательную наглядную функцию
-  const genre = useAppSelector(getGenre);
+  const genres = useAppSelector(getGenre);
   const filmsShownCount = useAppSelector(getfilmsShownCount);
   const films = useAppSelector(getFilmList);
   const filteredFilms = useAppSelector(getFilteredFilmList);
+  const promo = useAppSelector(getPromoFilm) as Film;
+  const isPromoFilmLoaded : boolean = useAppSelector(getIsPromoFilmLoaded);
 
-  // const promoFilm = useAppSelector(getPromoFilm) as Film;
-  // const isPromoFilmLoaded : boolean = useAppSelector(getIsPromoFilmLoaded);
+  let promoFilm;
+  (isPromoFilmLoaded) ? promoFilm = promo : promoFilm = Films[0]; // сделаем моковую заглушку на случай, если не будет скачан промо фильм
+
+  const {backgroundImage, name, posterImage, genre, released, id} = promoFilm;
 
   const showMoreButtonHandler = () => {
     dispatch(addFilms());
@@ -46,7 +50,7 @@ function Main(): JSX.Element {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -60,20 +64,20 @@ function Main(): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
 
-                <PlayButton id={1}/>
-                <MyListButton status='add' id={1}/>
+                <PlayButton id={id}/>
+                <MyListButton status='add' id={id}/>
 
               </div>
             </div>
@@ -85,7 +89,7 @@ function Main(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <Genres films={films} activeGenre={genre} genreClickHandler={genreClickHandler}/>
+          <Genres films={films} activeGenre={genres} genreClickHandler={genreClickHandler}/>
 
           <FilmList films={filteredFilms} filmsShownCount={filmsShownCount}/>
 
