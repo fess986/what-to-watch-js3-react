@@ -54,7 +54,7 @@ function FilmCard(): JSX.Element {
 
   if (!isFilmLoaded) {
     return (
-      <Loading />
+      <Loading caller=' Film Page'/>
     );
   }
 

@@ -45,7 +45,7 @@ function AddReview(): JSX.Element {
 
   if (!isFilmLoaded) {
     return (
-      <Loading />
+      <Loading caller=' Add Review Page'/>
     );
   }
 
