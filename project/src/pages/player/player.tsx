@@ -27,6 +27,7 @@ function Player(): JSX.Element {
   const id = Number(params.id) || 1; // чтобы не было проблем с доступом к этой переменной, даем вариант на выбор
 
   const film2 = useAppSelector(getActiveFilm) as Film;
+  console.log(film2);
 
   useEffect(() => {
     if (videoRef.current === null) {
@@ -35,8 +36,10 @@ function Player(): JSX.Element {
 
     videoRef.current.addEventListener('loadeddata', () => {
       setIsloading(false) ;
+      console.log('прогрузилось');
       setfilmDuration((current) => {
         if (videoRef.current) {
+          // console.log(videoRef.current)
           current = videoRef.current.duration;
         }
         return current;
@@ -52,6 +55,7 @@ function Player(): JSX.Element {
   // прогружаем активный фильм при смене адреса
   useEffect(() => {
     dispatch(fetchActiveFilmAction(id));
+    console.log('прогрузка фильма');
   }, [id, dispatch]);
 
 
@@ -66,7 +70,7 @@ function Player(): JSX.Element {
   const {backgroundImage} = film2 || Films[0];
 
   const handleCurrentTimePlaying = (evt : SyntheticEvent<HTMLVideoElement>) => {
-    setCurrentTimePlaying((evt.target as HTMLVideoElement).currentTime);
+    setCurrentTimePlaying((evt.target as HTMLVideoElement).currentTime); // мы получаем evt именно из тега видео, поэтому уверенно уведомляем об этом TS, чтобы он не писал ошибки
   };
 
   const exitButtonClickHandler = (evt : MouseEvent) => {
@@ -120,6 +124,10 @@ function Player(): JSX.Element {
     }
   };
 
+  const progressClickHandler = (evt : MouseEvent) => {
+    console.log(evt);
+  };
+
   return (
     <div className="player">
       <video
@@ -135,8 +143,8 @@ function Player(): JSX.Element {
 
       <div className="player__controls">
         <div className="player__controls-row">
-          <div className="player__time">
-            <progress className="player__progress" value={String(playRowPosition)} max="100"></progress>
+          <div className="player__time" onClick={progressClickHandler}>
+            <progress className="player__progress" onClick={progressClickHandler} value={String(playRowPosition)} max="100"></progress>
             <div className="player__toggler" style={{left: `${playRowPosition}%` }}>Toggler</div>
           </div>
           <div className="player__time-value">{parseMinutes(filmDuration - currentTimePlaying)}</div>
@@ -164,7 +172,7 @@ function Player(): JSX.Element {
 
           }
 
-          <div className="player__name">{isLoading ? 'loading' : 'played'}</div>
+          <div className="player__name">{isLoading ? 'loading' : 'Play'}</div>
 
           <button type="button" className="player__full-screen" onClick={toggleFullScreen}>
             <svg viewBox="0 0 27 27" width="27" height="27">

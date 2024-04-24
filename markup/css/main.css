@@ -743,6 +743,7 @@ main {
   margin: 0 0 20px; }
 
 .film-card__genre::after {
+  
   content: '·';
   margin-left: 4px;
   margin-right: 4px; }
